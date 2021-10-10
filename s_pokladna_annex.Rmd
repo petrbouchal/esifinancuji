@@ -1,0 +1,17 @@
+---
+title: "s_pokladna_annex"
+author: "Petr Bouchal"
+date: "9/23/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+https://www.statnipokladna.cz/assets/cs/media/IISSP-RIS_Metodika_2021-06-21_RIS-Identifikace-koruny-metodicky-material-verze-013.pdf
+
+https://dotaceeu.cz/Dotace/media/SF/NOK/Evaluace/Evalua%c4%8dn%c3%ad%20knihovna/2017/Adicionalita/Priloha-2-Postup-sestaveni-tabulek_1.pdf
+
+https://dotaceeu.cz/cs/evropske-fondy-v-cr/narodni-organ-pro-koordinaci/evaluace/knihovna-evaluaci/verejne-vydaje-a-fondy-eu-2007%e2%80%932015

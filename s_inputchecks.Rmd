@@ -1,0 +1,21 @@
+---
+title: "Vstupní kontrola dat"
+output: html_document
+---
+
+IN PROGRESS (INTERNAL USE ONLY)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE,
+                      fig.width = 10, fig.asp = 1/.62, fig.retina = 2,
+                      out.width = "100%")
+source("_targets_packages.R")
+```
+
+```{r}
+targets::tar_load(ef_pub)
+```
+
+## Sestavy
+
+
