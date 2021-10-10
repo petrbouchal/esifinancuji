@@ -13,7 +13,7 @@ budget_new_ops <- function(arrow_path, nastroj_op, codelists) {
 
   cnz <- cn %>%
     filter(druh == "Výdaje") %>%
-    select(trida, seskupeni, podseskupeni, zdroj, budget_spending, period_vykaz) %>%
+    select(trida, seskupeni, podseskupeni, zdroj, budget_spending, vykaz_date) %>%
     collect() %>%
     sp_add_codelist(zdroj) %>%
     sp_add_codelist(nastroj) %>%

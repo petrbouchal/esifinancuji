@@ -1096,15 +1096,15 @@
     },
     "statnipokladna": {
       "Package": "statnipokladna",
-      "Version": "0.6.0.9000",
+      "Version": "0.7.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "petrbouchal",
       "RemoteRepo": "statnipokladna",
       "RemoteRef": "master",
-      "RemoteSha": "cfc2846b4b893bec83d8d37b25f63f8409695775",
-      "Hash": "98e6b0dbc366409a851308c6ca07638e"
+      "RemoteSha": "3f994b24f908b723bc9238096d44bf785143c72e",
+      "Hash": "dd380b1572a7f5ac987e69840675dc09"
     },
     "stringi": {
       "Package": "stringi",

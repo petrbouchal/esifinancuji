@@ -14,7 +14,7 @@ collect_filtered_arrow_ds <- function(files, path) {
   is.character(files)
   x <- arrow::open_dataset(path)
   x %>%
-    filter(per_yr == 2019) %>%
+    filter(vykaz_year == 2019) %>%
     collect()
 
 }

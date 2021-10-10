@@ -11,7 +11,7 @@ targets::tar_load(compiled_op_sum)
 
 
 sf15 <- sp_load_table("sp_data/finsf/2015/12/finsf201512/FINSF01_2015012.csv") %>%
-  mutate(per_yr = as.integer(per_yr)) %>%
+  mutate(vykaz_year = as.integer(vykaz_year)) %>%
   sp_add_codelist(polozka)
 
 orgs <- read_parquet("data-processed/codelists/ucjed.parquet", as_data_frame = F) %>%

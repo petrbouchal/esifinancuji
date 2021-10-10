@@ -4,7 +4,7 @@ load_and_prep_budget <- function(table_file, polozka_codelist, months) {
 
   statnipokladna::sp_load_table(table_file) %>%
     sp_add_codelist(polozka) %>%
-    group_by(per_yr, ucjed, ico,
+    group_by(vykaz_year, ucjed, ico,
              paragraf, polozka, druh, polozka_nazev,
              trida, seskupeni, podseskupeni)
 }
@@ -20,11 +20,11 @@ load_budget_yearsum_local <- function(table_file, months, codelists) {
 
   rslt <- b_base %>%
     filter(!kon_pol | !kon_rep | !kon_okr | !kon_kraj) %>%
-    filter(per_m %in% months) %>%
+    filter(vykaz_month %in% months) %>%
     group_by(nuts, kraj, .add = T) %>%
     summarise(across(c(starts_with("budget")), sum, na.rm = T),
               .groups = "drop") %>%
-    mutate(period_vykaz = lubridate::make_date(per_yr, 12, 31))
+    mutate(vykaz_date = lubridate::make_date(vykaz_year, 12, 31))
   return(rslt)
 }
 
@@ -39,11 +39,11 @@ load_budget_yearsum_central_old <- function(table_file, months, codelists) {
 
   rslt <- b_base %>%
     filter(!kon_pol | kon_rep | kon_okr | kon_kraj) %>%
-    filter(per_m %in% months) %>%
+    filter(vykaz_month %in% months) %>%
     group_by(kapitola, .add = TRUE) %>%
     summarise(across(c(starts_with("budget")), sum, na.rm = T),
               .groups = "drop") %>%
-    mutate(period_vykaz = lubridate::make_date(per_yr, 12, 31))
+    mutate(vykaz_date = lubridate::make_date(vykaz_year, 12, 31))
 
   return(rslt)
 }
@@ -63,7 +63,7 @@ load_budget_yearsum_central_new <- function(table_file, months,
     group_by(kapitola, zdroj, pvs, .add = TRUE) %>%
     summarise(across(c(starts_with("budget")), sum, na.rm = T),
               .groups = "drop") %>%
-    mutate(period_vykaz = lubridate::make_date(per_yr, 12, 31))
+    mutate(vykaz_date = lubridate::make_date(vykaz_year, 12, 31))
   return(rslt)
 }
 
@@ -83,7 +83,7 @@ budget_arrow_months <- function(table_file, destination, months, fn, codelists) 
   purrrow::marrow_dir(table_file, fn,
                       months = months, codelists = codelists,
                       .path = here::here(destination),
-                      .partitioning = c("per_yr", "period_vykaz", "druh"))
+                      .partitioning = c("vykaz_year", "vykaz_date", "druh"))
 
 }
 
@@ -95,7 +95,7 @@ load_budget_local_grants <- function(table_file, months, codelists) {
 
   sp_load_table(table_file) %>%
     sp_add_codelist(ucelznak) %>%
-    filter(per_m %in% months) %>%
+    filter(vykaz_month %in% months) %>%
     rename(budget_grants = ZU_ROZKZM) %>%
     mutate(druh = "Příjmy")
 }

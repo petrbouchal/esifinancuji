@@ -13,18 +13,18 @@ sc_pol <- read_parquet("data-processed/codelists/polozka.parquet")
 
 ds0 %>%
   filter(ico %in% sc_org_oss_ico$ico) %>%
-  count(per_yr, druh, wt = sum((budget_spending), na.rm = T)/1e9) %>%
+  count(vykaz_year, druh, wt = sum((budget_spending), na.rm = T)/1e9) %>%
   spread(druh, n)
 
 ds0 %>%
   filter(ico %in% sc_org_oss_ico$ico) %>%
-  count(per_yr, trida, wt = sum((budget_spending), na.rm = T)/1e9) %>%
-  spread(per_yr, n)
+  count(vykaz_year, trida, wt = sum((budget_spending), na.rm = T)/1e9) %>%
+  spread(vykaz_year, n)
 
 mr17 <- sp_load_table("sp_data/misris/2017/12/MIS-RIS_2017012.csv")
 
 mr17 %>%
-  count(per_m)
+  count(vykaz_month)
 
 mr17 %>%
   sp_add_codelist(sc_pol) %>%

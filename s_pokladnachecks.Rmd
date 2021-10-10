@@ -42,15 +42,15 @@ Z dat:
 bind_rows(
   open_dataset(sp_central_old_arrdir) %>% 
     filter(ico %in% ico_oss) %>%
-    select(per_yr, druh, budget_spending) %>% 
+    select(vykaz_year, druh, budget_spending) %>% 
     collect() %>% 
-    count(per_yr, druh, wt = budget_spending/1e9) %>% 
+    count(vykaz_year, druh, wt = budget_spending/1e9) %>% 
     spread(druh, n),
   open_dataset(sp_central_new_arrdir) %>% 
     filter(ico %in% ico_oss) %>%
-    select(per_yr, druh, budget_spending) %>% 
+    select(vykaz_year, druh, budget_spending) %>% 
     collect() %>% 
-    count(per_yr, druh, wt = budget_spending/1e9) %>% 
+    count(vykaz_year, druh, wt = budget_spending/1e9) %>% 
     spread(druh, n)
 )
 ```
@@ -98,10 +98,10 @@ https://monitor.statnipokladna.cz/analyza/##query=uq_5fb642ff-31a3-4640-9d29-2fb
 ```{r}
 open_dataset(sp_local_arrdir) %>% 
   # filter(ico %in% ico_oss) %>%
-  select(per_yr, druh, budget_spending, kraj) %>% 
+  select(vykaz_year, druh, budget_spending, kraj) %>% 
   collect() %>% 
-  # filter(per_yr == 2020) %>% 
-  count(per_yr, druh, wt = budget_spending/1e9) %>% 
+  # filter(vykaz_year == 2020) %>% 
+  count(vykaz_year, druh, wt = budget_spending/1e9) %>% 
   spread(druh, n) 
   # arrange(`Příjmy`)
 ```
@@ -112,7 +112,7 @@ open_dataset(sp_local_arrdir) %>%
 lgs <- open_dataset(targets::tar_read(sp_local_grants_arrdir))
 
 lgs %>% 
-  filter(per_yr == 2020) %>% 
+  filter(vykaz_year == 2020) %>% 
   select(ucelznak_nazev, budget_grants) %>% 
   collect() %>% 
   count(ucelznak_nazev, wt = budget_grants/1e9, sort = T) %>% 
