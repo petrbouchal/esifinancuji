@@ -16,6 +16,8 @@ z ESI fondů v ČR primárně v letech 2014-2020. Cílem je:
 společné evropské politiky podpory a pomoci, ESI a obdobných fondů na
 Úřadu vlády ČR* (CZ.08.1.125/0.0/0.0/15_001/0000176)**
 
+**[Draft studie o roli ESIF ve veřejných financích](s_pokladna.html)**
+
 Detailnější dokumentace k pipelinu:
 
 -   [obsahová dokumentace](s_doc.html)
