@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Veřejné výdaje a ESI fondy: hlavní poznatky</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="site/site.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">ESIF data</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="README.html">Základní info</a>
+</li>
+<li>
+  <a href="s_pokladna.html">Draft studie</a>
+</li>
+<li>
+  <a href="s_doc.html">Dokumentace</a>
+</li>
+<li>
+  <a href="s_output.html">Výstupní data</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Technická dokumentace
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="s_inputchecks.html">Validace vstupů</a>
+    </li>
+    <li>
+      <a href="dev.html">Vývojářská dokumentace</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/petrbouchal/esifinancuji">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://petrbouchal.xyz">
+    <span class="fas fa-asterisk fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Veřejné výdaje a ESI fondy: hlavní poznatky</h1>
+
+</div>
+
+
+<div id="celkové-výdaje" class="section level2 tabset">
+<h2 class="tabset">Celkové výdaje</h2>
+<div id="celý-státní-rozpočet" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">Celý státní rozpočet</h3>
+<div id="absolutně" class="section level4">
+<h4>Absolutně</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+</div>
+<div id="podíl-esif" class="section level4">
+<h4>Podíl ESIF</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-3-1.png" width="100%" /></p>
+</div>
+</div>
+<div id="relevantní-oblasti-srovnatelné-se-studií-z-roku-2017" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">Relevantní oblasti (srovnatelné se studií z roku 2017)</h3>
+<div id="absolutně-1" class="section level4">
+<h4>Absolutně</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
+</div>
+<div id="podíl-esif-1" class="section level4">
+<h4>Podíl ESIF</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-6-1.png" width="100%" /></p>
+</div>
+</div>
+</div>
+<div id="běžné-a-kapitálové" class="section level2 tabset">
+<h2 class="tabset">Běžné a kapitálové</h2>
+<div id="celý-státní-rozpočet-1" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">Celý státní rozpočet</h3>
+<div id="absolutně-2" class="section level4">
+<h4>Absolutně</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-8-1.png" width="100%" /></p>
+</div>
+<div id="podíl-esif-2" class="section level4">
+<h4>Podíl ESIF</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-9-1.png" width="100%" /></p>
+</div>
+</div>
+<div id="relevantní-oblasti" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">Relevantní oblasti</h3>
+<div id="absolutně-3" class="section level4">
+<h4>Absolutně</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-11-1.png" width="100%" /></p>
+</div>
+<div id="podíl-esif-3" class="section level4">
+<h4>Podíl ESIF</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-12-1.png" width="100%" /></p>
+</div>
+</div>
+</div>
+<div id="skupiny-odvětvové-členění" class="section level2 tabset tabset-pills">
+<h2 class="tabset tabset-pills">Skupiny (odvětvové členění)</h2>
+<div id="absolutně-4" class="section level3">
+<h3>Absolutně</h3>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-14-1.png" width="100%" /></p>
+</div>
+<div id="podíl-esif-4" class="section level3">
+<h3>Podíl ESIF</h3>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-15-1.png" width="100%" /></p>
+</div>
+</div>
+<div id="oddíly" class="section level2 tabset tabset-pills">
+<h2 class="tabset tabset-pills">Oddíly</h2>
+<div id="absolutně-5" class="section level3">
+<h3>Absolutně</h3>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-17-1.png" width="100%" /></p>
+</div>
+<div id="podíl-esif-5" class="section level3">
+<h3>Podíl ESIF</h3>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-18-1.png" width="100%" /></p>
+</div>
+</div>
+<div id="rizikové-pododdíly" class="section level2">
+<h2>Rizikové pododdíly</h2>
+<div id="běžné-výdaje" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">Běžné výdaje</h3>
+<pre><code>## Adding missing grouping variables: `skupina`, `oddil`</code></pre>
+<pre><code>## Joining, by = c(&quot;skupina&quot;, &quot;oddil&quot;, &quot;trida&quot;, &quot;pododdil&quot;)</code></pre>
+<pre><code>## Joining, by = c(&quot;trida&quot;, &quot;skupina&quot;, &quot;oddil&quot;, &quot;pododdil&quot;)</code></pre>
+<div id="absolutně-6" class="section level4">
+<h4>Absolutně</h4>
+<pre><code>## Scale for &#39;y&#39; is already present. Adding another scale for &#39;y&#39;, which will
+## replace the existing scale.</code></pre>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-22-1.png" width="100%" /></p>
+</div>
+<div id="podíly" class="section level4">
+<h4>Podíly</h4>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-23-1.png" width="100%" /></p>
+</div>
+</div>
+</div>
+<div id="příklad-detailní-analýzy" class="section level2">
+<h2>Příklad detailní analýzy</h2>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-24-1.png" width="100%" /></p>
+</div>
+<div id="technické-aspekty-ve-stručnosti" class="section level2">
+<h2>Technické aspekty ve stručnosti</h2>
+<div id="zdroje-dat" class="section level3">
+<h3>Zdroje dat</h3>
+<p>Využíváme data ze Státní poklady, konkrétně otevřené datové sady o plnění rozpočtů tzv. ústředně řízených organizacích, které dohromady odpovídají hranicím státního rozpočtu.</p>
+</div>
+<div id="jak-fungují-rozpočtová-data" class="section level3">
+<h3>Jak fungují rozpočtová data</h3>
+<div id="záběr" class="section level4">
+<h4>Záběr</h4>
+<p>Státní pokladna ve veřejně dostupných datech sleduje čtyři typy organizací</p>
+<ul>
+<li>ústředně řízené:</li>
+<li>organizační složky státu</li>
+<li>příspěvkové organizace</li>
+<li>státní fondy</li>
+<li>místně řízené,</li>
+<li>tj. obce, kraje a jejich příspěvkové organizace a sdružení, vše společně</li>
+</ul>
+<p>Kromě příjmů a výdajů pak stát eviduje ještě účelové transfery (dotace) od státu k obcím.</p>
+</div>
+<div id="logika-toku-peněz-a-její-odraz-v-datech" class="section level4">
+<h4>Logika toku peněz a její odraz v datech</h4>
+<p>Peníze do veřejného sektoru tečou třemi cestami:</p>
+<ul>
+<li>do státního rozpočtu</li>
+<li>do obecních a krajských rozpočtů</li>
+<li>do státních fondů</li>
+</ul>
+<p>Následně tečou dál formou transferů, tj. účelových a neúčelových přesunů, dotací atd., např. od státu nebo státním fondům obcím nebo státním příspěvkovým organizacím.</p>
+<p>Peníze jednou přitečené do státního rozpočtu jsou tam vidět jako příjem a následně jako výdaj. Pokud peníze utrácí stát sám na svoje vlastní aktivity, výdaje vidíme rozčlěnený do detailu podle paragrafů a položek. Pokud stát poslal peníze dál, např. obcím, vidíme ho jako transfer a další detail vidíme až v datech od toho, kdo je na konci utratil, tj. např. obec. Proto např. ve státním rozpočtu nejde dobře sledovat výdaje na platy ve školství, protože ty jsou ve státním rozpočtu evidovány jako transfer obcím a nejsou v detailu sledovány.</p>
+<p>U ESI fondů platí, že peníze přitečou vždy do státního rozpočtu (tzv. Národní fond) a následně je stát buď</p>
+<ul>
+<li>utratí (sám je příjemce) - pak vidíme na co přesně, tj. např. platy, nákupy + na jaké odvětví (paragraf)</li>
+<li>pošle dál do veřejného sektoru, např. obci nebo vlastní příspěvkovce - pak je vidíme ve výdajích SR jako transfer a obec/státní či obecní příspěvkovka jej eviduje v detailu výdajů svého rozpočtu (k tomu ale viz níže)</li>
+<li>pošle do soukromého sektoru jako transfer (dotaci) - pak je vidíme ve výdajích SR jako transfer v daném odvětví (paragrafu).</li>
+</ul>
+<p>Technické řešení tohoto problému - kdy výdaje jsou evidovány při předání mezi částmi veřejného sektoru i při konečném vydání - řeší konsolidace, pro kterou data státní pokladny také poskytují podklad.</p>
+</div>
+<div id="členění-jaký-detail-můžeme-znát" class="section level4">
+<h4>Členění: jaký detail můžeme znát</h4>
+<p>Data státní pokladny fungují tak, že na každou utracenou korunu nalepí několik nálepek podle různých členění a výsledné datové sady tak poskytují velmi jemný rozpad výdají podle několika členění naráz. Každé členění má několik úrovní detailu, od cca 10 kategorií po několik set.</p>
+<ul>
+<li>odvětvové členění, tzv. paragrafy, tj. na jakou oblast (viděno sektorově)</li>
+<li>zodpovědnostní členění: kapitoly, tj. z rozpočtu kterého ministerstva, popř. konkrétní veřejné organizace, výdaje šly</li>
+<li>druhové členění: v nejvyšší hladině členění na běžné a kapitálové výdaje, dále na platy, transfery, nákupy atd.</li>
+<li>zdrojové třídění: kde se peníze vzaly? V základní úrovni ČR x mimo, dále až na konkrétní programy vč. kofinancování</li>
+</ul>
+<p>Této vícerozpěrnosti dat využíváme jednak pro identifikaci peněz z ESIF (zdrojové třídění), jednak pro detailnější analýzy (např. kapitálové výdaje na transfery soukromému sektoru v oblasi energetiky).</p>
+<p>U zdrojového třídění dokážeme odlišit i období, tj. např. v roce 2015 lze odlišit OP D 2007-13 od OP D 2014-20.</p>
+</div>
+<div id="ve-vztahu-k-esif-datům" class="section level4">
+<h4>Ve vztahu k ESIF datům</h4>
+<p>Ze státní pokladny lze dovodit operační program, ztrácí se ale vazba na projekty a tím i na kategorie používané v monitoringu ESIF, např. oblasti intervencí.</p>
+</div>
+</div>
+<div id="dostupnost-a-omezení-dat" class="section level3">
+<h3>Dostupnost a omezení dat</h3>
+<table>
+<thead>
+<tr class="header">
+<th>typ</th>
+<th>roky</th>
+<th>identifikace ESIF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>státní rozpočet</td>
+<td>2015-2021</td>
+<td>Ano</td>
+</tr>
+<tr class="even">
+<td>státní příspěvkové organizace</td>
+<td>2010-2020</td>
+<td>?</td>
+</tr>
+<tr class="odd">
+<td>státní fondy</td>
+<td>2015-2021</td>
+<td>Ne</td>
+</tr>
+<tr class="even">
+<td>samosprávy a jimi zřizované organizace</td>
+<td>2010-2021</td>
+<td>Částečně</td>
+</tr>
+</tbody>
+</table>
+<div id="poznámky-ke-kvalitě-dat" class="section level4">
+<h4>Poznámky ke kvalitě dat</h4>
+<ul>
+<li>odvětvové třídění investic do pododdílů v oddílu Doprava je po roce 2015 velmi vachrlaté a pododdíly v podstatě nejdou použít - většina výdajů na železnice a silnice je v pododdíle Ostatní záležitosti… a všechny tyto oddíly objemově velmi skáčou mezi lety.</li>
+</ul>
+</div>
+</div>
+<div id="srovnatelnost-se-studií-z-roku-2017" class="section level3">
+<h3>Srovnatelnost se studií z roku 2017</h3>
+<p>Hlavní rozdíly jsou tři:</p>
+<ol style="list-style-type: decimal">
+<li>studie z roku 2017 zahrnuje státní fondy</li>
+<li>studie z roku 2017 zahrnuje samosprávy</li>
+<li>studie z roku 2017 pracuje s vybraným okruhem výdajů - vyloučeny jsou např. ty části druhového nebo odvětvového třídění, kde ESI fondy nehrají roli (např. sociální dávky), popř. které nebyly centrem zájmu studie (zemědělství)</li>
+</ol>
+<p>Ad 1: u SF nejsou z veřejných zdrojů data o zdrojích výdajů, pro rok 2017 vznikly velkým množstvím ruční kompilace interně na MF Ad 2: pro obce data o zdroji výdajů zřejmě nejsou přímo dostupná od roku 2015</p>
+<p>Následky:</p>
+<p>ad 1. Kategorie “ústředně řízení organizace” zahrnuje jiný okruh výdajů; po roce 2015 u části těchto výdajů neznáme rozdělení na ESIF a vlastní. Nicméně celkové součty výdajů pro “překryvový” rok (kde máme data z obou zdrojů) cca odpovídají. ad 2. O kategorii “místně řízených organizací” tj. samospráv máme ohledně podílu ESIF jen nepřímá data a jejich kvalita spolehlivost zatím není jasná. ad 3. V této studii na některých místech ukazujeme dva okruhy výdajů: jednak celý státní rozpočet, jednak výběr podle studie z roku 2017.</p>
+</div>
+</div>
+<div id="odkladiště" class="section level2">
+<h2>Odkladiště</h2>
+<p><img src="s_pokladna_files/figure-html/unnamed-chunk-25-1.png" width="100%" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

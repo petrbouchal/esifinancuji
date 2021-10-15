@@ -251,21 +251,33 @@ $(document).ready(function () {
   <a href="README.html">Základní info</a>
 </li>
 <li>
+  <a href="s_pokladna.html">Draft studie</a>
+</li>
+<li>
   <a href="s_doc.html">Dokumentace</a>
 </li>
 <li>
-  <a href="s_output.html">Validace &amp; dokumentace výstupů</a>
+  <a href="s_output.html">Výstupní data</a>
 </li>
-<li>
-  <a href="s_inputchecks.html">Validace vstupů</a>
-</li>
-<li>
-  <a href="dev.html">Technická dokumentace</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Technická dokumentace
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="s_inputchecks.html">Validace vstupů</a>
+    </li>
+    <li>
+      <a href="dev.html">Vývojářská dokumentace</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/petrbouchal/esifunguji">
+  <a href="https://github.com/petrbouchal/esifinancuji">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -295,13 +307,11 @@ $(document).ready(function () {
 <!-- badges: end -->
 <p>Tento repozitář obsahuje kód na zpracování dat o výdajích financovaných z ESI fondů v ČR primárně v letech 2014-2020. Cílem je:</p>
 <ul>
-<li>sestavit dataset použitelný pro modelování dopadů ESI fondů na HDP (QUEST, HERMIN - tj. republiková a krajská úroveň, kategorizace výdajů podle specifikace modelů)</li>
-<li>ověřit spolehlivost dat státní pokladny o zdrojích veřejných výdajů (u výdajů ústředních orgánů informace o zdroji, u místně řízených organizací informace o přijatých transferech)</li>
 <li>připravit dataset pro vyhodnocení role ESI fondů ve veřejných výdajích</li>
-<li>[buď zde nebo jinde] analýza role ESI fondů ve veřejných výdajích</li>
+<li>analýza role ESI fondů ve veřejných výdajích</li>
 </ul>
 <p><strong>Vytvořeno pro Úřad vlády ČR jako součást projektu <em>Systémová podpora společné evropské politiky podpory a pomoci, ESI a obdobných fondů na Úřadu vlády ČR</em> (CZ.08.1.125/0.0/0.0/15_001/0000176)</strong></p>
-<p>Detailnější dokumentace k pipelinu na tvorbu dat pro makro modely:</p>
+<p>Detailnější dokumentace k pipelinu:</p>
 <ul>
 <li><a href="s_doc.html">obsahová dokumentace</a></li>
 <li><a href="s_inputchecks.html">vstupní validace dat</a></li>
@@ -311,11 +321,7 @@ $(document).ready(function () {
 <p>Relevantní předchozí publikace v této oblasti:</p>
 <ul>
 <li><a href="https://dotaceeu.cz/cs/evropske-fondy-v-cr/narodni-organ-pro-koordinaci/evaluace/knihovna-evaluaci/verejne-vydaje-a-fondy-eu-2007%e2%80%932015">MMR (2017) o roli ESI fondů ve veřejných výdajích</a> ( <a href="https://dotaceeu.cz/Dotace/media/SF/NOK/Evaluace/Evalua%c4%8dn%c3%ad%20knihovna/2017/Adicionalita/Verejne-vydaje-a-fondy-EU-final-public_1.pdf">PDF</a>)</li>
-<li><a href="https://www.vlada.cz/assets/evropske-zalezitosti/analyzy-EU/171204_Dopad_ESI_fondu_na_hospodarsky_rust_CR_final.pdf">Předchozí studie Úřadu vlády (2017) - makroekonomické odhady dopadu ESIF na ekonomiku</a></li>
-<li><a href="https://www.vlada.cz/assets/evropske-zalezitosti/analyzy-EU/Dopad-ESI-fondu-na-hospodarstvi-CR.pdf">Navazující studie Úřadu vlády (2018)</a></li>
-<li><a href="https://www.vlada.cz/assets/evropske-zalezitosti/aktualne/Vyuzivani-makroevaluaci-a-makroekonomickych-modelu-clenskymi-staty-EU.pdf">Úřad vlády (2019) přehled využívání makro modelů v zemích EU</a></li>
 </ul>
-<p><em>Pojmenováno s citem k regionu narození jednoho nejmenovaného šéfa projektového týmu.</em></p>
 <div id="dokumentace-souborů" class="section level2">
 <h2>Dokumentace souborů</h2>
 <ul>

@@ -251,21 +251,33 @@ $(document).ready(function () {
   <a href="README.html">Základní info</a>
 </li>
 <li>
+  <a href="s_pokladna.html">Draft studie</a>
+</li>
+<li>
   <a href="s_doc.html">Dokumentace</a>
 </li>
 <li>
-  <a href="s_output.html">Validace &amp; dokumentace výstupů</a>
+  <a href="s_output.html">Výstupní data</a>
 </li>
-<li>
-  <a href="s_inputchecks.html">Validace vstupů</a>
-</li>
-<li>
-  <a href="dev.html">Technická dokumentace</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Technická dokumentace
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="s_inputchecks.html">Validace vstupů</a>
+    </li>
+    <li>
+      <a href="dev.html">Vývojářská dokumentace</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/petrbouchal/esifunguji">
+  <a href="https://github.com/petrbouchal/esifinancuji">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -309,12 +321,11 @@ default:
   sp_months_central_new: 12 # which month&#39;s data to download
   sp_central_arrowdir_new: &quot;data-processed/sp-central-new-arr&quot;
 
-
   sp_nastroj_ids_1420_ops: [&quot;102&quot;, &quot;103&quot;, &quot;104&quot;, &quot;105&quot;, &quot;106&quot;, &quot;107&quot;, &quot;108&quot;, &quot;109&quot;]
   sp_nastroj_ids_1420_prv: [&quot;130&quot;, &quot;187&quot;]
 
   sp_nastroj_ids_0713_ops: [&quot;30&quot;, &quot;31&quot;, &quot;33&quot;, &quot;36&quot;, &quot;37&quot;, &quot;39&quot;, &quot;40&quot;, &quot;51&quot;, &quot;52&quot;, &quot;53&quot;, &quot;54&quot;]
-  sp_nastroj_ids_0713_prv: [&quot;4&quot;, &quot;87&quot;]
+  sp_nastroj_ids_0713_prv: [&quot;27&quot;, &quot;87&quot;]
 
   # settings for FINU (central budget 2010-2014)
   sp_years_central_old: !expr 2010:2014
@@ -326,6 +337,10 @@ default:
   sp_months_local: 12
   sp_local_arrowdir: &quot;data-processed/sp-local-arr&quot;
   sp_local_grants_arrowdir: &quot;data-processed/sp-local-grants-arr&quot;
+
+  # settings for FINSF (state funds 2015-)
+  sp_months_sf: 12
+  sp_sf_arrowdir: &quot;data-processed/sp-sf-arr&quot;
 
   # URL for getting project data
   ef_pubxls_url: &quot;https://dotaceeu.cz/getmedia/6297d56b-0b57-418d-ad25-dd16bd687479/2021_06-Seznam-operaci-_-List-of-operations.xls.aspx?ext=.xls&quot;
@@ -376,6 +391,9 @@ default:
   # export location - hierarchy
   hier_export_dir: &quot;data-export/matice_202108&quot;
   hier_export_xlsx: &quot;matice.xlsx&quot;
+
+  # data from 2017 study
+  first_report_xlsx: &quot;data-input/adic2017/vydaje_dataset.xlsx&quot;
 </code></pre>
 </details>
 <p><br></p>
