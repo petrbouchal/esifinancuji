@@ -64,6 +64,33 @@ extract_cl <- function(cl_target_list, cl_string) {
 }
 
 
+# Datavis utils -----------------------------------------------------------
+
+theme_studie <- function(...) {
+  ptrr::theme_ptrr(family = "Arial", title_family = "Arial",
+                   tonecol = "grey90", base_size = 9,
+                   legend.key.width = unit(6, "pt"),
+                   legend.key.height = unit(10, "pt"),
+                   ...)
 }
 
+yr_brks <- lubridate::make_date(2015:2020, 12, 31)
+yr_lbls <- c("2015", "'16", "'17", "'18", "'19", "2020")
+yr_lbls_m <- c("2015", "'16", "'17", "'18", "'19", "'20")
+
+yr_brks_old <- lubridate::make_date(2007:2015, 12, 31)
+yr_lbls_old <- c("2007", "'08", "'09", "'10", "'11",
+                 "'12", "'13", "'14", "2015")
+
+clrs <- c(# "b" = "#24a7af", # bezne - mmr
+  # "e" = "#001489", # evropa - mmr
+  # "n" = "#e21c18", # narodni - mmr
+  # "m" = "#00af3f", # mistni - mmr
+  "k" = "#ae254b", # kapital
+  "b" = "#4c6d16", # bezne
+  "e" = "#1c286e", # evropa - tone
+  "n" = "#C83432", # narodni - tone
+  "m" = "#d9b830", # mistni
+  "u" = "#1c286e", # ustredni
+  "c" = "grey20") # celkem
 

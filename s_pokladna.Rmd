@@ -1,12 +1,560 @@
 ---
-title: "Untitled"
-author: "Petr Bouchal"
-date: "9/23/2021"
-output: html_document
+title: "Veřejné výdaje a ESI fondy: hlavní poznatky"
+subtitle: "Interní draft, říjen 2021"
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, out.width = "100%", warning = FALSE, message = FALSE)
+
+source("_targets_packages.R")
+source("R/utils.R")
+source("R/functions.R")
 ```
 
-##
+```{r load-targets}
+targets::tar_load(sp_cl)
+targets::tar_load(compiled_op_sum)
+targets::tar_load(sp_sf_arrdir)
+targets::tar_load(sp_central_new_arrdir)
+targets::tar_load(dt17_wide)
+targets::tar_load(dt17_long)
+targets::tar_load(sp_local_arrdir)
+targets::tar_load(cb_esif_marked)
+targets::tar_load(cb_sum_long)
+targets::tar_load(cb_sum_hlousek_wide)
+targets::tar_load(cb_sum_wide)
+targets::tar_load(cb_sum_hlousek_long)
+```
+
+## Celkové výdaje {.tabset}
+
+### Celý státní rozpočet {.tabset .tabset-pills}
+
+```{r}
+cb_sum <- cb_sum_long %>%
+  group_by(vykaz_date, source) %>%
+  summarise(spending = sum(spending), .groups = "drop")
+
+cb_sum_perc <- cb_sum %>% 
+  group_by(vykaz_date) %>% 
+  mutate(perc = spending/sum(spending)) %>% 
+  filter(source == "EU")
+```
+
+#### Absolutně
+
+```{r}
+ggplot(cb_sum, aes(vykaz_date, spending/1e9, alpha = source)) +
+  geom_col() + 
+  scale_y_continuous(expand = ptrr::flush_axis, 
+                     breaks = seq(from = 0, to = 2000, by = 500),
+                     labels = ptrr::label_number_cz()) +
+  expand_limits(y = c(NA, 2000)) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  scale_alpha_manual(values = c(1, .5), name = "Zdroj") +
+  scale_fill_manual(values = clrs[["c"]]) +
+  theme_studie() +
+  labs(title = "Výdaje státního rozpočtu vlastní a z ESI fondů",
+       subtitle = "mld. Kč")
+```
+
+#### Podíl ESIF
+
+
+```{r}
+ggplot(cb_sum_perc, aes(vykaz_date, perc, alpha = source)) +
+  geom_line(size = 2) + 
+  geom_point(size = 4, colour = "white") + 
+  geom_point(size = 3) + 
+  scale_y_continuous(expand = ptrr::flush_axis,
+                     limits = c(0, NA),
+                     breaks = scales::breaks_pretty(),
+                     labels = ptrr::label_percent_cz(1)) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  scale_alpha_manual(values = c(1, .5), name = "Blah") +
+  scale_fill_manual(values = clrs[["c"]]) +
+  theme_studie(legend.position = "none") +
+  labs(title = "Podíl ESI fondů na výdajích státního rozpočtu")
+```
+
+### Relevantní oblasti (srovnatelné se studií z roku 2017) {.tabset .tabset-pills}
+
+
+
+```{r}
+cb_sum_hl <- cb_sum_hlousek_long %>%
+  group_by(vykaz_date, source) %>%
+  summarise(spending = sum(spending), .groups = "drop")
+
+cb_sum_hl_perc <- cb_sum_hl %>% 
+  group_by(vykaz_date) %>% 
+  mutate(perc = spending/sum(spending)) %>% 
+  filter(source == "EU")
+```
+
+#### Absolutně
+
+```{r}
+ggplot(cb_sum_hl, aes(vykaz_date, spending/1e9, alpha = source)) +
+  geom_col() + 
+  scale_y_continuous(expand = ptrr::flush_axis, 
+                     breaks = seq(from = 0, to = 600, by = 200),
+                     labels = ptrr::label_number_cz()) +
+  expand_limits(y = c(NA, 600)) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  scale_alpha_manual(values = c(1, .5), name = "Zdroj") +
+  scale_fill_manual(values = clrs[["c"]]) +
+  theme_studie() +
+  labs(title = "Výdaje státního rozpočtu vlastní a z ESI fondů",
+       subtitle = "mld. Kč")
+```
+
+#### Podíl ESIF
+
+```{r}
+ggplot(cb_sum_hl_perc, aes(vykaz_date, perc, alpha = source)) +
+  geom_line(size = 2) + 
+  geom_point(size = 4, colour = "white") + 
+  geom_point(size = 3) + 
+  scale_y_continuous(expand = ptrr::flush_axis,
+                     limits = c(0, NA),
+                     breaks = scales::breaks_pretty(),
+                     labels = ptrr::label_percent_cz(1)) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  scale_alpha_manual(values = c(1, .5), name = "Blah") +
+  scale_fill_manual(values = clrs[["c"]]) +
+  theme_studie(legend.position = "none") +
+  labs(title = "Podíl ESI fondů na výdajích státního rozpočtu")
+```
+
+## Běžné a kapitálové {.tabset}
+
+### Celý státní rozpočet {.tabset .tabset-pills}
+
+```{r}
+cb_sum_trida <- cb_sum_long %>%
+  group_by(vykaz_date, source, trida) %>%
+  summarise(spending = sum(spending), .groups = "drop") 
+
+cb_sum_trida_perc <- cb_sum_trida %>% 
+  group_by(vykaz_date, trida) %>% 
+  mutate(perc = spending/sum(spending)) %>% 
+  filter(source == "EU")
+```
+
+#### Absolutně
+
+```{r}
+ggplot(cb_sum_trida, aes(vykaz_date, spending/1e9, alpha = source,
+                         fill = trida)) +
+  geom_col() + 
+  scale_y_continuous(expand = ptrr::flush_axis, 
+                     breaks = seq(from = 0, to = 2100, by = 300),
+                     labels = ptrr::label_number_cz()) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  guides(fill = "none") +
+  expand_limits(y = c(NA, 1800)) +
+  scale_alpha_manual(values = c(1, .5), name = "Zdroj") +
+  scale_fill_manual(values = c(clrs[["b"]], clrs[["k"]])) +
+  theme_studie(multiplot = T) +
+  facet_grid(~trida) +
+  labs(title = "Výdaje vlastní a z ESI fondů",
+       subtitle = "mld. Kč")
+```
+
+#### Podíl ESIF
+
+```{r}
+ggplot(cb_sum_trida_perc, aes(vykaz_date, perc, colour = trida)) +
+  geom_line(size = 2) + 
+  geom_point(size = 4, colour = "white") + 
+  geom_point(size = 3) + 
+  scale_y_continuous(expand = ptrr::flush_axis,
+                     limits = c(0, NA),
+                     breaks = scales::breaks_pretty(n = 6),
+                     labels = ptrr::label_percent_cz(1)) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  guides(colour = "none") +
+  scale_colour_manual(values = c(clrs[["b"]], clrs[["k"]])) +
+  facet_grid(~trida) +
+  theme_studie(multiplot = T) +
+  labs(title = "Podíl ESI fondů na běžných a kapitálových výdajích")
+```
+
+### Relevantní oblasti {.tabset .tabset-pills}
+
+```{r}
+cb_sum_trida_hl <- cb_sum_hlousek_long %>%
+  group_by(vykaz_date, source, trida) %>%
+  summarise(spending = sum(spending), .groups = "drop") 
+
+cb_sum_trida_hl_perc <- cb_sum_trida_hl %>% 
+  group_by(vykaz_date, trida) %>% 
+  mutate(perc = spending/sum(spending)) %>% 
+  filter(source == "EU")
+```
+
+#### Absolutně
+
+```{r}
+ggplot(cb_sum_trida_hl, aes(vykaz_date, spending/1e9, alpha = source,
+                            fill = trida)) +
+  geom_col() + 
+  scale_y_continuous(expand = ptrr::flush_axis, 
+                     breaks = seq(from = 0, to = 500, by = 100),
+                     labels = ptrr::label_number_cz()) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  guides(fill = "none") +
+  expand_limits(y = c(NA, 500)) +
+  scale_alpha_manual(values = c(1, .5), name = "Zdroj") +
+  scale_fill_manual(values = c(clrs[["b"]], clrs[["k"]])) +
+  theme_studie(multiplot = T) +
+  facet_grid(~trida) +
+  labs(title = "Výdaje vlastní a z ESI fondů",
+       subtitle = "členěno na běžné a kapitálové, mld. Kč")
+```
+
+#### Podíl ESIF
+
+```{r}
+ggplot(cb_sum_trida_hl_perc, aes(vykaz_date, perc, colour = trida)) +
+  geom_line(size = 2) + 
+  geom_point(size = 4, colour = "white") + 
+  geom_point(size = 3) + 
+  scale_y_continuous(expand = ptrr::flush_axis,
+                     limits = c(0, NA),
+                     breaks = scales::breaks_pretty(n = 6),
+                     labels = ptrr::label_percent_cz(1)) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  guides(colour = "none") +
+  scale_colour_manual(values = c(clrs[["b"]], clrs[["k"]])) +
+  facet_grid(~trida) +
+  theme_studie(multiplot = T) +
+  labs(title = "Podíl ESI fondů na běžných a kapitálových výdajích")
+```
+
+## Skupiny (odvětvové členění) {.tabset .tabset-pills}
+
+```{r}
+cb_sum_skupina <- cb_sum_long %>%
+  group_by(vykaz_date, source, trida, skupina) %>%
+  summarise(spending = sum(spending), .groups = "drop") %>% 
+  drop_na(skupina) %>% 
+  mutate(trida = str_remove(trida, " výdaje"))
+
+cb_sum_skupina_perc <- cb_sum_skupina %>% 
+  group_by(vykaz_date, trida, skupina) %>% 
+  mutate(perc = spending/sum(spending)) %>% 
+  filter(source == "EU")
+```
+
+### Absolutně
+
+```{r}
+ggplot(cb_sum_skupina, aes(vykaz_date, spending/1e9, alpha = source,
+                           fill = trida)) +
+  geom_col() + 
+  scale_y_continuous(expand = ptrr::flush_axis, 
+                     breaks = seq(from = 0, to = 1000, by = 200),
+                     labels = ptrr::label_number_cz()) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  scale_alpha_manual(values = c(1, .5), name = "Zdroj") +
+  scale_fill_manual(values = c(clrs[["b"]], clrs[["k"]]), name = NULL) +
+  theme_studie(multiplot = T) +
+  facet_wrap(~skupina, nrow = 2, labeller = label_wrap_gen()) +
+  labs(title = "Výdaje vlastní a z ESI fondů podle skupin",
+       subtitle = "členěno na běžné a kapitálové, mld. Kč")
+```
+
+### Podíl ESIF
+
+```{r}
+ggplot(cb_sum_skupina_perc, aes(vykaz_date, perc, colour = trida)) +
+  geom_line(size = 1) + 
+  geom_point(size = 1.5, colour = "white") + 
+  geom_point(size = 2) + 
+  scale_y_continuous(limits = c(0, NA),
+                     breaks = scales::breaks_pretty(n = 6),
+                     labels = ptrr::label_percent_cz(1)) +
+  scale_x_date(labels = yr_lbls_m, breaks = yr_brks) +
+  scale_colour_manual(values = c(clrs[["b"]], clrs[["k"]]), name = NULL) +
+  facet_wrap(~skupina, nrow = 2, labeller = label_wrap_gen()) +
+  theme_studie(multiplot = T, legend.position = "bottom") +
+  labs(title = "Podíl ESI fondů na výdajích podle skupin",
+       subtitle = "členěno na běžné a kapitálové")
+```
+
+## Oddíly {.tabset .tabset-pills}
+
+```{r}
+cb_sum_oddil <- cb_sum_long %>%
+  group_by(vykaz_date, source, trida, oddil) %>%
+  summarise(spending = sum(spending), .groups = "drop") %>% 
+  drop_na(oddil) %>% 
+  mutate(trida = str_remove(trida, " výdaje"))
+
+cb_sum_oddil_perc <- cb_sum_oddil %>% 
+  group_by(vykaz_date, trida, oddil) %>% 
+  mutate(perc = spending/sum(spending)) %>% 
+  filter(source == "EU")
+```
+
+### Absolutně
+
+```{r, fig.height=6}
+ggplot(cb_sum_oddil %>% 
+         filter(oddil != "Dávky a podpory v sociálním zabezpečení"), 
+       aes(vykaz_date, spending/1e9, alpha = source,
+                         fill = trida)) +
+  geom_col() + 
+  scale_y_continuous(expand = ptrr::flush_axis, 
+                     breaks = seq(from = 0, to = 200, by = 50),
+                     labels = ptrr::label_number_cz()) +
+  scale_x_date(labels = yr_lbls_m, breaks = yr_brks) +
+  scale_alpha_manual(values = c(1, .5), name = "Zdroj") +
+  scale_fill_manual(values = c(clrs[["b"]], clrs[["k"]]), name = NULL) +
+  theme_studie(multiplot = T) +
+  facet_wrap(~str_sub(oddil, 1, 40), nrow = 5, labeller = label_wrap_gen()) +
+  labs(title = "Výdaje vlastní a z ESI fondů podle oddílů",
+       subtitle = "členěno na běžné a kapitálové, mld. Kč. Soc. zabezpečení vynecháno pro čitelnost")
+```
+
+### Podíl ESIF
+
+```{r, fig.height=6}
+ggplot(cb_sum_oddil_perc, aes(vykaz_date, perc, colour = trida)) +
+  geom_line(size = 1) + 
+  geom_point(size = 1.5, colour = "white") + 
+  geom_point(size = 2) + 
+  scale_y_continuous(limits = c(0, NA),
+                     breaks = scales::breaks_pretty(n = 6),
+                     labels = ptrr::label_percent_cz(1)) +
+  scale_x_date(labels = yr_lbls_m, breaks = yr_brks) +
+  scale_colour_manual(values = c(clrs[["b"]], clrs[["k"]]), name = NULL) +
+  facet_wrap(~str_sub(oddil, 1, 40), nrow = 6, labeller = label_wrap_gen()) +
+  theme_studie(multiplot = T, legend.position = "bottom") +
+  labs(title = "Podíl ESI fondů na výdajích podle oddílů",
+       subtitle = "členěno na běžné a kapitálové")
+```
+
+## Rizikové pododdíly
+
+### Běžné výdaje {.tabset .tabset-pills}
+
+```{r}
+cb_sum_pododdil <- cb_sum_long %>%
+  group_by(vykaz_date, source, trida, skupina, oddil, pododdil) %>%
+  summarise(spending = sum(spending), .groups = "drop") %>% 
+  drop_na(pododdil) %>% 
+  mutate(trida = str_remove(trida, " výdaje"))
+
+cb_sum_pododdil_perc <- cb_sum_pododdil %>% 
+  group_by(vykaz_date, trida, skupina, oddil, pododdil) %>% 
+  mutate(perc = spending/sum(spending)) %>% 
+  filter(source == "EU")
+
+cb_sum_pododdil_perc_avg <- cb_sum_long %>% 
+  group_by(trida, skupina, oddil, pododdil, source) %>% 
+  summarise(spending = sum(spending), .groups = "drop") %>% 
+  group_by(trida, pododdil) %>% 
+  mutate(perc = spending/sum(spending)) %>% 
+  filter(source == "EU") %>% 
+  mutate(trida = str_remove(trida, " výdaje"))
+
+cb_sum_pododdil_perc_slope <- cb_sum_pododdil_perc %>% 
+  filter(vykaz_date > "2016-01-01") %>% 
+  group_by(trida, skupina, oddil, pododdil) %>% 
+  mutate(allna = all(is.na(perc))) %>% 
+  filter(!allna) %>% 
+  nest() %>% 
+  mutate(model = map(data, ~lm(perc ~ vykaz_date, data = .x) %>% broom::tidy())) %>% 
+  unnest(model) %>% 
+  filter(term == "vykaz_date") %>% 
+  select(trida, pododdil, slope = estimate) %>% 
+  left_join(cb_sum_pododdil_perc_avg)
+
+pododd_ranks_bezne <- cb_sum_pododdil_perc_slope %>% 
+  filter(trida == "Běžné") %>% 
+  ungroup() %>% 
+  mutate(rank_perc = 1/rank(perc),
+         rank_slope = 1/rank(slope),
+         rank_sum = rank_perc + rank_slope) %>% 
+  select(skupina, oddil, pododdil, trida, starts_with("rank")) %>% 
+  slice_min(rank_perc, n = 12) 
+
+```
+
+```{r}
+pododd_riziko <- cb_sum_pododdil %>% 
+  filter(vykaz_date > "2016-01-01") %>% 
+  left_join(pododd_ranks_bezne) %>% 
+  drop_na(rank_sum) %>% 
+  mutate(pododdil = as.factor(pododdil) %>% 
+           fct_reorder(rank_slope)) %>% 
+  group_by(oddil) %>% 
+  mutate(spend_oddil = sum(spending)) %>% 
+  ungroup() %>% 
+  mutate(pododdil = fct_reorder(pododdil, spend_oddil, .desc = TRUE, .fun = mean) %>% 
+           fct_relabel(~str_sub(.x, 1, 40)))
+```
+
+
+```{r}
+riz_odd_gg <- ggplot(pododd_riziko, aes(vykaz_date, spending/1e9, alpha = source)) +
+  scale_y_continuous(expand = ptrr::flush_axis, 
+                     labels = ptrr::label_percent_cz()) +
+  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
+  scale_alpha_manual(values = c(1, .5), name = "Zdroj") +
+  scale_fill_manual(values = c(clrs[["b"]], clrs[["k"]]), name = NULL) +
+  theme_studie(multiplot = T) +
+  facet_wrap(~pododdil, nrow = 4, labeller = label_wrap_gen())
+```
+
+#### Absolutně
+
+```{r, fig.height=7}
+riz_odd_gg +
+  geom_col(position = "stack", fill = clrs[["b"]]) +
+  labs(title = "Vybrané rizikové pododdíly výdajů státního rozpočtu",
+       subtitle = "běžné výdaje, mld. Kč\nřazeno podle objemu rozpočtového oddílu") +
+  scale_y_continuous(expand = ptrr::flush_axis, 
+                     labels = ptrr::label_number_cz(1))
+```
+
+#### Podíly
+
+```{r, fig.height=7}
+riz_odd_gg +
+  geom_col(position = "fill", fill = clrs[["b"]]) +
+  labs(title = "Vybrané rizikové pododdíly výdajů státního rozpočtu",
+       subtitle = "běžné výdaje, podíly\nřazeno podle objemu rozpočtového oddílu")
+  
+```
+
+
+
+## Příklad detailní analýzy
+
+```{r}
+pdod <- "Správa v sociálním zabezpečení a politice zaměstnanosti"
+pdsk <- "Platy"
+
+cb_esif_marked %>% 
+  filter(podseskupeni == pdsk, 
+         pododdil == pdod
+         # pododdil == "Správa ve vzdělávání"
+         # pododdil == "Správa v ochraně životního prostředí"
+  ) %>% 
+  count(vykaz_date, esif, wt = budget_spending/1e9) %>% 
+  ggplot(aes(vykaz_date, n, alpha = as.factor(esif) %>% fct_rev())) +
+  scale_alpha_manual(values = c(1, .5), name = "Zdroj",
+                     labels = c("EU", "vlastní")) +
+  geom_col(fill = clrs[["b"]]) + 
+  theme_studie() +
+  labs(title = "Podíl EU fondů na specifické výseči výdajů",
+       subtitle = str_glue("Podseskupení: {pdsk}\nPododdíl: {pdod}"))
+```
+
+## Technické aspekty ve stručnosti
+
+### Zdroje dat
+
+Využíváme data ze Státní poklady, konkrétně otevřené datové sady o plnění rozpočtů tzv. ústředně řízených organizacích, které dohromady odpovídají hranicím státního rozpočtu.
+
+### Jak fungují rozpočtová data
+
+#### Záběr
+
+Státní pokladna ve veřejně dostupných datech sleduje čtyři typy organizací
+
+- ústředně řízené:
+  - organizační složky státu
+  - příspěvkové organizace
+  - státní fondy
+- místně řízené, 
+  - tj. obce, kraje a jejich příspěvkové organizace a sdružení, vše společně
+
+Kromě příjmů a výdajů pak stát eviduje ještě účelové transfery (dotace) od státu k obcím.
+
+#### Logika toku peněz a její odraz v datech
+
+Peníze do veřejného sektoru tečou třemi cestami:
+
+- do státního rozpočtu
+- do obecních a krajských rozpočtů
+- do státních fondů
+
+Následně tečou dál formou transferů, tj. účelových a neúčelových přesunů, dotací atd., např. od státu nebo státním fondům obcím nebo státním příspěvkovým organizacím.
+
+Peníze jednou přitečené do státního rozpočtu jsou tam vidět jako příjem a následně jako výdaj. Pokud peníze utrácí stát sám na svoje vlastní aktivity, výdaje vidíme rozčlěnený do detailu podle paragrafů a položek. Pokud stát poslal peníze dál, např. obcím, vidíme ho jako transfer a další detail vidíme až v datech od toho, kdo je na konci utratil, tj. např. obec. Proto např. ve státním rozpočtu nejde dobře sledovat výdaje na platy ve školství, protože ty jsou ve státním rozpočtu evidovány jako transfer obcím a nejsou v detailu sledovány. 
+
+U ESI fondů platí, že peníze přitečou vždy do státního rozpočtu (tzv. Národní fond) a následně je stát buď 
+
+- utratí (sám je příjemce) - pak vidíme na co přesně, tj. např. platy, nákupy + na jaké odvětví (paragraf)
+- pošle dál do veřejného sektoru, např. obci nebo vlastní příspěvkovce - pak je vidíme ve výdajích SR jako transfer a obec/státní či obecní příspěvkovka jej eviduje v detailu výdajů svého rozpočtu (k tomu ale viz níže)
+- pošle do soukromého sektoru jako transfer (dotaci) - pak je vidíme ve výdajích SR jako transfer v daném odvětví (paragrafu).
+
+Technické řešení tohoto problému - kdy výdaje jsou evidovány při předání mezi částmi veřejného sektoru i při konečném vydání - řeší konsolidace, pro kterou data státní pokladny také poskytují podklad.
+
+#### Členění: jaký detail můžeme znát
+
+Data státní pokladny fungují tak, že na každou utracenou korunu nalepí několik nálepek podle různých členění a výsledné datové sady tak poskytují velmi jemný rozpad výdají podle několika členění naráz. Každé členění má několik úrovní detailu, od cca 10 kategorií po několik set.
+
+- odvětvové členění, tzv. paragrafy, tj. na jakou oblast (viděno sektorově)
+- zodpovědnostní členění: kapitoly, tj. z rozpočtu kterého ministerstva, popř. konkrétní veřejné organizace, výdaje šly
+- druhové členění: v nejvyšší hladině členění na běžné a kapitálové výdaje, dále na platy, transfery, nákupy atd.
+- zdrojové třídění: kde se peníze vzaly? V základní úrovni ČR x mimo, dále až na konkrétní programy vč. kofinancování
+
+Této vícerozpěrnosti dat využíváme jednak pro identifikaci peněz z ESIF (zdrojové třídění), jednak pro detailnější analýzy (např. kapitálové výdaje na transfery soukromému sektoru v oblasi energetiky).
+
+U zdrojového třídění dokážeme odlišit i období, tj. např. v roce 2015 lze odlišit OP D 2007-13 od OP D 2014-20.
+
+#### Ve vztahu k ESIF datům
+
+Ze státní pokladny lze dovodit operační program, ztrácí se ale vazba na projekty a tím i na kategorie používané v monitoringu ESIF, např. oblasti intervencí.
+
+### Dostupnost a omezení dat
+
+| typ  | roky   | identifikace ESIF  |
+|---|---|---|
+| státní rozpočet  |  2015-2021 | Ano
+| státní příspěvkové organizace  | 2010-2020  | ? |
+| státní fondy  | 2015-2021  | Ne |
+| samosprávy a jimi zřizované organizace | 2010-2021 | Částečně |
+
+#### Poznámky ke kvalitě dat
+
+- odvětvové třídění investic do pododdílů v oddílu Doprava je po roce 2015 velmi vachrlaté a pododdíly v podstatě nejdou použít - většina výdajů na železnice a silnice je v pododdíle Ostatní záležitosti... a všechny tyto oddíly objemově velmi skáčou mezi lety.
+
+### Srovnatelnost se studií z roku 2017
+
+Hlavní rozdíly jsou tři:
+
+1. studie z roku 2017 zahrnuje státní fondy
+2. studie z roku 2017 zahrnuje samosprávy
+3. studie z roku 2017 pracuje s vybraným okruhem výdajů - vyloučeny jsou např. ty části druhového nebo odvětvového třídění, kde ESI fondy nehrají roli (např. sociální dávky), popř. které nebyly centrem zájmu studie (zemědělství)
+
+Ad 1: u SF nejsou z veřejných zdrojů data o zdrojích výdajů, pro rok 2017 vznikly velkým množstvím ruční kompilace interně na MF
+Ad 2: pro obce data o zdroji výdajů zřejmě nejsou přímo dostupná od roku 2015
+
+Následky:
+
+ad 1. Kategorie "ústředně řízení organizace" zahrnuje jiný okruh výdajů; po roce 2015 u části těchto výdajů neznáme rozdělení na ESIF a vlastní. Nicméně celkové součty výdajů pro "překryvový" rok (kde máme data z obou zdrojů) cca odpovídají.
+ad 2. O kategorii "místně řízených organizací" tj. samospráv máme ohledně podílu ESIF jen nepřímá data a jejich kvalita spolehlivost zatím není jasná.
+ad 3. V této studii na některých místech ukazujeme dva okruhy výdajů: jednak celý státní rozpočet, jednak výběr podle studie z roku 2017.
+
+## Odkladiště
+
+```{r}
+dt17_long %>%
+  filter(typ == "mřo") %>% 
+  count(vykaz_year, source, wt = spending/1e6) %>% 
+  ggplot(aes(vykaz_year, n, fill = source)) +
+  geom_col()
+```
+
+
