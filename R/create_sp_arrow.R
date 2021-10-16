@@ -4,7 +4,8 @@ load_and_prep_budget <- function(table_file, polozka_codelist, months) {
 
   statnipokladna::sp_load_table(table_file) %>%
     sp_add_codelist(polozka) %>%
-    group_by(vykaz_year, ucjed, ico,
+    group_by(vykaz_year,
+             # ucjed, ico,
              paragraf, polozka, druh, polozka_nazev,
              trida, seskupeni, podseskupeni)
 }
@@ -21,7 +22,7 @@ load_budget_yearsum_local <- function(table_file, months, codelists) {
   rslt <- b_base %>%
     filter(!kon_pol | !kon_rep | !kon_okr | !kon_kraj) %>%
     filter(vykaz_month %in% months) %>%
-    group_by(nuts, kraj, .add = T) %>%
+    # group_by(nuts, kraj, .add = T) %>%
     summarise(across(c(starts_with("budget")), sum, na.rm = T),
               .groups = "drop") %>%
     mutate(vykaz_date = lubridate::make_date(vykaz_year, 12, 31))
@@ -40,7 +41,7 @@ load_budget_yearsum_central_old <- function(table_file, months, codelists) {
   rslt <- b_base %>%
     filter(!kon_pol | kon_rep | kon_okr | kon_kraj) %>%
     filter(vykaz_month %in% months) %>%
-    group_by(kapitola, .add = TRUE) %>%
+    group_by(ico, kapitola, .add = TRUE) %>%
     summarise(across(c(starts_with("budget")), sum, na.rm = T),
               .groups = "drop") %>%
     mutate(vykaz_date = lubridate::make_date(vykaz_year, 12, 31))
@@ -60,7 +61,7 @@ load_budget_yearsum_central_new <- function(table_file, months,
 
   rslt <- b_base %>%
     filter(!kon_pol | kon_rep | kon_okr | kon_kraj) %>%
-    group_by(kapitola, zdroj, pvs, .add = TRUE) %>%
+    group_by(ico, kapitola, zdroj, pvs, .add = TRUE) %>%
     summarise(across(c(starts_with("budget")), sum, na.rm = T),
               .groups = "drop") %>%
     mutate(vykaz_date = lubridate::make_date(vykaz_year, 12, 31))
