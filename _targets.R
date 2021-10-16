@@ -64,6 +64,36 @@ t_sestavy <- list(
   tar_target(efs_prv_annual, summarise_prv(efs_prv, quarterly = FALSE))
 )
 
+
+# 2017 data ---------------------------------------------------------------
+
+t_2017 <- list(
+  tar_file(first_report_xlsx, c_first_report_xlsx),
+  tar_target(dt17_wide, read_xlsx(first_report_xlsx, 2) %>%
+               rename(paragraf = Paragraf,
+                      spending_eu = EU,
+                      spending_celkem = celkem,
+                      spending_vlastni = vlastni,
+                      trida = variable,
+                      paragraf_nazev = par_nazev,
+                      pododdil_kod = pododdil,
+                      pododdil = pododdil_nazev,
+                      oddil = oddil_nazev,
+                      skupina = skupina_nazev,
+                      druh_typ = typvar,
+                      vykaz_year = year) %>%
+               select(-par_nazev_kr, -par_nazev_str)),
+  tar_target(dt17_long, dt17_wide %>%
+               select(-spending_celkem) %>%
+               pivot_longer(c(spending_eu, spending_vlastni),
+                            names_to = "source", values_to = "spending") %>%
+               mutate(source = recode(source,
+                                      spending_eu = "EU",
+                                      spending_vlastni = "vlastní")))
+)
+
+# Geo IDs -----------------------------------------------------------------
+
 t_geometa <- list(
   tar_target(zuj_obec, get_zuj_obec()),
   # číselník krajů pro vložení kódu kraje v PRV
@@ -215,5 +245,7 @@ source("R/html_output.R")
 # Compile targets lists ---------------------------------------------------
 
 list(t_public_list, t_sp_codelists, t_sp_data_central_new,
+     t_sestavy, t_op_compile, t_2017,
+     t_sp_statefunds, t_vydaje_core,
      t_sp_data_central_old, t_html, t_sp_data_local,
-     t_sp_data_local_grants, t_sestavy, t_geometa, t_config)
+     t_sp_data_local_grants, t_geometa, t_config)
