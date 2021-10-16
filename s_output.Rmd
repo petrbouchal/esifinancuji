@@ -24,29 +24,24 @@ targets::tar_load(config_yml)
 
 ### Soubory
 
-Vše v `` `r  
-c_macro_export_dir` `` ([Github](`r paste0(c_repo_remote, "/tree/master/", c_macro_export_dir)`)) 
-
-- součty po letech: `` `r  
-c_macro_export_reg_csv_a` `` / `` `r  
-c_macro_export_reg_xlsx_a` ``
-- součty po čtvrtletích: `` `r  
-c_macro_export_csv_q` `` / `` `r  
-c_macro_export_xlsx_q` ``
-
-Data s krajským rozpadem obsahují sloupec s kódem NUTS3.
+TO DO
 
 CSV soubory uzpůsobeny pro Excel (úprava konce řádků) a CEE region (odděleno středníky, desetinná čárka).
 
 ### Codebook
 
+TO DO
+
 ```{r codebook}
 # macro_sum_codebook
 ```
 
-Zapsáno v `r file.path(c_macro_export_dir, c_macro_export_cdbk)`
+<!-- Zapsáno v ` -->
+<!-- `r file.path(c_macro_export_dir, c_macro_export_cdbk)`` -->
 
 ## Náhled proměnných
+
+TO DO
 
 ```{r columns}
 # glimpse(macro_sum_reg_quarterly)
