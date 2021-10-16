@@ -64,19 +64,6 @@ extract_cl <- function(cl_target_list, cl_string) {
 }
 
 
-render_readme <- function(path = "README.Rmd", output_format = "github_document", output_file = "README.md") {
-  rmarkdown::render(path, output_format, output_file)
 }
 
-gh_url <- function(path, repo, user = "petrbouchal", remote = NULL, branch = "main") {
-  if(is.null(remote)) rmt <- paste0(user, "/", repo)
-  paste("https://github.com", rmt, "tree", branch, path, sep = "/")
-}
 
-gh_link <- function(text = NULL, path, repo, user = "petrbouchal", remote = NULL, branch = "main") {
-  url <- gh_url(path, repo, user, remote, branch)
-  if(is.null(text)) text <- url
-
-  paste0("[", text, "](", url, ")")
-
-}
