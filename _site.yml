@@ -6,19 +6,21 @@ exclude: ["LICENSE.md", "*.csv", "*.rds", "renv", "renv.lock", "data-input", "da
 navbar:
   title: "ESIF data"
   left:
-  - text: Základní info
-    href: README.html
+  - text: Draft studie
+    href: s_pokladna.html
   - text: Dokumentace
     href: s_doc.html
-  - text: Validace & dokumentace výstupů
+  - text: Výstupní data
     href: s_output.html
-  - text: Validace vstupů
-    href: s_inputchecks.html
   - text: Technická dokumentace
-    href: dev.html
+    menu:
+    - text: Validace vstupů
+      href: s_inputchecks.html
+    - text: Vývojářská dokumentace
+      href: dev.html
   right:
   - icon: fab fa-github fa-lg
-    href: https://github.com/petrbouchal/esifunguji
+    href: https://github.com/petrbouchal/esifinancuji
   - icon: fas fa-asterisk fa-lg
     href: https://petrbouchal.xyz
 output:
