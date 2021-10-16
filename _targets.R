@@ -49,9 +49,7 @@ t_public_list <- list(
   tar_target(ef_pub, read_pubxls(ef_pubxls))
 )
 
-
 ## Custom MS sestavy -------------------------------------------------------
-
 
 t_sestavy <- list(
   # seznam ŽOPek
@@ -240,6 +238,19 @@ t_sp_data_local_grants <- list(
              format = "file")
 )
 
+
+# Data for analysis -------------------------------------------------------
+
+t_vydaje_core <- list(
+  tar_target(nastroje_zdroje, make_nastroje_zdroje(sp_cl)),
+  tar_target(cb_esif_marked, make_cb_esif_marked(sp_central_new_arrdir,
+                                                 sp_cl, nastroje_zdroje)),
+  tar_target(cb_sum_long, summarise_esif_marked(cb_esif_marked)),
+  tar_target(cb_sum_wide, make_esif_sum_wide(cb_sum_long)),
+  tar_target(cb_sum_hlousek_long,
+             summarise_esif_marked(cb_esif_marked %>% filter_hlousek())),
+  tar_target(cb_sum_hlousek_wide, make_esif_sum_wide(cb_sum_hlousek_long))
+)
 
 # HTML output -------------------------------------------------------------
 
