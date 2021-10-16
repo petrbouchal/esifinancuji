@@ -1,6 +1,12 @@
 library(magrittr)
 library(dplyr)
 library(stringr)
+
+
+# OP labels ---------------------------------------------------------------
+
+
+
 op_labels <- tibble::tribble(
   ~op_id,                                                ~op_nazev,    ~op_zkr,
   "01", "Operační program Podnikání a inovace pro konkurenceschopnost", "OP PIK",
@@ -35,19 +41,19 @@ add_op_labels <- function(data, abbrevs = op_labels,
   return(data2)
 }
 
-nastroj_op <- tibble::tribble(~nastroj_id, ~op_id,
-                      "101",       "XX",
-                      "102",       "01",
-                      "103",       "02",
-                      "104",       "05",
-                      "105",       "04",
-                      "106",       "05",
-                      "107",       "06",
-                      "108",       "07",
-                      "109",       "08",
-                      "110",       "11",
-                      "130",       "YY",
-                      "187",       "YY")
+nastroj_op <- tibble::tribble(~nastroj_id, ~op_id, ~obdobi,
+                      "101",       "XX", "2014-20",
+                      "102",       "01", "2014-20",
+                      "103",       "02", "2014-20",
+                      "104",       "05", "2014-20",
+                      "105",       "04", "2014-20",
+                      "106",       "05", "2014-20",
+                      "107",       "06", "2014-20",
+                      "108",       "07", "2014-20",
+                      "109",       "08", "2014-20",
+                      "110",       "11", "2014-20",
+                      "130",       "YY", "2014-20",
+                      "187",       "YY", "2014-20")
 
 extract_cl <- function(cl_target_list, cl_string) {
 
