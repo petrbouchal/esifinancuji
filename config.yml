@@ -5,12 +5,11 @@ default:
   sp_months_central_new: 12 # which month's data to download
   sp_central_arrowdir_new: "data-processed/sp-central-new-arr"
 
-
   sp_nastroj_ids_1420_ops: ["102", "103", "104", "105", "106", "107", "108", "109"]
   sp_nastroj_ids_1420_prv: ["130", "187"]
 
   sp_nastroj_ids_0713_ops: ["30", "31", "33", "36", "37", "39", "40", "51", "52", "53", "54"]
-  sp_nastroj_ids_0713_prv: ["4", "87"]
+  sp_nastroj_ids_0713_prv: ["27", "87"]
 
   # settings for FINU (central budget 2010-2014)
   sp_years_central_old: !expr 2010:2014
