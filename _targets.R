@@ -130,6 +130,26 @@ t_sp_data_central_new <- list(
   tar_target(sp_central_new_ops, budget_new_ops(sp_central_new_arrdir, nastroj_op, sp_cl))
 )
 
+## Pre-2015 central budget data --------------------------------------------
+
+t_sp_data_central_old <- list(
+  tar_target(d_years_o, c_sp_years_central_old),
+  tar_target(d_years_o_ptrn, d_years_o, pattern = map(d_years_o)),
+  tar_target(d_months_o, c_sp_months_central_old),
+  tar_target(d_id_o, "finu"),
+  tar_url(d_url_o, sp_get_dataset_url(d_id_o, d_years_o_ptrn, d_months_o),
+          pattern = map(d_years_o_ptrn)),
+  tar_file(d_file_o, {is.character(d_url_o)
+    sp_get_dataset(d_id_o, d_years_o, d_months_o)},
+    pattern = map(d_years_o)), # to make sure target runs when data at URL changes
+  tar_target(table_file_o, sp_get_table_file("budget-central-old", d_file_o),
+             format = "file", pattern = map(d_file_o)),
+  tar_target(sp_central_old_arrdir,
+             budget_arrow_months(table_file_o, c_sp_central_arrowdir_old,
+                                 c_sp_months_central_old, load_budget_yearsum_central_old,
+                                 codelists = sp_cl),
+             format = "file")
+)
 
 ## State fund budgets ------------------------------------------------------
 
@@ -172,26 +192,6 @@ t_sp_data_local <- list(
              format = "file")
 )
 
-## Pre-2015 central budget data --------------------------------------------
-
-t_sp_data_central_old <- list(
-  tar_target(d_years_o, c_sp_years_central_old),
-  tar_target(d_years_o_ptrn, d_years_o, pattern = map(d_years_o)),
-  tar_target(d_months_o, c_sp_months_central_old),
-  tar_target(d_id_o, "finu"),
-  tar_url(d_url_o, sp_get_dataset_url(d_id_o, d_years_o_ptrn, d_months_o),
-          pattern = map(d_years_o_ptrn)),
-  tar_file(d_file_o, {is.character(d_url_o)
-    sp_get_dataset(d_id_o, d_years_o, d_months_o)},
-    pattern = map(d_years_o)), # to make sure target runs when data at URL changes
-  tar_target(table_file_o, sp_get_table_file("budget-central-old", d_file_o),
-             format = "file", pattern = map(d_file_o)),
-  tar_target(sp_central_old_arrdir,
-             budget_arrow_months(table_file_o, c_sp_central_arrowdir_old,
-                                 c_sp_months_central_old, load_budget_yearsum_central_old,
-                                 codelists = sp_cl),
-             format = "file")
-)
 
 ## Local budgets - grants --------------------------------------------------
 
