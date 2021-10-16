@@ -130,6 +130,25 @@ t_sp_data_central_new <- list(
   tar_target(sp_central_new_ops, budget_new_ops(sp_central_new_arrdir, nastroj_op, sp_cl))
 )
 
+
+## State fund budgets ------------------------------------------------------
+
+t_sp_statefunds <- list(
+  tar_target(d_id_sf, "finsf"),
+  tar_url(d_url_sf, sp_get_dataset_url(d_id_sf, d_years_ptrn, d_months),
+          pattern = map(d_years_ptrn)),
+  tar_file(d_file_sf, {is.character(d_url_sf)
+    sp_get_dataset(d_id_sf, d_years, d_months)},
+    pattern = map(d_years)), # to make sure target runs when data at URL changes
+  tar_target(table_file_sf, sp_get_table_file("budget-statefunds", d_file_sf),
+             format = "file", pattern = map(d_file_sf)),
+  tar_target(sp_sf_arrdir,
+             budget_arrow_months(table_file_sf, c_sp_sf_arrowdir,
+                                 c_sp_months_sf, load_budget_yearsum_sf,
+                                 codelists = sp_cl),
+             format = "file")
+)
+
 ## Local budget data -----------------------------------------------
 
 # read_tarrow(target_name)

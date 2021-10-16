@@ -22,6 +22,10 @@ default:
   sp_local_arrowdir: "data-processed/sp-local-arr"
   sp_local_grants_arrowdir: "data-processed/sp-local-grants-arr"
 
+  # settings for FINSF (state funds 2015-)
+  sp_months_sf: 12
+  sp_sf_arrowdir: "data-processed/sp-sf-arr"
+
   # URL for getting project data
   ef_pubxls_url: "https://dotaceeu.cz/getmedia/6297d56b-0b57-418d-ad25-dd16bd687479/2021_06-Seznam-operaci-_-List-of-operations.xls.aspx?ext=.xls"
 
@@ -71,3 +75,6 @@ default:
   # export location - hierarchy
   hier_export_dir: "data-export/matice_202108"
   hier_export_xlsx: "matice.xlsx"
+
+  # data from 2017 study
+  first_report_xlsx: "data-input/adic2017/vydaje_dataset.xlsx"

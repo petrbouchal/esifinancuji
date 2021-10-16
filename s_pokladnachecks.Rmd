@@ -24,6 +24,9 @@ targets::tar_load(sp_central_new_ops)
 ```{r ico-oss}
 ico_oss <- sp_cl$sp_cl_aa7d5f37_ucjed %>% 
   filter(druhuj_id == "1") %>% pull(ico) %>% unique()
+
+ico_sf <- sp_cl$sp_cl_aa7d5f37_ucjed %>% 
+  filter(druhuj_id == "2") %>% pull(ico) %>% unique()
 ```
 
 ## Rozpočty
@@ -41,7 +44,7 @@ Z dat:
 ```{r budget-basic}
 bind_rows(
   open_dataset(sp_central_old_arrdir) %>% 
-    filter(ico %in% ico_oss) %>%
+    filter(ico %in% c(ico_oss, ico_sf)) %>%
     select(vykaz_year, druh, budget_spending) %>% 
     collect() %>% 
     count(vykaz_year, druh, wt = budget_spending/1e9) %>% 
@@ -98,7 +101,8 @@ https://monitor.statnipokladna.cz/analyza/##query=uq_5fb642ff-31a3-4640-9d29-2fb
 ```{r}
 open_dataset(sp_local_arrdir) %>% 
   # filter(ico %in% ico_oss) %>%
-  select(vykaz_year, druh, budget_spending, kraj) %>% 
+  # select(vykaz_year, druh, budget_spending, kraj) %>% 
+  select(vykaz_year, druh, budget_spending) %>% 
   collect() %>% 
   # filter(vykaz_year == 2020) %>% 
   count(vykaz_year, druh, wt = budget_spending/1e9) %>% 

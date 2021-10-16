@@ -67,6 +67,23 @@ load_budget_yearsum_central_new <- function(table_file, months,
   return(rslt)
 }
 
+load_budget_yearsum_sf <- function(table_file, destination, months, fn, codelists) {
+  polozka_branchname <- names(codelists)[str_detect(names(codelists), "polozka$")]
+  polozka <- codelists[[polozka_branchname]]
+
+  b_base <- load_and_prep_budget(table_file, polozka, months)
+
+  rslt <- b_base %>%
+    filter(!kon_pol | kon_rep | kon_okr | kon_kraj) %>%
+    filter(vykaz_month %in% months) %>%
+    group_by(ico, kapitola, .add = TRUE) %>%
+    summarise(across(c(starts_with("budget")), sum, na.rm = T),
+              .groups = "drop") %>%
+    mutate(vykaz_date = lubridate::make_date(vykaz_year, 12, 31))
+
+  return(rslt)
+}
+
 
 ##' .. content for \description{} (no empty lines) ..
 ##'
