@@ -64,6 +64,10 @@ t_sestavy <- list(
   tar_target(efs_prv_annual, summarise_prv(efs_prv, quarterly = FALSE))
 )
 
+t_op_compile <- list(
+  tar_target(compiled_op_sum,
+             summarise_by_op(efs_zop_annual, efs_prv_annual)))
+
 
 # 2017 data ---------------------------------------------------------------
 
