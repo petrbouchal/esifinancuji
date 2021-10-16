@@ -34,5 +34,10 @@ output:
     toc_float: false
     mathjax: null
     df_print: paged
+    theme:
+      version: 4
+      bg: "#ffffff"
+      fg: "#000000"
+      primary: "#0000ff"
     # includes:
     #   in_header: matomo.html
