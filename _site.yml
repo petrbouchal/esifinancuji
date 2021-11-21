@@ -25,7 +25,7 @@ navbar:
     href: https://petrbouchal.xyz
 output:
   html_document:
-    css: site/site.css
+    # css: site/site.css
     fig_retina: 3
     fig_width: 6
     fig_height: 3
@@ -41,5 +41,10 @@ output:
       bg: "#ffffff"
       fg: "#000000"
       primary: "#0000ff"
+      navbar-bg: "#0000ff"
+      base_font:
+        google: "IBM Plex Sans"
+      code_font:
+        google: "IBM Plex Mono"
     # includes:
     #   in_header: matomo.html
