@@ -41,7 +41,7 @@ CSV soubory uzpůsobeny pro Excel (úprava konce řádků) a CEE region (odděle
 #### Soubory na Githubu
 
 V adresáři `
-`r file.path(c_export_dir)``: `r ptrr::gh_link("Github", c_export_dir, "esifinancuji")`
+`r file.path(c_export_dir)``: `r ptrr::gh_link("Github", c_export_dir, "esifinancuji", branch = "master")`
 
 - Paragrafy + kapitál x běžné: `r ptrr::gh_link("CSV", cb_sum_long_csv, "esifinancuji", branch = "master")` | `r ptrr::gh_link("parquet", cb_sum_long_parquet, "esifinancuji", branch = "master")` | `r ptrr::gh_link("Excel", cb_sum_long_xlsx, "esifinancuji", branch = "master")`
 - Paragrafy + kompletní druhové třídění: `r ptrr::gh_link("parquet", cb_semisum_long_parquet, "esifinancuji", branch = "master")`
