@@ -43,8 +43,8 @@ CSV soubory uzpůsobeny pro Excel (úprava konce řádků) a CEE region (odděle
 V adresáři `
 `r file.path(c_export_dir)``: `r ptrr::gh_link("Github", c_export_dir, "esifinancuji")`
 
-- Paragrafy + kapitál x běžné: `r ptrr::gh_link("CSV", cb_sum_long_csv, "esifinancuji")` | `r ptrr::gh_link("parquet", cb_sum_long_parquet, "esifinancuji")` | `r ptrr::gh_link("Excel", cb_sum_long_xlsx, "esifinancuji")`
-- Paragrafy + kompletní druhové třídění: `r ptrr::gh_link("parquet", cb_semisum_long_parquet, "esifinancuji")`
+- Paragrafy + kapitál x běžné: `r ptrr::gh_link("CSV", cb_sum_long_csv, "esifinancuji", branch = "master")` | `r ptrr::gh_link("parquet", cb_sum_long_parquet, "esifinancuji", branch = "master")` | `r ptrr::gh_link("Excel", cb_sum_long_xlsx, "esifinancuji", branch = "master")`
+- Paragrafy + kompletní druhové třídění: `r ptrr::gh_link("parquet", cb_semisum_long_parquet, "esifinancuji", branch = "master")`
 
 ### Codebook
 
@@ -54,7 +54,7 @@ pointblank::get_informant_report(cb_codebook, title = "Codebook") %>%
 ```
 
 Zapsáno v `
-`r file.path(cb_codebook_yaml)`` (`r ptrr::gh_link("Github", cb_codebook_yaml, "esifinancuji")`)
+`r file.path(cb_codebook_yaml)`` (`r ptrr::gh_link("Github", cb_codebook_yaml, "esifinancuji", branch = "master")`)
 
 ## Náhled proměnných {.tabset .tabset-pills}
 
