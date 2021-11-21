@@ -246,11 +246,26 @@ t_vydaje_core <- list(
   tar_target(cb_esif_marked, make_cb_esif_marked(sp_central_new_arrdir,
                                                  sp_cl, nastroje_zdroje)),
   tar_target(cb_sum_long, summarise_esif_marked(cb_esif_marked)),
+  tar_target(cb_semisum_long, semisummarise_esif_marked(cb_esif_marked)),
   tar_target(cb_sum_wide, make_esif_sum_wide(cb_sum_long)),
   tar_target(cb_sum_hlousek_long,
              summarise_esif_marked(cb_esif_marked %>% filter_hlousek())),
   tar_target(cb_sum_hlousek_wide, make_esif_sum_wide(cb_sum_hlousek_long))
 )
+
+t_vydaje_export <- list(
+  tar_file(cb_sum_long_xlsx, export_table(cb_sum_long, here::here(c_export_dir, c_export_sum_xlsx), write_xlsx)),
+  tar_file(cb_sum_long_csv, export_table(cb_sum_long, here::here(c_export_dir, c_export_sum_csv), write_excel_csv2)),
+  tar_file(cb_sum_long_parquet, export_table(cb_sum_long, here::here(c_export_dir, c_export_sum_pq), write_parquet)),
+  tar_file(cb_semisum_long_parquet, export_table(cb_semisum_long, here::here(c_export_dir, c_export_detail_pq), write_parquet)),
+  tar_target(cb_codebook, make_export_codebook(cb_semisum_long)),
+  tar_file(cb_codebook_yaml,
+           {pointblank::yaml_write(informant = cb_codebook %>%
+                                     pointblank::set_read_fn(read_fn = ~cb_semisum_long),
+                                   path = c_export_dir,
+                                   filename = c_export_cdbk)
+             file.path(c_export_dir, c_export_cdbk)
+           }))
 
 # HTML output -------------------------------------------------------------
 
@@ -263,4 +278,5 @@ list(t_public_list, t_sp_codelists, t_sp_data_central_new,
      t_sestavy, t_op_compile, t_2017,
      t_sp_statefunds, t_vydaje_core,
      t_sp_data_central_old, t_html, t_sp_data_local,
+     t_vydaje_export,
      t_sp_data_local_grants, t_geometa, t_config)

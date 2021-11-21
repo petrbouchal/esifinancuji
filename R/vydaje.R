@@ -69,6 +69,16 @@ make_cb_esif_marked <- function(dataset_path, codelists, nastroje_zdroje) {
     filter(!kon_pol | !kon_rep | kon_okr | kon_kraj)
 }
 
+semisummarise_esif_marked <- function(data) {
+  data %>%
+    filter(paragraf != "0000") %>%
+    group_by(across(c(starts_with("vykaz"), starts_with("paragraf"),
+                      starts_with("polozka"), -matches("(start|end)_date$"),
+                      esif, skupina, oddil, pododdil,
+                      kapitola,
+                      trida, seskupeni, podseskupeni))) %>%
+    summarise(budget_spending = sum(budget_spending), .groups = "drop")
+}
 
 summarise_esif_marked <- function(data) {
   data %>%

@@ -18,6 +18,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link href="site_libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+<link href="site_libs/_IBM Plex Sans-0.4.0/font.css" rel="stylesheet" />
+<link href="site_libs/_IBM Plex Mono-0.4.0/font.css" rel="stylesheet" />
 <script src="site_libs/bs3compat-0.3.1/transition.js"></script>
 <script src="site_libs/bs3compat-0.3.1/tabs.js"></script>
 <script src="site_libs/bs3compat-0.3.1/bs3compat.js"></script>
@@ -296,23 +298,615 @@ $(document).ready(function () {
 <h2>Dokumentace hlavního výstupu</h2>
 <div id="soubory" class="section level3">
 <h3>Soubory</h3>
-<p>TO DO</p>
 <p>CSV soubory uzpůsobeny pro Excel (úprava konce řádků) a CEE region (odděleno středníky, desetinná čárka).</p>
+<div id="soubory-na-githubu" class="section level4">
+<h4>Soubory na Githubu</h4>
+<p>V adresáři <code>data-export</code>: <a href="https://github.com/petrbouchal/esifinancuji/tree/main/data-export">Github</a></p>
+<ul>
+<li>Paragrafy + kapitál x běžné: <a href="https://github.com/petrbouchal/esifinancuji/tree/main//Users/petr/cwork/esifinancuji/data-export/esif_sr.csv">CSV</a> | <a href="https://github.com/petrbouchal/esifinancuji/tree/main//Users/petr/cwork/esifinancuji/data-export/esif_sr.parquet">Parquet</a> | <a href="https://github.com/petrbouchal/esifinancuji/tree/main//Users/petr/cwork/esifinancuji/data-export/esif_sr.xlsx">Excel</a></li>
+<li>Paragrafy + kompletní druhové třídění: <a href="https://github.com/petrbouchal/esifinancuji/tree/main//Users/petr/cwork/esifinancuji/data-export/esif_sr_detail.parquet">parquet</a></li>
+</ul>
+</div>
 </div>
 <div id="codebook" class="section level3">
 <h3>Codebook</h3>
-<p>TO DO</p>
-<!-- Zapsáno v ` -->
-<!-- data-export/export_202108/macro-sum_codebook.yaml` -->
+<div id="pb_information" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+html {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#pb_information .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 130%;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pb_information .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_information .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pb_information .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pb_information .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pb_information .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_information .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pb_information .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pb_information .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pb_information .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pb_information .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pb_information .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pb_information .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pb_information .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pb_information .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pb_information .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pb_information .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#pb_information .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_information .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#pb_information .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_information .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pb_information .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pb_information .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pb_information .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_information .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#pb_information .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_information .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#pb_information .gt_left {
+  text-align: left;
+}
+
+#pb_information .gt_center {
+  text-align: center;
+}
+
+#pb_information .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pb_information .gt_font_normal {
+  font-weight: normal;
+}
+
+#pb_information .gt_font_bold {
+  font-weight: bold;
+}
+
+#pb_information .gt_font_italic {
+  font-style: italic;
+}
+
+#pb_information .gt_super {
+  font-size: 65%;
+}
+
+#pb_information .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+
+#pb_information {
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: .15px;
+}
+
+#pb_information a {
+  color: #375F84;
+  text-decoration: none;
+}
+
+#pb_information a:hover {
+  color: #375F84;
+  text-decoration: underline;
+}
+
+#pb_information p {
+  overflow: visible;
+  margin-top: 2px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 5px;
+}
+
+#pb_information ul {
+  list-style-type: square;
+  padding-left: 25px;
+  margin-top: -4px;
+  margin-bottom: 6px;
+}
+
+#pb_information li {
+  text-indent: -1px;
+}
+
+#pb_information h4 {
+  font-weight: 500;
+  color: #444444;
+}
+
+#pb_information code {
+  font-family: 'IBM Plex Mono', monospace, courier;
+  font-size: 90%;
+  font-weight: 500;
+  color: #666666;
+  background-color: transparent;
+  padding: 0;
+}
+
+#pb_information .pb_date {
+  text-decoration-style: solid;
+  text-decoration-color: #9933CC;
+  text-decoration-line: underline;
+  text-underline-position: under;
+  font-variant-numeric: tabular-nums;
+  margin-right: 4px;
+}
+
+#pb_information .pb_label {
+  border: solid 1px;
+  border-color: inherit;
+  padding: 0px 3px 0px 3px;
+}
+
+#pb_information .pb_label_rounded {
+  border: solid 1px;
+  border-color: inherit;
+  border-radius: 8px;
+  padding: 0px 8px 0px 8px;
+}
+
+#pb_information .pb_sub_label {
+  font-size: smaller;
+  color: #777777;
+}
+
+#pb_information .pb_col_type {
+  font-size: 75%;
+}
+
+#pb_information .gt_sourcenote {
+  height: 35px;
+  font-size: 60%;
+  padding: 0;
+}
+
+#pb_information .gt_group_heading {
+  text-indent: -3px;
+}
+</style>
+  <table class="gt_table" style="table-layout: fixed;; width: 0px">
+  <colgroup>
+    <col style="width:875px;"/>
+  </colgroup>
+  <thead class="gt_header">
+    <tr>
+      <th colspan="1" class="gt_heading gt_title gt_font_normal" style="color: #444444; font-size: 28px; text-align: left; font-weight: 500;">Codebook</th>
+    </tr>
+    <tr>
+      <th colspan="1" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-size: 12px; text-align: left;"><span style="text-decoration-style:solid;text-decoration-color:#ADD8E6;text-decoration-line:underline;text-underline-position:under;color:#333333;font-variant-numeric:tabular-nums;padding-left:4px;margin-right:5px;padding-right:2px;">Codebook hlavního výstupu</span></p>
+<div style="height:25px;margin-top:10px;"><span style="background-color:#F1D35A;color:#222222;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 0px 5px 5px;font-weight:bold;border:solid 1px #F1D35A;padding:2px 15px 2px 15px;font-size:smaller;">tibble</span>
+<span style="background-color:none;color:#222222;padding:0.5em 0.5em;position:inherit;margin:5px 10px 5px -4px;font-weight:bold;border:solid 1px #F1D35A;padding:2px 15px 2px 15px;font-size:smaller;">cb_semisum_long</span><span style="background-color:#eecbff;color:#333333;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 0px 5px 5px;font-weight:bold;border:solid 1px #eecbff;padding:2px 15px 2px 15px;font-size:smaller;">Rows</span>
+<span style="background-color:none;color:#333333;padding:0.5em 0.5em;position:inherit;margin:5px 0px 5px -4px;font-weight:bold;border:solid 1px #eecbff;padding:2px 15px 2px 15px;font-size:smaller;">56,512</span>
+<span style="background-color:#BDE7B4;color:#333333;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 0px 5px 1px;font-weight:bold;border:solid 1px #BDE7B4;padding:2px 15px 2px 15px;font-size:smaller;">Columns</span>
+<span style="background-color:none;color:#333333;padding:0.5em 0.5em;position:inherit;margin:5px 0px 5px -4px;font-weight:bold;border:solid 1px #BDE7B4;padding:2px 15px 2px 15px;font-size:smaller;">17</span></div>
+</th>
+    </tr>
+  </thead>
+  
+  <tbody class="gt_table_body">
+    <tr class="gt_group_heading_row">
+      <td colspan="1" class="gt_group_heading" style="color: #444444; font-weight: 500; text-transform: uppercase; background-color: #FCFCFC; border-bottom-width: 1; border-bottom-style: solid; border-bottom-color: #EFEFEF;">Table</td>
+    </tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><h4 style="margin-bottom:5px;">INFO</h4>
+<p>Tabulka se součty výdajů podle času, zdroje (ESIF nebo ne) a druhového i odvětvového třídění</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><h4 style="margin-bottom:5px;">VARIANTY</h4>
+<p>Varianta pojmenovaná 'detail' obsahuje kompletní rozpad na druhové třídění; standardní verze je třídění na běžné a kapitálové výdaje.</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><h4 style="margin-bottom:5px;">CELKOVÁ STRUKTURA</h4>
+<p>dlouhý formát: čas a kraj jsou v řádcích, metadata a jednotlivé zdroje financí jsou ve sloupcích</p>
+</div></td></tr>
+    <tr class="gt_group_heading_row">
+      <td colspan="1" class="gt_group_heading" style="color: #444444; font-weight: 500; text-transform: uppercase; background-color: #FCFCFC; border-bottom-width: 1; border-bottom-style: solid; border-bottom-color: #EFEFEF;">Columns</td>
+    </tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">vykaz_year</code>  <code class="pb_col_type">integer</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Cíl EU 2020 rok výkazu</p>
+<p><strong class="pb_sub_label">ZDROJ</strong> Matice cílů od NOK</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">vykaz_date</code>  <code class="pb_col_type">Date</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> poslední den období výkazu</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">paragraf_long</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> čtyřmístný kód paragrafu</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> odvětvové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">paragraf</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> čtyřmístný kód paragrafu</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> odvětvové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">paragraf_nazev</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> čtyřmístný kód paragrafu</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> odvětvové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">polozka</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label"></strong></p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">polozka_id</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Položka - kód</p>
+<p><strong class="pb_sub_label">POZNÁMKA</strong> jen v detailním exportu</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> druhové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">polozka_nazev</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Položka - název</p>
+<p><strong class="pb_sub_label">POZNÁMKA</strong> jen v detailním exportu</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> druhové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">esif</code>  <code class="pb_col_type">logical</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> ESIF ano/ne</p>
+<p><strong class="pb_sub_label">ZDROJ</strong> odvozeno ze seznamu zdrojů</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> zdrojové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">skupina</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Skupina - název</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> odvětvové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">oddil</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Oddíl - název</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> odvětvové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">pododdil</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Pododdil - název</p>
+<p><strong class="pb_sub_label">POZNÁMKA</strong> jen v detailním exportu</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> odvětvové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">kapitola</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Rozpočtová kapitola - kód</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> odpovědnostní</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">trida</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Třída - název</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> druhové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">seskupeni</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Seskupeni - název</p>
+<p><strong class="pb_sub_label">POZNÁMKA</strong> jen v detailním exportu</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> druhové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">podseskupeni</code>  <code class="pb_col_type">character</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Podseskupeni - název</p>
+<p><strong class="pb_sub_label">POZNÁMKA</strong> jen v detailním exportu</p>
+<p><strong class="pb_sub_label">TŘÍDĚNÍ</strong> druhové</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="color: #666666; font-size: smaller; border-top-width: 1; border-top-style: solid; border-top-color: #EFEFEF;"><div class='gt_from_md'><p><code style="margin-bottom:5px;color:#555555;font-weight:500;line-height:2em;border:solid 1px #499FFE;padding:2px 8px 3px 8px;background-color:#FAFAFA;">budget_spending</code>  <code class="pb_col_type">numeric</code></p>
+<p><strong class="pb_sub_label">POPIS</strong> Výdaje - skutečnost</p>
+</div></td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="1"><span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin-left:10px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;padding:2px 10px 2px 10px;">2021-11-22 00:25:16 CET</span>
+<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;margin:5px 1px 5px 0;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">&lt; 1 s</span>
+<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 1px 5px -1px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">2021-11-22 00:25:17 CET</span></td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+<p>Zapsáno v <code>data-export/codebook.yaml</code> (<a href="https://github.com/petrbouchal/esifinancuji/tree/main/data-export/codebook.yaml">Github</a>)</p>
 </div>
 </div>
-<div id="náhled-proměnných" class="section level2">
-<h2>Náhled proměnných</h2>
-<p>TO DO</p>
+<div id="náhled-proměnných" class="section level2 tabset tabset-pills">
+<h2 class="tabset tabset-pills">Náhled proměnných</h2>
+<div id="souhrn" class="section level3">
+<h3>Souhrn</h3>
+<p>Z druhového členění obsahuje jen hrubé dělení na běžné x kapitílové.</p>
+<pre><code>Rows: 5,161
+Columns: 12
+$ trida          &lt;chr&gt; &quot;Běžné výdaje&quot;, &quot;Běžné výdaje&quot;, &quot;Běžné výdaje&quot;, &quot;Běžné …
+$ paragraf       &lt;chr&gt; &quot;0000&quot;, &quot;0000&quot;, &quot;1011&quot;, &quot;1011&quot;, &quot;1011&quot;, &quot;1011&quot;, &quot;1011&quot;,…
+$ skupina        &lt;chr&gt; NA, NA, &quot;Zemědělství, lesní hospodářství a rybářství&quot;, …
+$ oddil          &lt;chr&gt; NA, NA, &quot;Zemědělství, lesní hospodářství a rybářství&quot;, …
+$ pododdil       &lt;chr&gt; NA, NA, &quot;Zemědělská a potravinářská činnost a rozvoj&quot;, …
+$ esif           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+$ obdobi         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, &quot;2007-13&quot;, &quot;2007-13&quot;, &quot;…
+$ paragraf_nazev &lt;chr&gt; &quot;Pro příjmy (technický záznam)&quot;, &quot;Pro příjmy (technický…
+$ vykaz_date     &lt;date&gt; 2015-12-31, 2016-12-31, 2015-12-31, 2016-12-31, 2017-1…
+$ vykaz_year     &lt;int&gt; 2015, 2016, 2015, 2016, 2017, 2018, 2019, 2020, 2015, 2…
+$ spending       &lt;dbl&gt; 0, 0, 243192022, 193517103, 204035708, 208216166, 27017…
+$ source         &lt;chr&gt; &quot;vlastní&quot;, &quot;vlastní&quot;, &quot;vlastní&quot;, &quot;vlastní&quot;, &quot;vlastní&quot;, …</code></pre>
+<p>Obsahuje celé druhové členění</p>
+<pre><code>Rows: 56,512
+Columns: 17
+$ vykaz_year      &lt;int&gt; 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, 2015, …
+$ vykaz_date      &lt;date&gt; 2015-12-31, 2015-12-31, 2015-12-31, 2015-12-31, 2015-…
+$ paragraf_long   &lt;chr&gt; &quot;101100&quot;, &quot;101100&quot;, &quot;101100&quot;, &quot;101100&quot;, &quot;101100&quot;, &quot;101…
+$ paragraf        &lt;chr&gt; &quot;1011&quot;, &quot;1011&quot;, &quot;1011&quot;, &quot;1011&quot;, &quot;1011&quot;, &quot;1011&quot;, &quot;1011&quot;…
+$ paragraf_nazev  &lt;chr&gt; &quot;Udržování výrobního potenciálu zemědělství, zemědělsk…
+$ polozka         &lt;chr&gt; &quot;5011&quot;, &quot;5011&quot;, &quot;5013&quot;, &quot;5013&quot;, &quot;5031&quot;, &quot;5031&quot;, &quot;5032&quot;…
+$ polozka_id      &lt;chr&gt; &quot;160184675767183647&quot;, &quot;160184675767183647&quot;, &quot;649373381…
+$ polozka_nazev   &lt;chr&gt; &quot;Platy zaměstnanců v pracovním poměru&quot;, &quot;Platy zaměstn…
+$ esif            &lt;lgl&gt; FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, TR…
+$ skupina         &lt;chr&gt; &quot;Zemědělství, lesní hospodářství a rybářství&quot;, &quot;Zemědě…
+$ oddil           &lt;chr&gt; &quot;Zemědělství, lesní hospodářství a rybářství&quot;, &quot;Zemědě…
+$ pododdil        &lt;chr&gt; &quot;Zemědělská a potravinářská činnost a rozvoj&quot;, &quot;Zemědě…
+$ kapitola        &lt;chr&gt; &quot;0329&quot;, &quot;0329&quot;, &quot;0329&quot;, &quot;0329&quot;, &quot;0329&quot;, &quot;0329&quot;, &quot;0329&quot;…
+$ trida           &lt;chr&gt; &quot;Běžné výdaje&quot;, &quot;Běžné výdaje&quot;, &quot;Běžné výdaje&quot;, &quot;Běžné…
+$ seskupeni       &lt;chr&gt; &quot;Platy a podobné a související výdaje&quot;, &quot;Platy a podob…
+$ podseskupeni    &lt;chr&gt; &quot;Platy&quot;, &quot;Platy&quot;, &quot;Platy&quot;, &quot;Platy&quot;, &quot;Povinné pojistné …
+$ budget_spending &lt;dbl&gt; 1496491.00, 5430789.00, 100000.00, 350000.00, 399207.1…</code></pre>
+</div>
 </div>
 <div id="validace-výstupu" class="section level2">
 <h2>Validace výstupu</h2>
 <p>IN PROGRESS</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["vykaz_year"],"name":[1],"type":["int"],"align":["right"]},{"label":["esif"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["detail"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sum"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["d"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"2015","2":"FALSE","3":"1135.81148","4":"1135.81148","5":"0.000000000000000000000"},{"1":"2015","2":"TRUE","3":"161.51011","4":"161.51011","5":"0.000000000000000000000"},{"1":"2016","2":"FALSE","3":"1167.78395","4":"1167.78395","5":"0.000000000000000000000"},{"1":"2016","2":"TRUE","3":"52.05957","4":"52.05957","5":"0.000000000000007105427"},{"1":"2017","2":"FALSE","3":"1212.42947","4":"1212.42947","5":"0.000000000000000000000"},{"1":"2017","2":"TRUE","3":"67.36618","4":"67.36618","5":"0.000000000000000000000"},{"1":"2018","2":"FALSE","3":"1301.03014","4":"1301.03014","5":"0.000000000000000000000"},{"1":"2018","2":"TRUE","3":"99.94425","4":"99.94425","5":"0.000000000000000000000"},{"1":"2019","2":"FALSE","3":"1438.85778","4":"1438.85778","5":"0.000000000000000000000"},{"1":"2019","2":"TRUE","3":"112.88043","4":"112.88043","5":"0.000000000000000000000"},{"1":"2020","2":"FALSE","3":"1719.71343","4":"1719.71343","5":"0.000000000000000000000"},{"1":"2020","2":"TRUE","3":"123.21595","4":"123.21595","5":"0.000000000000000000000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 </div>
 

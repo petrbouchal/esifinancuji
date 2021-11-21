@@ -1,0 +1,88 @@
+type: informant
+read_fn: ~cb_semisum_long
+tbl_name: cb_semisum_long
+info_label: Codebook hlavního výstupu
+lang: en
+locale: en
+table:
+  name: cb_semisum_long
+  _columns: 17
+  _rows: 56512.0
+  _type: tbl_df
+  Info: Tabulka se součty výdajů podle času, zdroje (ESIF nebo ne) a druhového i odvětvového
+    třídění
+  Varianty: Varianta pojmenovaná 'detail' obsahuje kompletní rozpad na druhové třídění;
+    standardní verze je třídění na běžné a kapitálové výdaje.
+  Celková struktura: 'dlouhý formát: čas a kraj jsou v řádcích, metadata a jednotlivé
+    zdroje financí jsou ve sloupcích'
+columns:
+  vykaz_year:
+    _type: integer
+    Popis: Cíl EU 2020 rok výkazu
+    Zdroj: Matice cílů od NOK
+  vykaz_date:
+    _type: Date
+    Popis: poslední den období výkazu
+  paragraf_long:
+    _type: character
+    Popis: čtyřmístný kód paragrafu
+    Třídění: odvětvové
+  paragraf:
+    _type: character
+    Popis: čtyřmístný kód paragrafu
+    Třídění: odvětvové
+  paragraf_nazev:
+    _type: character
+    Popis: čtyřmístný kód paragrafu
+    Třídění: odvětvové
+  polozka:
+    _type: character
+  polozka_id:
+    _type: character
+    Popis: Položka - kód
+    Poznámka: jen v detailním exportu
+    Třídění: druhové
+  polozka_nazev:
+    _type: character
+    Popis: Položka - název
+    Poznámka: jen v detailním exportu
+    Třídění: druhové
+  esif:
+    _type: logical
+    Popis: ESIF ano/ne
+    Zdroj: odvozeno ze seznamu zdrojů
+    Třídění: zdrojové
+  skupina:
+    _type: character
+    Popis: Skupina - název
+    Třídění: odvětvové
+  oddil:
+    _type: character
+    Popis: Oddíl - název
+    Třídění: odvětvové
+  pododdil:
+    _type: character
+    Popis: Pododdil - název
+    Poznámka: jen v detailním exportu
+    Třídění: odvětvové
+  kapitola:
+    _type: character
+    Popis: Rozpočtová kapitola - kód
+    Třídění: odpovědnostní
+  trida:
+    _type: character
+    Popis: Třída - název
+    Třídění: druhové
+  seskupeni:
+    _type: character
+    Popis: Seskupeni - název
+    Poznámka: jen v detailním exportu
+    Třídění: druhové
+  podseskupeni:
+    _type: character
+    Popis: Podseskupeni - název
+    Poznámka: jen v detailním exportu
+    Třídění: druhové
+  budget_spending:
+    _type: numeric
+    Popis: Výdaje - skutečnost

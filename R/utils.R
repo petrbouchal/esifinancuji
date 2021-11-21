@@ -94,3 +94,9 @@ clrs <- c(# "b" = "#24a7af", # bezne - mmr
   "u" = "#1c286e", # ustredni
   "c" = "grey20") # celkem
 
+export_table <- function(data, path, fun, ...) {
+
+  fun(data, path, ...)
+
+  return(path)
+}
