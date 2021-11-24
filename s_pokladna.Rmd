@@ -1,15 +1,24 @@
 ---
 title: "Veřejné výdaje a ESI fondy: hlavní poznatky"
 subtitle: "Interní draft, říjen 2021"
-output: 
-  html_document:
+output:
+  bookdown::html_document2:
+    number_sections: no
+    self_contained: no
     toc: yes
     toc_float: yes
     toc_depth: 3
-    pandoc_args: !expr rmarkdown::pandoc_lua_filter_args(rmarkdown::pkg_file_lua('pandoc-quotes.lua', 'ptrr'))
+    pandoc_args: !expr ptrr::pandoc_quotes()
+    theme:
+      version: 5
+  bookdown::word_document2:
+    number_sections: no
+    pandoc_args: !expr ptrr::pandoc_quotes()
+  # reference_docx: mmr-template.docx
+
 always_allow_html: yes
-bibliography: [references.json, packages.bib]
-csl: chicago-author-date.csl
+bibliography: [refs/references.json, refs/packages.bib]
+csl: refs/chicago-author-date.csl
 link-citations: yes
 nocite: '@*'
 lang: cs
@@ -25,10 +34,11 @@ options("scipen"=100, "digits"=8)
 ```
 
 ```{r, include=FALSE}
-knitr::write_bib(c("base", "ggplot2", "dplyr", "readr", "readxl", "gplots", 
-                   "stringr", "plotly", "czso", "janitor", "data.table", 
+knitr::write_bib(c("base", "ggplot2", "dplyr", "readr", "readxl", 
+                   "stringr", "czso", "janitor", "pointblank", "arrow", 
+                   "lubridate", "targets",
                    "forcats", "tidyr", "statnipokladna"),
-                 file = 'packages.bib')
+                 file = 'refs/packages.bib')
 ```
 
 
@@ -574,4 +584,4 @@ dt17_long %>%
   geom_col()
 ```
 
-
+## Citace: literatura, data, nástroje

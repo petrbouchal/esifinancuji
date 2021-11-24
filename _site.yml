@@ -2,7 +2,7 @@ name: ESIF a veřejné výdaje
 output_dir: docs
 lang: cs
 include: ["demo.R"]
-exclude: ["LICENSE.md", "*.csv", "*.rds", "renv", "renv.lock", "data-input", "data-output", "data-processed", "sp_data", "config.yml", "R", "data-export", "scripts"]
+exclude: ["LICENSE.md", "*.csv", "*.rds", "renv", "renv.lock", "data-input", "data-output", "data-processed", "sp_data", "config.yml", "R", "data-export", "scripts", "refs"]
 navbar:
   title: "ESIF data"
   left:
