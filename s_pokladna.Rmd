@@ -61,7 +61,7 @@ targets::tar_load(cb_sum_hlousek_long)
 
 ### Celý státní rozpočet {.tabset .tabset-pills}
 
-```{r}
+```{r summarise}
 cb_sum <- cb_sum_long %>%
   group_by(vykaz_date, source) %>%
   summarise(spending = sum(spending), .groups = "drop")
@@ -74,7 +74,7 @@ cb_sum_perc <- cb_sum %>%
 
 #### Absolutně
 
-```{r}
+```{r plot-abs}
 ggplot(cb_sum, aes(vykaz_date, spending/1e9, alpha = source)) +
   geom_col() + 
   scale_y_continuous(expand = ptrr::flush_axis, 
@@ -92,7 +92,7 @@ ggplot(cb_sum, aes(vykaz_date, spending/1e9, alpha = source)) +
 #### Podíl ESIF
 
 
-```{r}
+```{r plot-podil-esif}
 ggplot(cb_sum_perc, aes(vykaz_date, perc, alpha = source)) +
   geom_line(size = 2) + 
   geom_point(size = 4, colour = "white") + 
@@ -112,7 +112,7 @@ ggplot(cb_sum_perc, aes(vykaz_date, perc, alpha = source)) +
 
 
 
-```{r}
+```{r sum-hlousek}
 cb_sum_hl <- cb_sum_hlousek_long %>%
   group_by(vykaz_date, source) %>%
   summarise(spending = sum(spending), .groups = "drop")
@@ -125,7 +125,7 @@ cb_sum_hl_perc <- cb_sum_hl %>%
 
 #### Absolutně
 
-```{r}
+```{r plot-abs-hlousek}
 ggplot(cb_sum_hl, aes(vykaz_date, spending/1e9, alpha = source)) +
   geom_col() + 
   scale_y_continuous(expand = ptrr::flush_axis, 
@@ -142,7 +142,7 @@ ggplot(cb_sum_hl, aes(vykaz_date, spending/1e9, alpha = source)) +
 
 #### Podíl ESIF
 
-```{r}
+```{r plot-podil-hlousek}
 ggplot(cb_sum_hl_perc, aes(vykaz_date, perc, alpha = source)) +
   geom_line(size = 2) + 
   geom_point(size = 4, colour = "white") + 
@@ -162,7 +162,7 @@ ggplot(cb_sum_hl_perc, aes(vykaz_date, perc, alpha = source)) +
 
 ### Celý státní rozpočet {.tabset .tabset-pills}
 
-```{r}
+```{r sum-trida}
 cb_sum_trida <- cb_sum_long %>%
   group_by(vykaz_date, source, trida) %>%
   summarise(spending = sum(spending), .groups = "drop") 
@@ -175,7 +175,7 @@ cb_sum_trida_perc <- cb_sum_trida %>%
 
 #### Absolutně
 
-```{r}
+```{r plot-bezkap-abs}
 ggplot(cb_sum_trida, aes(vykaz_date, spending/1e9, alpha = source,
                          fill = trida)) +
   geom_col() + 
@@ -195,7 +195,7 @@ ggplot(cb_sum_trida, aes(vykaz_date, spending/1e9, alpha = source,
 
 #### Podíl ESIF
 
-```{r}
+```{r plot-bezkap-podil}
 ggplot(cb_sum_trida_perc, aes(vykaz_date, perc, colour = trida)) +
   geom_line(size = 2) + 
   geom_point(size = 4, colour = "white") + 
@@ -214,7 +214,7 @@ ggplot(cb_sum_trida_perc, aes(vykaz_date, perc, colour = trida)) +
 
 ### Relevantní oblasti {.tabset .tabset-pills}
 
-```{r}
+```{r sum-trida-hlousek}
 cb_sum_trida_hl <- cb_sum_hlousek_long %>%
   group_by(vykaz_date, source, trida) %>%
   summarise(spending = sum(spending), .groups = "drop") 
@@ -227,7 +227,7 @@ cb_sum_trida_hl_perc <- cb_sum_trida_hl %>%
 
 #### Absolutně
 
-```{r}
+```{r plot-bezkap-abs-hlousek}
 ggplot(cb_sum_trida_hl, aes(vykaz_date, spending/1e9, alpha = source,
                             fill = trida)) +
   geom_col() + 
@@ -247,7 +247,7 @@ ggplot(cb_sum_trida_hl, aes(vykaz_date, spending/1e9, alpha = source,
 
 #### Podíl ESIF
 
-```{r}
+```{r plot-bezkap-podil-hlousek}
 ggplot(cb_sum_trida_hl_perc, aes(vykaz_date, perc, colour = trida)) +
   geom_line(size = 2) + 
   geom_point(size = 4, colour = "white") + 
@@ -266,7 +266,7 @@ ggplot(cb_sum_trida_hl_perc, aes(vykaz_date, perc, colour = trida)) +
 
 ## Skupiny (odvětvové členění) {.tabset .tabset-pills}
 
-```{r}
+```{r sum-odvetvi}
 cb_sum_skupina <- cb_sum_long %>%
   group_by(vykaz_date, source, trida, skupina) %>%
   summarise(spending = sum(spending), .groups = "drop") %>% 
@@ -281,7 +281,7 @@ cb_sum_skupina_perc <- cb_sum_skupina %>%
 
 ### Absolutně
 
-```{r}
+```{r plot-skup-abs}
 ggplot(cb_sum_skupina, aes(vykaz_date, spending/1e9, alpha = source,
                            fill = trida)) +
   geom_col() + 
@@ -299,7 +299,7 @@ ggplot(cb_sum_skupina, aes(vykaz_date, spending/1e9, alpha = source,
 
 ### Podíl ESIF
 
-```{r}
+```{r plot-skup-podil}
 ggplot(cb_sum_skupina_perc, aes(vykaz_date, perc, colour = trida)) +
   geom_line(size = 1) + 
   geom_point(size = 1.5, colour = "white") + 
@@ -317,7 +317,7 @@ ggplot(cb_sum_skupina_perc, aes(vykaz_date, perc, colour = trida)) +
 
 ## Oddíly {.tabset .tabset-pills}
 
-```{r}
+```{r sum-oddil}
 cb_sum_oddil <- cb_sum_long %>%
   group_by(vykaz_date, source, trida, oddil) %>%
   summarise(spending = sum(spending), .groups = "drop") %>% 
@@ -332,7 +332,7 @@ cb_sum_oddil_perc <- cb_sum_oddil %>%
 
 ### Absolutně
 
-```{r, fig.height=6}
+```{r plot-oddil-abs, fig.height=6}
 ggplot(cb_sum_oddil %>% 
          filter(oddil != "Dávky a podpory v sociálním zabezpečení"), 
        aes(vykaz_date, spending/1e9, alpha = source,
@@ -352,7 +352,7 @@ ggplot(cb_sum_oddil %>%
 
 ### Podíl ESIF
 
-```{r, fig.height=6}
+```{r plot-oddil-podil, fig.height=6}
 ggplot(cb_sum_oddil_perc, aes(vykaz_date, perc, colour = trida)) +
   geom_line(size = 1) + 
   geom_point(size = 1.5, colour = "white") + 
@@ -372,7 +372,7 @@ ggplot(cb_sum_oddil_perc, aes(vykaz_date, perc, colour = trida)) +
 
 ### Běžné výdaje {.tabset .tabset-pills}
 
-```{r}
+```{r sum-pododd-riziko}
 cb_sum_pododdil <- cb_sum_long %>%
   group_by(vykaz_date, source, trida, skupina, oddil, pododdil) %>%
   summarise(spending = sum(spending), .groups = "drop") %>% 
@@ -415,7 +415,7 @@ pododd_ranks_bezne <- cb_sum_pododdil_perc_slope %>%
 
 ```
 
-```{r}
+```{r pododd-riziko}
 pododd_riziko <- cb_sum_pododdil %>% 
   filter(vykaz_date > "2016-01-01") %>% 
   left_join(pododd_ranks_bezne) %>% 
@@ -430,7 +430,7 @@ pododd_riziko <- cb_sum_pododdil %>%
 ```
 
 
-```{r}
+```{r make-plot-pododd-riziko}
 riz_odd_gg <- ggplot(pododd_riziko, aes(vykaz_date, spending/1e9, alpha = source)) +
   scale_y_continuous(expand = ptrr::flush_axis, 
                      labels = ptrr::label_percent_cz()) +
@@ -443,7 +443,7 @@ riz_odd_gg <- ggplot(pododd_riziko, aes(vykaz_date, spending/1e9, alpha = source
 
 #### Absolutně
 
-```{r, fig.height=7}
+```{r plot-pododd-riziko-abs, fig.height=7}
 riz_odd_gg +
   geom_col(position = "stack", fill = clrs[["b"]]) +
   labs(title = "Vybrané rizikové pododdíly výdajů státního rozpočtu",
@@ -454,7 +454,7 @@ riz_odd_gg +
 
 #### Podíly
 
-```{r, fig.height=7}
+```{r plot-pododd-riziko-podil, fig.height=7}
 riz_odd_gg +
   geom_col(position = "fill", fill = clrs[["b"]]) +
   labs(title = "Vybrané rizikové pododdíly výdajů státního rozpočtu",
@@ -466,7 +466,7 @@ riz_odd_gg +
 
 ## Příklad detailní analýzy
 
-```{r}
+```{r plot-detail}
 pdod <- "Správa v sociálním zabezpečení a politice zaměstnanosti"
 pdsk <- "Platy"
 
@@ -576,7 +576,7 @@ ad 3. V této studii na některých místech ukazujeme dva okruhy výdajů: jedn
 
 ## Odkladiště
 
-```{r}
+```{r plot-extra-celkem}
 dt17_long %>%
   filter(typ == "mřo") %>% 
   count(vykaz_year, source, wt = spending/1e6) %>% 

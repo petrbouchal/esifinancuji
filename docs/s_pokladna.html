@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="cs" xml:lang="cs">
 
 <head>
 
@@ -23,9 +23,6 @@
 <script src="site_libs/bs3compat-0.3.1/transition.js"></script>
 <script src="site_libs/bs3compat-0.3.1/tabs.js"></script>
 <script src="site_libs/bs3compat-0.3.1/bs3compat.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -58,6 +55,28 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 
 
@@ -220,69 +239,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -290,16 +246,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -375,22 +321,22 @@ div.tocify {
 <h3 class="tabset tabset-pills">Celý státní rozpočet</h3>
 <div id="absolutně" class="section level4">
 <h4>Absolutně</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-abs-1.png" width="100%" /></p>
 </div>
 <div id="podíl-esif" class="section level4">
 <h4>Podíl ESIF</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-3-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-podil-esif-1.png" width="100%" /></p>
 </div>
 </div>
 <div id="relevantní-oblasti-srovnatelné-se-studií-z-roku-2017" class="section level3 tabset tabset-pills">
 <h3 class="tabset tabset-pills">Relevantní oblasti (srovnatelné se studií z roku 2017)</h3>
 <div id="absolutně-1" class="section level4">
 <h4>Absolutně</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-abs-hlousek-1.png" width="100%" /></p>
 </div>
 <div id="podíl-esif-1" class="section level4">
 <h4>Podíl ESIF</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-6-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-podil-hlousek-1.png" width="100%" /></p>
 </div>
 </div>
 </div>
@@ -400,22 +346,22 @@ div.tocify {
 <h3 class="tabset tabset-pills">Celý státní rozpočet</h3>
 <div id="absolutně-2" class="section level4">
 <h4>Absolutně</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-8-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-bezkap-abs-1.png" width="100%" /></p>
 </div>
 <div id="podíl-esif-2" class="section level4">
 <h4>Podíl ESIF</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-9-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-bezkap-podil-1.png" width="100%" /></p>
 </div>
 </div>
 <div id="relevantní-oblasti" class="section level3 tabset tabset-pills">
 <h3 class="tabset tabset-pills">Relevantní oblasti</h3>
 <div id="absolutně-3" class="section level4">
 <h4>Absolutně</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-11-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-bezkap-abs-hlousek-1.png" width="100%" /></p>
 </div>
 <div id="podíl-esif-3" class="section level4">
 <h4>Podíl ESIF</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-12-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-bezkap-podil-hlousek-1.png" width="100%" /></p>
 </div>
 </div>
 </div>
@@ -423,22 +369,22 @@ div.tocify {
 <h2 class="tabset tabset-pills">Skupiny (odvětvové členění)</h2>
 <div id="absolutně-4" class="section level3">
 <h3>Absolutně</h3>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-14-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-skup-abs-1.png" width="100%" /></p>
 </div>
 <div id="podíl-esif-4" class="section level3">
 <h3>Podíl ESIF</h3>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-15-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-skup-podil-1.png" width="100%" /></p>
 </div>
 </div>
 <div id="oddíly" class="section level2 tabset tabset-pills">
 <h2 class="tabset tabset-pills">Oddíly</h2>
 <div id="absolutně-5" class="section level3">
 <h3>Absolutně</h3>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-17-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-oddil-abs-1.png" width="100%" /></p>
 </div>
 <div id="podíl-esif-5" class="section level3">
 <h3>Podíl ESIF</h3>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-18-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-oddil-podil-1.png" width="100%" /></p>
 </div>
 </div>
 <div id="rizikové-pododdíly" class="section level2">
@@ -447,17 +393,17 @@ div.tocify {
 <h3 class="tabset tabset-pills">Běžné výdaje</h3>
 <div id="absolutně-6" class="section level4">
 <h4>Absolutně</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-22-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-pododd-riziko-abs-1.png" width="100%" /></p>
 </div>
 <div id="podíly" class="section level4">
 <h4>Podíly</h4>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-23-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-pododd-riziko-podil-1.png" width="100%" /></p>
 </div>
 </div>
 </div>
 <div id="příklad-detailní-analýzy" class="section level2">
 <h2>Příklad detailní analýzy</h2>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-24-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-detail-1.png" width="100%" /></p>
 </div>
 <div id="technické-aspekty-ve-stručnosti" class="section level2">
 <h2>Technické aspekty ve stručnosti</h2>
@@ -569,18 +515,81 @@ div.tocify {
 </ol>
 <p>Ad 1: u SF nejsou z veřejných zdrojů data o zdrojích výdajů, pro rok 2017 vznikly velkým množstvím ruční kompilace interně na MF Ad 2: pro obce data o zdroji výdajů zřejmě nejsou přímo dostupná od roku 2015</p>
 <p>Následky:</p>
-<p>ad 1. Kategorie “ústředně řízení organizace” zahrnuje jiný okruh výdajů; po roce 2015 u části těchto výdajů neznáme rozdělení na ESIF a vlastní. Nicméně celkové součty výdajů pro “překryvový” rok (kde máme data z obou zdrojů) cca odpovídají. ad 2. O kategorii “místně řízených organizací” tj. samospráv máme ohledně podílu ESIF jen nepřímá data a jejich kvalita spolehlivost zatím není jasná. ad 3. V této studii na některých místech ukazujeme dva okruhy výdajů: jednak celý státní rozpočet, jednak výběr podle studie z roku 2017.</p>
+<p>ad 1. Kategorie „ústředně řízení organizace“ zahrnuje jiný okruh výdajů; po roce 2015 u části těchto výdajů neznáme rozdělení na ESIF a vlastní. Nicméně celkové součty výdajů pro „překryvový“ rok (kde máme data z obou zdrojů) cca odpovídají. ad 2. O kategorii „místně řízených organizací“ tj. samospráv máme ohledně podílu ESIF jen nepřímá data a jejich kvalita spolehlivost zatím není jasná. ad 3. V této studii na některých místech ukazujeme dva okruhy výdajů: jednak celý státní rozpočet, jednak výběr podle studie z roku 2017.</p>
 </div>
 </div>
 <div id="odkladiště" class="section level2">
 <h2>Odkladiště</h2>
-<p><img src="s_pokladna_files/figure-html/unnamed-chunk-25-1.png" width="100%" /></p>
+<p><img src="s_pokladna_files/figure-html/plot-extra-celkem-1.png" width="100%" /></p>
+</div>
+<div id="citace-literatura-data-nástroje" class="section level2 unnumbered">
+<h2 class="unnumbered">Citace: literatura, data, nástroje</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-czso" class="csl-entry">
+Bouchal, Petr. 2021a. <em>czso: Use Open Data from the Czech Statistical Office in R</em>. <a href="https://CRAN.R-project.org/package=czso">https://CRAN.R-project.org/package=czso</a>.
+</div>
+<div id="ref-R-statnipokladna" class="csl-entry">
+———. 2021b. <em>statnipokladna: Use Data from the Czech Public Finance Database</em>.
+</div>
+<div id="ref-R-janitor" class="csl-entry">
+Firke, Sam. 2020. <em>janitor: Simple Tools for Examining and Cleaning Dirty Data</em>. <a href="https://github.com/sfirke/janitor">https://github.com/sfirke/janitor</a>.
+</div>
+<div id="ref-lubridate2011" class="csl-entry">
+Grolemund, Garrett, a Hadley Wickham. 2011. <span>„Dates and Times Made Easy with <span>lubridate</span>"</span>. <em>Journal of Statistical Software</em> 40 (3): 1–25. <a href="https://www.jstatsoft.org/v40/i03/">https://www.jstatsoft.org/v40/i03/</a>.
+</div>
+<div id="ref-R-pointblank" class="csl-entry">
+Iannone, Richard, a Mauricio Vargas. 2021. <em>pointblank: Data Validation and Organization of Metadata for Local and Remote Tables</em>. <a href="https://CRAN.R-project.org/package=pointblank">https://CRAN.R-project.org/package=pointblank</a>.
+</div>
+<div id="ref-R-targets" class="csl-entry">
+Landau, William Michael. 2021a. <em>targets: Dynamic Function-Oriented Make-Like Declarative Workflows</em>.
+</div>
+<div id="ref-targets2021" class="csl-entry">
+———. 2021b. <span>„The targets R package: a dynamic Make-like function-oriented pipeline toolkit for reproducibility and high-performance computing"</span>. <em>Journal of Open Source Software</em> 6 (57): 2959. <a href="https://doi.org/10.21105/joss.02959">https://doi.org/10.21105/joss.02959</a>.
+</div>
+<div id="ref-ministerstvopromistnirozvojVerejneVydajeFondy2017" class="csl-entry">
+Ministerstvo pro místní rozvoj. 2017. <span>„Veřejné výdaje a fondy EU 2007–2015"</span>. Praha: Ministerstvo pro místní rozvoj. <a href="https://dotaceeu.cz/cs/evropske-fondy-v-cr/narodni-organ-pro-koordinaci/evaluace/knihovna-evaluaci/verejne-vydaje-a-fondy-eu-2007%e2%80%932015">https://dotaceeu.cz/cs/evropske-fondy-v-cr/narodni-organ-pro-koordinaci/evaluace/knihovna-evaluaci/verejne-vydaje-a-fondy-eu-2007%e2%80%932015</a>.
+</div>
+<div id="ref-MonitorInformacniPortal" class="csl-entry">
+<span>„Monitor - informační portál Ministerstva financí"</span>. b.r. Viděno 19. listopad 2020. <a href="https://monitor.statnipokladna.cz/">https://monitor.statnipokladna.cz/</a>.
+</div>
+<div id="ref-R-base" class="csl-entry">
+R Core Team. 2021. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-R-arrow" class="csl-entry">
+Richardson, Neal, Ian Cook, Nic Crane, Jonathan Keane, Romain François, Jeroen Ooms, a Apache Arrow. 2021. <em>arrow: Integration to Apache ’Arrow’</em>.
+</div>
+<div id="ref-R-lubridate" class="csl-entry">
+Spinu, Vitalie, Garrett Grolemund, a Hadley Wickham. 2021. <em>lubridate: Make Dealing with Dates a Little Easier</em>.
+</div>
+<div id="ref-ggplot22016" class="csl-entry">
+Wickham, Hadley. 2016. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div id="ref-R-stringr" class="csl-entry">
+———. 2019. <em>stringr: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
+</div>
+<div id="ref-R-forcats" class="csl-entry">
+———. 2020. <em>forcats: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats">https://CRAN.R-project.org/package=forcats</a>.
+</div>
+<div id="ref-R-tidyr" class="csl-entry">
+———. 2021. <em>tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
+</div>
+<div id="ref-R-readxl" class="csl-entry">
+Wickham, Hadley, a Jennifer Bryan. 2019. <em>readxl: Read Excel Files</em>. <a href="https://CRAN.R-project.org/package=readxl">https://CRAN.R-project.org/package=readxl</a>.
+</div>
+<div id="ref-R-dplyr" class="csl-entry">
+Wickham, Hadley, Romain François, Lionel Henry, a Kirill Müller. 2021. <em>dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
+</div>
+<div id="ref-R-readr" class="csl-entry">
+Wickham, Hadley, a Jim Hester. 2021. <em>readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.
+</div>
+<div id="ref-R-ggplot2" class="csl-entry">
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, a Dewey Dunnington. 2020. <em>ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
+</div>
+</div>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -613,35 +622,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 
 </body>
