@@ -5,6 +5,9 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+cnf <- config::get()
+names(cnf) <- paste0("c_", names(cnf))
+list2env(cnf, envir = .GlobalEnv)
 ```
 
 ## Struktura a nástroje
@@ -72,3 +75,8 @@ sessionInfo()
 targets::tar_visnetwork()
 ```
 
+### Git
+
+Repozitář online: `r c_repo_remote`
+
+Commit: `r gert::git_info()$commit`
