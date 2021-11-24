@@ -16,12 +16,14 @@ list2env(cnf, envir = .GlobalEnv)
 
 - Na vstupu je 
   - online data Státní pokladny (pro část o veřejných výdajích)
-  - online excelová tabulka projektů od MMR
-  - jeden Arrow dataset
+  - online excelová tabulka projektů od MMR - pro validaci
+  - sestavy projektů od MMR - pro validaci
+  - data ze studie z roku 2017
 - Na výstupu je
-  - kupa excel a CSV souborů
+  - několik exportních souborů (excel, CSV, parquet)
   - webová dokumentace
   - codebook
+  - studie v Rmarkdown
 - Mezi tím je spousta kroků v `tidyverse`, které všechna data propojují.
 
 ### Jak se to děje
@@ -30,11 +32,11 @@ Celý pipeline je organizován nástrojem `{targets}`, funguje podobně jako `ma
 
 Všechny cesty ke vstupním a výstupním souborům a dalším parametry se nastavují v `config.yml`.
 
-O reprodukovatelnost prostředí (tj. udržování správné verze balíků R) se stará systém {renv}.
+O reprodukovatelnost prostředí (tj. udržování správné verze balíků R) se stará systém `{renv}`.
 
-Dokumentaci a validaci dat zajišťují postupy v balíku `{pointblank}`
+Dokumentaci a validaci dat zajišťují postupy s využitím balíku `{pointblank}`
 
-Dokumentace se generuje ze vstupních RMarkdown souborů do adresáře `/docs`, který se po push na github automaticky publikuje.
+Dokumentace se generuje ze vstupních Rmarkdown souborů do adresáře `/docs`, který se po push na github automaticky publikuje.
 
 ## Jak to znovu pustit
 
