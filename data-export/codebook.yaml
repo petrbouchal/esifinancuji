@@ -4,13 +4,19 @@ tbl_name: cb_semisum_long
 info_label: Codebook hlavního výstupu
 lang: en
 locale: en
+meta_snippets:
+  rok_od: ~. %>% dplyr::select(vykaz_year) %>% dplyr::distinct() %>% dplyr::summarize(pb_summary
+    = min(vykaz_year, na.rm = TRUE)) %>% dplyr::pull(pb_summary) %>% as.character()
+  rok_do: ~. %>% dplyr::select(vykaz_year) %>% dplyr::distinct() %>% dplyr::summarize(pb_summary
+    = max(vykaz_year, na.rm = TRUE)) %>% dplyr::pull(pb_summary) %>% as.character()
 table:
   name: cb_semisum_long
   _columns: 17
   _rows: 56512.0
   _type: tbl_df
   Info: Tabulka se součty výdajů podle času, zdroje (ESIF nebo ne) a druhového i odvětvového
-    třídění
+    třídění<br />Jde o konsolidované výdaje, tj. součet odpovídá celkovým výdajům
+    státního rozpočtu.<br />Detaily viz v draftu studie.
   Varianty: Varianta pojmenovaná 'detail' obsahuje kompletní rozpad na druhové třídění;
     standardní verze je třídění na běžné a kapitálové výdaje.
   Celková struktura: 'dlouhý formát: čas a kraj jsou v řádcích, metadata a jednotlivé
@@ -18,11 +24,12 @@ table:
 columns:
   vykaz_year:
     _type: integer
-    Popis: Cíl EU 2020 rok výkazu
-    Zdroj: Matice cílů od NOK
+    Popis: rok výkazu
+    Rozpětí: od {rok_od} do {rok_do}
   vykaz_date:
     _type: Date
     Popis: poslední den období výkazu
+    Rozpětí: viz `vykaz_year`
   paragraf_long:
     _type: character
     Popis: čtyřmístný kód paragrafu

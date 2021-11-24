@@ -1,16 +1,26 @@
 make_export_codebook <- function(cb_semisum_long) {
   create_informant(tbl = cb_semisum_long,
                    label = "Codebook hlavního výstupu") %>%
-    info_tabular(Info = "Tabulka se součty výdajů podle času, zdroje (ESIF nebo ne) a druhového i odvětvového třídění",
+    info_tabular(Info = str_c("Tabulka se součty výdajů podle času, zdroje (ESIF nebo ne) a druhového i odvětvového třídění",
+                          "Jde o konsolidované výdaje, tj. součet odpovídá celkovým výdajům státního rozpočtu.",
+                          "Detaily viz v draftu studie.", sep = "<br />"),
                  `Varianty` = "Varianta pojmenovaná 'detail' obsahuje kompletní rozpad na druhové třídění; standardní verze je třídění na běžné a kapitálové výdaje.",
                  `Celková struktura` = "dlouhý formát: čas a kraj jsou v řádcích, metadata a jednotlivé zdroje financí jsou ve sloupcích") %>%
-    info_columns("vykaz_year",
-                 Popis = "Cíl EU 2020",
-                 Zdroj = "Matice cílů od NOK") %>%
+
+    info_snippet(
+      snippet_name = "rok_od",
+      fn = snip_lowest(column = "vykaz_year")
+    ) %>%
+    info_snippet(
+      snippet_name = "rok_do",
+      fn = snip_highest(column = "vykaz_year")
+    ) %>%
     info_columns("vykaz_date",
-                 Popis = "poslední den období výkazu") %>%
+                 Popis = "poslední den období výkazu",
+                 Rozpětí = "viz `vykaz_year`") %>%
     info_columns("vykaz_year",
-                 Popis = "rok výkazu")%>%
+                 Popis = "rok výkazu",
+                 Rozpětí = "od {rok_od} do {rok_do}")%>%
     info_columns("paragraf",
                  Popis = "čtyřmístný kód paragrafu",
                  Třídění = "odvětvové") %>%
@@ -57,5 +67,6 @@ make_export_codebook <- function(cb_semisum_long) {
                  Popis = "Výdaje - skutečnost") %>%
     info_columns("kapitola",
                  Popis = "Rozpočtová kapitola - kód",
-                 Třídění = "odpovědnostní")
+                 Třídění = "odpovědnostní") %>%
+    incorporate()
 }
