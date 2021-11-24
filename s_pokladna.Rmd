@@ -5,6 +5,14 @@ output:
   html_document:
     toc: yes
     toc_float: yes
+    toc_depth: 3
+    pandoc_args: !expr rmarkdown::pandoc_lua_filter_args(rmarkdown::pkg_file_lua('pandoc-quotes.lua', 'ptrr'))
+always_allow_html: yes
+bibliography: [references.json, packages.bib]
+csl: chicago-author-date.csl
+link-citations: yes
+nocite: '@*'
+lang: cs
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +21,16 @@ knitr::opts_chunk$set(echo = FALSE, out.width = "100%", warning = FALSE, message
 source("_targets_packages.R")
 source("R/utils.R")
 source("R/functions.R")
+options("scipen"=100, "digits"=8)
 ```
+
+```{r, include=FALSE}
+knitr::write_bib(c("base", "ggplot2", "dplyr", "readr", "readxl", "gplots", 
+                   "stringr", "plotly", "czso", "janitor", "data.table", 
+                   "forcats", "tidyr", "statnipokladna"),
+                 file = 'packages.bib')
+```
+
 
 ```{r load-targets}
 targets::tar_load(sp_cl)
