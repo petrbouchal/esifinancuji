@@ -18,14 +18,11 @@ cnf <- config::get()
 
 ## Celková analytická logika systému
 
-Cílem této datové pipeline je vytvořit vstupní data o výdajích z ESI fondů pro makroekonomické modely QUEST a HERMIN za období 2014-2020.
-
-Výsledkem je rozpad výdajů na kraje, čtvrletí a kategorie QUEST/HERMIN.
-
-Vycházíme z dat o projektech, platbách (ŽOP) a z očištěných dat o geolokaci projektů. Základním vstupem jsou sestavy z MSSF, od SZIF (pro PRV) a data o geolokaci projektů mimo PRV od MMR (výstup předchozího projektu.)
+TO DO
 
 ## Data a rozhodnutí
 
+TO DO
 
 ### Hodnoty konfiguračních proměnných v souboru `config.yml`
 
