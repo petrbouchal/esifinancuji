@@ -282,14 +282,22 @@ $(document).ready(function () {
 
 <div id="celková-analytická-logika-systému" class="section level2">
 <h2>Celková analytická logika systému</h2>
-<p>TO DO</p>
+<ul>
+<li>z dat státní pokladny o veřejných výdajích sestavujeme kompletní dataset výdajů členěných podle odvětvového a druhového třídění</li>
+<li>ze zdrojového třídění dovozujeme podíl ESI fondů v jednotlivých kategoriích výdajů či jejich kombinacích</li>
+<li>omezujeme se na státní rozpočet, protože u státních fondů ani samospráv není zdrojové třídění veřejně dostupné</li>
+<li>celkové objemy ESI fondů validujeme proti veřejným datům o proplácení projektů, popř. poloveřejným jemnějším datům ze sestav MMR</li>
+</ul>
+<p>Hlavními výstupy jsou: - datové exporty pro detailní analýzu, viz <a href="s_output.html">dokument k výstupům</a> - <a href="s_pokladna.html">studie</a> role ESI fondů ve výdajích státního rozpočtu</p>
 </div>
 <div id="data-a-rozhodnutí" class="section level2">
 <h2>Data a rozhodnutí</h2>
-<p>Hlavním datovým vstupem jsou open data státní pokladny.</p>
+<p>V naší definici ESI fondů nejsou zahrnuty norské/EEA fondy, proto jsou součástí kategorie označené (mírně nepřesně) jako “vlastní výdaje”.</p>
+<p>V ESI fondech je zahrnuto kofinancování ze státního rozpočtu, nikoli ale konfinancování z jiných zdrojů.</p>
+<p>K problematice srovnatelnosti se studií z roku 2014 viz <a href="s_pokladna.html#data">relevantní část ve studii</a></p>
 <div id="technické-detaily" class="section level3">
 <h3>Technické detaily</h3>
-<p>viz soubor s technickou dokumentací</p>
+<p>viz <a href="dev.html">technickou dokumentaci</a></p>
 </div>
 <div id="hodnoty-konfiguračních-proměnných-v-souboru-config.yml" class="section level3">
 <h3>Hodnoty konfiguračních proměnných v souboru <code>config.yml</code></h3>

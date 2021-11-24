@@ -2,12 +2,27 @@
 title: esifinancuji
 output: 
   html_document:
+    # css: site/site.css
+    fig_retina: 3
+    fig_width: 6
+    fig_height: 3
+    fig_showtext: true
+    pandoc_args: !expr ptrr::pandoc_quotes()
+    dev: ragg_png
+    toc: false
+    toc_float: false
+    mathjax: null
+    df_print: paged
     theme:
-      version: 4
+      version: 5
       bg: "#ffffff"
       fg: "#000000"
       primary: "#0000ff"
-      navbar-bg: "#00f"
+      navbar-bg: "#0000ff"
+      base_font:
+        google: "IBM Plex Sans"
+      code_font:
+        google: "IBM Plex Mono"
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -36,8 +51,7 @@ Tento repozitář obsahuje kód na zpracování dat o výdajích financovaných 
 Detailnější dokumentace k pipelinu:
 
 - [obsahová dokumentace](s_doc.html)
-- [vstupní validace dat](s_inputchecks.html)
-- [dokumantace a validace výstupu](s_output.html)
+- [dokumentace a validace výstupu](s_output.html)
 - [technická dokumentace](dev.html)
 
 Relevantní předchozí publikace v této oblasti:

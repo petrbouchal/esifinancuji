@@ -477,7 +477,7 @@ cb_esif_marked %>%
        subtitle = str_glue("Podseskupení: {pdsk}\nPododdíl: {pdod}"))
 ```
 
-## Technické aspekty ve stručnosti
+## Technické aspekty ve stručnosti {#data}
 
 ### Zdroje dat
 

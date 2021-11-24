@@ -18,11 +18,26 @@ cnf <- config::get()
 
 ## Celková analytická logika systému
 
-TO DO
+- z dat státní pokladny o veřejných výdajích sestavujeme kompletní dataset výdajů členěných podle odvětvového a druhového třídění
+- ze zdrojového třídění dovozujeme podíl ESI fondů v jednotlivých kategoriích výdajů či jejich kombinacích
+- omezujeme se na státní rozpočet, protože u státních fondů ani samospráv není zdrojové třídění veřejně dostupné
+- celkové objemy ESI fondů validujeme proti veřejným datům o proplácení projektů, popř. poloveřejným jemnějším datům ze sestav MMR
+
+Hlavními výstupy jsou:
+- datové exporty pro detailní analýzu, viz [dokument k výstupům](s_output.html)
+- [studie](s_pokladna.html) role ESI fondů ve výdajích státního rozpočtu
 
 ## Data a rozhodnutí
 
-TO DO
+V naší definici ESI fondů nejsou zahrnuty norské/EEA fondy, proto jsou součástí kategorie označené (mírně nepřesně) jako "vlastní výdaje".
+
+V ESI fondech je zahrnuto kofinancování ze státního rozpočtu, nikoli ale konfinancování z jiných zdrojů.
+
+K problematice srovnatelnosti se studií z roku 2014 viz [relevantní část ve studii](s_pokladna.html#data)
+
+### Technické detaily
+
+viz [technickou dokumentaci](dev.html)
 
 ### Hodnoty konfiguračních proměnných v souboru `config.yml`
 
