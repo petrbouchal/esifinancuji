@@ -2,15 +2,6 @@
 title: "Veřejné výdaje a ESI fondy: hlavní poznatky"
 subtitle: "Interní draft, říjen 2021"
 output:
-  bookdown::html_document2:
-    number_sections: no
-    self_contained: no
-    toc: yes
-    toc_float: yes
-    toc_depth: 3
-    pandoc_args: !expr ptrr::pandoc_quotes()
-    theme:
-      version: 5
   bookdown::word_document2:
     number_sections: no
     pandoc_args: !expr ptrr::pandoc_quotes()

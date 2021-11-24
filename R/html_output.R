@@ -31,7 +31,7 @@ t_html <- list(
   tar_file(s_pokladna_html, command = {!! tar_knitr_deps_expr("s_pokladna.Rmd")
     siteconf
     sitefiles
-    rmarkdown::render_site(s_pokladna_rmd)
+    rmarkdown::render_site(s_pokladna_rmd, output_format = "bookdown::html_document2")
     "docs/s_pokladna.html"}),
   tar_file(s_doc_rmd, "s_doc.Rmd"),
   tar_file(s_doc_html, command = {!! tar_knitr_deps_expr("s_doc.Rmd")
