@@ -13,11 +13,7 @@ navbar:
   - text: Výstupní data
     href: s_output.html
   - text: Technická dokumentace
-    menu:
-    - text: Validace vstupů
-      href: s_inputchecks.html
-    - text: Vývojářská dokumentace
-      href: dev.html
+    href: dev.html
   right:
   - icon: fab fa-github fa-lg
     href: https://github.com/petrbouchal/esifinancuji
