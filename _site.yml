@@ -36,6 +36,7 @@ output:
       version: 5
       bg: "#ffffff"
       fg: "#000000"
+      headings_color: blue
       primary: "#0000ff"
       navbar-bg: "#0000ff"
       base_font:
@@ -61,6 +62,7 @@ output:
       fg: "#000000"
       primary: "#0000ff"
       navbar-bg: "#0000ff"
+      headings_color: blue
       base_font:
         google: "IBM Plex Sans"
       code_font:
