@@ -67,9 +67,10 @@ extract_cl <- function(cl_target_list, cl_string) {
 # Datavis utils -----------------------------------------------------------
 
 theme_studie <- function(...) {
-  ptrr::theme_ptrr(family = "Arial", title_family = "Arial",
-                   tonecol = "grey90", base_size = 9,
+  ptrr::theme_ptrr(family = "Helvetica", title_family = "Helvetica",
+                   tonecol = "grey95", base_size = 9,
                    legend.key.width = unit(6, "pt"),
+                   margin_side = 0,
                    legend.key.height = unit(10, "pt"),
                    ...)
 }
