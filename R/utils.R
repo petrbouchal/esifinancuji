@@ -101,3 +101,36 @@ export_table <- function(data, path, fun, ...) {
 
   return(path)
 }
+
+
+pc <- function(x, accuracy = 1) {
+  ptrr::label_percent_cz(accuracy = accuracy)(x)
+}
+
+nm <- function(x, accuracy = 1) {
+  ptrr::label_number_cz(accuracy = accuracy)(x)
+}
+
+bn <- function(x, accuracy = 1) {
+  ptrr::label_number_cz(accuracy = accuracy)(x/1e9)
+}
+
+mn <- function(x, accuracy = 1) {
+  ptrr::label_number_cz(accuracy = accuracy)(x/1e6)
+}
+
+get_nm <- function(data, rok, eu = NULL) {
+  ddd <- data |>
+    filter(year(vykaz_date) == rok)
+
+  if(!is.null(eu)) {
+
+    fltr <- if(eu) "EU" else "vlastní"
+
+    ddd <- ddd |>
+      filter(source == fltr)
+  }
+
+  return(ddd |> pull(spending))
+
+}
