@@ -66,14 +66,16 @@ make_cb_esif_marked <- function(dataset_path, codelists, nastroje_zdroje) {
     sp_add_codelist(polozka) %>%
     select(-poznamka) %>%
     sp_add_codelist(paragraf) %>%
-    filter(!kon_pol | !kon_rep | kon_okr | kon_kraj)
+    filter(!kon_pol | !kon_rep | kon_okr | kon_kraj) |>
+    select(-matches("(start|end)_date$")) |>
+    ungroup()
 }
 
 semisummarise_esif_marked <- function(data) {
   data %>%
     filter(paragraf != "0000") %>%
     group_by(across(c(starts_with("vykaz"), starts_with("paragraf"),
-                      starts_with("polozka"), -matches("(start|end)_date$"),
+                      starts_with("polozka"),
                       esif, skupina, oddil, pododdil,
                       kapitola,
                       trida, seskupeni, podseskupeni))) %>%

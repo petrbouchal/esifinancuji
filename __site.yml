@@ -1,0 +1,76 @@
+name: ESIF a veřejné výdaje
+output_dir: docs
+base_url: https://esifinancuji.petrbouchal.xyz
+lang: cs
+include: ["demo.R"]
+exclude: ["LICENSE.md", "*.csv", "*.rds", "renv", "renv.lock", "data-input", "data-output", "data-processed", "sp_data", "config.yml", "R", "data-export", "scripts", "refs"]
+navbar:
+  title: "ESIF data"
+  left:
+  - text: Draft studie
+    href: s_pokladna.html
+  - text: Dokumentace
+    href: s_doc.html
+  - text: Výstupní data
+    href: s_output.html
+  - text: Technická dokumentace
+    href: dev.html
+  right:
+  - icon: fab fa-github fa-lg
+    href: https://github.com/petrbouchal/esifinancuji
+  - icon: fas fa-asterisk fa-lg
+    href: https://petrbouchal.xyz
+output:
+  html_document:
+    # css: site/site.css
+    fig_retina: 3
+    fig_width: 6
+    fig_height: 3
+    fig_showtext: true
+    pandoc_args: !expr ptrr::pandoc_quotes()
+    dev: ragg_png
+    toc: false
+    toc_float: false
+    mathjax: null
+    df_print: paged
+    theme:
+      version: 5
+      bg: "#ffffff"
+      fg: "#000000"
+      headings_color: blue
+      primary: "#0000ff"
+      navbar-bg: "#0000ff"
+      base_font:
+        google: IBM Plex Sans
+      code_font:
+        google: IBM Plex Mono
+    # includes:
+    #   in_header: matomo.html
+  bookdown::html_document2:
+    mathjax: null
+    number_sections: no
+    fig_retina: 3
+    fig_width: 6
+    fig_height: 3
+    self_contained: no
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+    pandoc_args: !expr ptrr::pandoc_quotes()
+    theme:
+      version: 5
+      bg: "#ffffff"
+      fg: "#000000"
+      primary: "#0000ff"
+      navbar-bg: "#0000ff"
+      headings_color: blue
+      base_font:
+        collection:
+          google: IBM Plex Sans
+      code_font:
+        collection:
+          google: IBM Plex Mono
+  bookdown::word_document2:
+    number_sections: no
+    pandoc_args: !expr ptrr::pandoc_quotes()
+    reference_docx: rmd-in/uv_vzor.docx
