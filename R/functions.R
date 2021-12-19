@@ -9,6 +9,6 @@ source(here::here("R/esif-obce.R"))
 source(here::here("R/codebook.R"))
 source(here::here("R/zop_timing.R"))
 source(here::here("R/vydaje.R"))
+source(here::here("R/studie.R"))
 
 library(bslib)
-

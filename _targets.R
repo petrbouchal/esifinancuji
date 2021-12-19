@@ -253,6 +253,26 @@ t_vydaje_core <- list(
   tar_target(cb_sum_hlousek_wide, make_esif_sum_wide(cb_sum_hlousek_long))
 )
 
+t_vydaje_analysis <- list(
+  tar_target(cb_totals, make_cb_totals(cb_sum_long)),
+  tar_target(cb_totals_p, make_cb_totals_perc(cb_totals)),
+  tar_target(cb_trida, make_cb_totals(cb_sum_long, trida)),
+  tar_target(cb_trida_p, make_cb_totals_perc(cb_trida)),
+
+  tar_target(cb_totals_hl, make_cb_totals(cb_sum_hlousek_long)),
+  tar_target(cb_totals_hl_p, make_cb_totals_perc(cb_totals_hl)),
+  tar_target(cb_trida_hl, make_cb_totals(cb_sum_hlousek_long, trida)),
+  tar_target(cb_trida_hl_p, make_cb_totals_perc(cb_trida_hl)),
+
+  tar_target(cb_trida_skupina, make_cb_totals(cb_sum_long, trida, skupina)),
+  tar_target(cb_trida_skupina_p, make_cb_totals_perc(cb_trida_skupina)),
+  tar_target(cb_trida_oddil, make_cb_totals(cb_sum_long, trida, skupina, oddil)),
+  tar_target(cb_trida_oddil_p, make_cb_totals_perc(cb_trida_oddil)),
+  tar_target(cb_trida_pododdil, make_cb_totals(cb_sum_long, trida,
+                                               skupina, oddil, pododdil)),
+  tar_target(cb_trida_pododdil_p, make_cb_totals_perc(cb_trida_pododdil))
+)
+
 t_vydaje_export <- list(
   tar_file(cb_sum_long_xlsx, export_table(cb_sum_long, file.path(c_export_dir, c_export_sum_xlsx), write_xlsx)),
   tar_file(cb_sum_long_csv, export_table(cb_sum_long, file.path(c_export_dir, c_export_sum_csv), write_excel_csv2)),
@@ -278,5 +298,5 @@ list(t_public_list, t_sp_codelists, t_sp_data_central_new,
      t_sestavy, t_op_compile, t_2017,
      t_sp_statefunds, t_vydaje_core,
      t_sp_data_central_old, t_html, t_sp_data_local,
-     t_vydaje_export,
+     t_vydaje_export, t_vydaje_analysis,
      t_sp_data_local_grants, t_geometa, t_config)
