@@ -3,11 +3,10 @@ title: "Veřejné výdaje a ESI fondy: hlavní poznatky"
 subtitle: "Interní draft, říjen 2021"
 output:
   html_document
-  # reference_docx: mmr-template.docx
 
 always_allow_html: yes
-bibliography: [refs/references.json, refs/packages.bib]
-csl: refs/chicago-author-date.csl
+bibliography: [rmd-in/references.json, rmd-in/packages.bib]
+csl: rmd-in/chicago-author-date.csl
 link-citations: yes
 nocite: '@*'
 lang: cs
@@ -28,7 +27,7 @@ knitr::write_bib(c("base", "ggplot2", "dplyr", "readr", "readxl",
                    "stringr", "czso", "janitor", "pointblank", "arrow", 
                    "lubridate", "targets",
                    "forcats", "tidyr", "statnipokladna"),
-                 file = 'refs/packages.bib')
+                 file = 'rmd-in/packages.bib')
 ```
 
 
