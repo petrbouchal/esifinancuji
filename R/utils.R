@@ -134,3 +134,23 @@ get_nm <- function(data, rok, eu = NULL) {
   return(ddd |> pull(spending))
 
 }
+
+listize <- function(data, ...) {
+  dd <- data |>
+    ungroup() |>
+    mutate(yr = paste0("y", year(vykaz_date))) |>
+    # mutate(across(c(...), janitor::make_clean_names)) |>
+    rename_with(~"sp", matches("spending|perc")) |>
+    select(yr, sp, ...)
+
+  if(!missing(...)) {
+    dd <-  pivot_wider(dd, names_from = c(...), values_from = sp) |>
+      janitor::clean_names() |>
+      rename_with(.fn = str_remove, pattern = "_vydaje")
+    dd <- split(dd, dd$yr)
+    map(dd, ~select(.x, -yr))
+  } else {
+    dd <- pivot_wider(dd, names_from = yr, values_from = sp) |>
+      janitor::clean_names()
+  }
+}

@@ -10,6 +10,7 @@ make_cb_totals_perc <- function(data_summed, ...) {
   data_summed %>%
     group_by(vykaz_date, ..., .add = TRUE) %>%
     mutate(perc = spending/sum(spending)) %>%
+    select(-spending) |>
     filter(source == "EU") |>
     ungroup()
 }
@@ -23,12 +24,26 @@ palette_studie <- c(
   "mimo ESIF" = "grey50"
 )
 
+label_lesslong <- function(string) {
+  string |> str_trunc(60) |> str_wrap(30)
+}
+
+make_labeller <- function(length, nrow = 2) {
+  function(string) {
+    string |>
+      str_trunc(width = (length - 4) * nrow, ellipsis = "…") |>
+      str_wrap(length)
+  }
+}
+
 plot_esif <- function(data, perc = FALSE, by_trida = TRUE,
-                        facet_var = NULL,
-                        title = NULL, subtitle = NULL, caption = NULL,
-                        breaks_y_limit = NA_real_, breaks_y_step = NULL,
-                        legend_labels = names(palette_studie),
-                        keep_legend = FALSE, divider = 1e9, ylabel_precision = 1) {
+                      facet_var = NULL,
+                      title = NULL, subtitle = NULL, caption = NULL,
+                      label_width = 30,
+                      breaks_y_limit = NA_real_, breaks_y_step = NULL,
+                      legend_labels = names(palette_studie),
+                      keep_legend = FALSE, divider = 1e9, ylabel_precision = 1,
+                      nrow = NULL) {
 
   is_multi <- !missing(facet_var)
 
@@ -53,16 +68,18 @@ plot_esif <- function(data, perc = FALSE, by_trida = TRUE,
          caption = caption)
 
   if(is_multi) {
-    plt <- p + facet_wrap(facets = vars({{facet_var}}))
+    plt <- p + facet_wrap(facets = vars({{facet_var}}),
+                          nrow = nrow,
+                          labeller = as_labeller(make_labeller(label_width)))
     } else {
     plt <- p
     }
 
   if(perc) {
     plt <- plt +
-      geom_line(size = 2, aes(colour = var)) +
-      geom_point(size = 4, colour = "white") +
-      geom_point(size = 3, aes(colour = var)) +
+      geom_line(size = 1.3, aes(colour = var)) +
+      geom_point(size = 2.5, colour = "white") +
+      geom_point(size = 1.6, aes(colour = var)) +
       scale_y_continuous(expand = ptrr::flush_axis,
                          breaks = scales::breaks_pretty(n = 6),
                          limits = c(0, breaks_y_limit),

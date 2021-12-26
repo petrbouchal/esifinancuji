@@ -1,4 +1,4 @@
 language:
   label:
-    fig: 'Graf '
     tab: 'Tabulka '
+    fig: !expr function(x) sprintf("**Graf %s** ", x)

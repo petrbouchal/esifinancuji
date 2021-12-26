@@ -1,5 +1,5 @@
 ---
-title: Veřejné výdaje a ESI fondy: hlavní poznatky
+title: "Veřejné výdaje a ESI fondy: hlavní poznatky"
 subtitle: "Interní draft"
 date: 12/2021
 output:
@@ -20,8 +20,12 @@ lang: cs
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, out.width = "100%", warning = FALSE, message = FALSE,
-                      fig.retina = 3, fig.width = (21.9-2.8-2.57)/2.54, fig.height = 4)
+knitr::opts_chunk$set(echo = FALSE, 
+                      # out.width = "100%",
+                      warning = FALSE, message = FALSE,
+                      dpi = 300, dev = "ragg_png", 
+                      fig.width = (21.9-2.8-2.57)/2.54,
+                      fig.height = 4)
 
 source("_targets_packages.R")
 source("R/utils.R")

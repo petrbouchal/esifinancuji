@@ -70,3 +70,7 @@ output:
       code_font:
         collection:
           google: IBM Plex Mono
+  bookdown::word_document2:
+    number_sections: no
+    pandoc_args: !expr ptrr::pandoc_quotes()
+    reference_docx: rmd-in/uv_vzor.docx

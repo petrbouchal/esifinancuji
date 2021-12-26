@@ -50,5 +50,13 @@ t_html <- list(
     siteconf
     sitefiles
     rmarkdown::render_site(s_dev_rmd)
-    "docs/dev.html"})
+    "docs/dev.html"}),
+  tar_file(s_analyza_rmd, "s_analyza.Rmd"),
+  tar_file(s_analyza_docx, command = {!! tar_knitr_deps_expr("s_analyza.Rmd")
+    fs::file_move("_site.yml", "__site.yml")
+    siteconf
+    sitefiles
+    rmarkdown::render(s_analyza_rmd)
+    fs::file_move("__site.yml", "_site.yml")
+    "s_analyza.docx"})
 )
