@@ -41,185 +41,505 @@ knitr::write_bib(c("base", "ggplot2", "dplyr", "readr", "readxl",
                  file = 'rmd-in/packages.bib')
 ```
 
-
 ```{r load-targets}
 targets::tar_load(cb_esif_marked)
 targets::tar_load(matches("^cb_sum"))
 ```
 
-
 ```{r load-targets-specific}
 targets::tar_load(matches("^cb_(totals|trida)"))
 ```
 
+```{r}
+oddil_kapdo500mil <- cb_trida_oddil |> 
+  filter(trida == "Kapitálové výdaje") |>
+  ungroup() |> 
+  count(oddil, wt = spending/n_distinct(vykaz_date)) |> 
+  arrange(n) |> 
+  filter(n < 5e8) |> 
+  pull(oddil)
+
+oddil_bezdo500mil <- cb_trida_oddil |> 
+  filter(trida == "Běžné výdaje") |>
+  ungroup() |> 
+  count(oddil, wt = spending/n_distinct(vykaz_date)) |> 
+  arrange(n) |> 
+  filter(n < 5e8) |> 
+  pull(oddil)
+
+oddil_do500mil <- cb_trida_oddil |> 
+  # filter(trida == "Běžné výdaje") |>
+  ungroup() |> 
+  count(oddil, wt = spending/n_distinct(vykaz_date)) |> 
+  arrange(n) |> 
+  filter(n < 5e8) |> 
+  pull(oddil)
+```
+
+
 # Shrnutí
+
+TO DO
+
+- ad data: detailnější analýza ukazuje jak specifické trendy a oblasti politik, tak problematickou kvalitu dat (doprava, bydlení, energetika/průmysl)
 
 # Úvod
 
-Hi
+## Cíle a motivace
 
-Evropské strukturální a investiční fondy (ESI fondy) tvoří podstatnou část veřejných výdajů. Cílem této studie je zmapovat, ve kterých oblastech výdajů státního rozpočtu hrají ESI fondy největší roli a jak se jejich podíl na výdajích vyvíjí od roku 2015.
+Evropské strukturální a investiční fondy (ESI fondy) tvoří podstatnou část veřejných výdajů.
+Cílem této studie je zmapovat, ve kterých oblastech výdajů státního rozpočtu hrají ESI fondy největší roli a jak se jejich podíl na výdajích vyvíjí od roku 2015.
 
-Tato studie navazuje na studii MMR z roku 2017 [@ministerstvopromistnirozvojVerejneVydajeFondy2017]. Od předchozí studie se přístup liší ve dvou rozměrech:
+Tato studie navazuje na studii MMR z roku 2017 [@ministerstvopromistnirozvojVerejneVydajeFondy2017].
+Od předchozí studie se přístup liší ve dvou rozměrech:
 
-1. omezujeme se pouze na státní rozpočet, tj. nezabýváme se rozpočty samospráv a státních fondů
-2. pokrýváme veškeré výdaje státního rozpočtu, tj. narozdíl od studie z roku 2017 nevylujučujeme z analýzy celkových výdajů oblasti, kde ESI fondy nehrají výraznou roli (např. mandatorní výdaje)
+1.  omezujeme se pouze na státní rozpočet, tj. nezabýváme se rozpočty samospráv a státních fondů
+1.  pokrýváme veškeré výdaje státního rozpočtu, tj. narozdíl od studie z roku 2017 nevylujučujeme z analýzy celkových výdajů oblasti, kde ESI fondy nehrají výraznou roli (např. mandatorní výdaje)
 
-Z toho důvodu bohužel nejsou údaje mezi studiemi srovnatelné, tj. nelze z nich sestavit souvislou časovou řadu období 2008-15 a 2015-20. Pro alespoň částečné srovnání ale v příloze uvádíme alternativní verzi výpočtů, která kopíruje množinu veřejných výdajů analyzovanou ve studii z roku 2017. Ani tím ale nedokážeme ale zajistit srovnatelnost celkových výsledků, protože data o podílu ESI fondů nejdou v období 2015-20 přímo dostupná pro výdaje samospráv a státních fondů.
+Z toho důvodu bohužel nejsou údaje mezi studiemi srovnatelné, tj.
+nelze z nich sestavit souvislou časovou řadu období 2008-15 a 2015-20.
+Pro alespoň částečné srovnání ale [v příloze](#studie2017) vizualizujeme alternativní verzi části výpočtů, která kopíruje množinu veřejných výdajů analyzovanou ve studii z roku 2017.
+Ani tím ale nedokážeme zajistit srovnatelnost celkových výsledků, protože data o podílu ESI fondů nejdou v období 2015-20 přímo dostupná pro výdaje samospráv a státních fondů.
 
 ## Metody a zdroje dat
 
 K analýze využíváme otevřená data z Monitoru Státní pokladny a analyzujeme je podle existujících třídění rozpočtové skladby, kde nejpodstatnější jsou třídění druhové (na nejvyšší úrovni dělí výdaje na běžné a kapitálové) a třídění odvětvové (tzv. paragrafy a jejich skupiny odpovídající oblastem veřejných politik.)
 
-Výdaje financované z ESI fondů identifikujeme ve zdrojovém třídění a započítáváme do nich všechny typy výdajů spojené s jednotlivými operačními programy. Nezahrnujeme naopak tzv. Norské a EEA fondy. Detaily jsou uvedeny v příloze.
+Výdaje financované z ESI fondů identifikujeme ve zdrojovém třídění a započítáváme do nich všechny typy výdajů spojené s jednotlivými operačními programy.
+Nezahrnujeme naopak tzv. Norské a EEA fondy.
+Detaily jsou uvedeny [v příloze](#data).
 
-# Celkové výdaje {.tabset}
+## Jak studii číst
 
-```{r}
-sr2020 <- sum(get_nm(cb_totals, 2020))
-eu2020 <- sum(get_nm(cb_totals, 2020, T))
-sr2015 <- sum(get_nm(cb_totals, 2015))
-eu2015 <- sum(get_nm(cb_totals, 2015, T))
+Studie postupuje od nejvyšší agregace k detailům.
+Sleduje tedy napřed [celkové výdaje](#celkove), pak dělení na běžné a kapitálové ([druhové členění](#bezkap)), a následně běžné a kapitálové výdaje v jednotlivých skupinách, oddílech a pododdílech (odvětvového členění). 
 
-```
+V části \@ref(tematicke) se pak zaměřujeme na několik oblastí výdajů, ve kterých ESI fondy hrají obzvláště podstatnou roli a s využitím jemnějších kategorií odvětvového členění identifikujeme přesnější oblasti veřejných výdajů, kterých se tato charakteristika týká.
 
-Výdaje státního rozpočtu v roce 2020 byly `r bn(sr2020)` mld. Kč, z toho `r bn(eu2020)` mld. Kč činily ESI fondy. Jak ukazuje graf \@ref(fig:plot-abs), u celkových výdajů jde o nárůst z roku 2015 (`r bn(sr2015)` mld. Kč), kdy ale následkem dobíhajícího programového období 2007-13 hrály ESI fondy větší roli (`r bn(eu2015)` mld. Kč).
-
-```{r plot-abs, fig.height=3, fig.cap = "Celkové výdaje"}
-plot_esif(cb_totals, breaks_y_limit = 2000, by_trida = FALSE,
-          title = "Výdaje státního rozpočtu: role ESI fondů",
-          subtitle = "mld. Kč", legend_labels = names(palette_studie)[c(5:6)])
-```
-
-
-
-```{r plot-perc, fig.height=3, fig.cap = "Podíl na celkových výdajích"}
-plot_esif(cb_totals_p, perc = TRUE, by_trida = FALSE,
-          title = "Podíl ESI fondů na výdajích státního rozpočtu")
-```
-
-# Běžné a kapitálové {.tabset}
-
-## Celý státní rozpočet {.tabset .tabset-pills}
-
-```{r plot-bezkap-abs}
-plot_esif(data = cb_trida, facet_var = trida, title = "Výdaje vlastní a z ESI fondů",
-            subtitle = "mld. Kč")
-```
+# Celkové výdaje {.tabset #celkove}
 
 ```{r}
+# sr2020 <- sum(get_nm(cb_totals, 2020))
+
+rl <- listize(cb_totals, source)
+```
+
+Výdaje státního rozpočtu v roce 2020 byly `r bn(rl$y2020$vlastni + rl$y2020$eu)` mld. Kč, z toho `r bn(rl$y2020$eu)` mld. Kč činily výdaje kryté ESI fondy.
+Jak ukazuje graf \@ref(fig:plot-abs), u celkových výdajů jde o nárůst z roku 2015 (`r bn(rl$y2015$vlastni + rl$y2015$eu)` mld. Kč), kdy ale následkem dobíhajícího programového období 2007-13 hrály ESI fondy větší roli (`r bn(rl$y2015$eu)` mld. Kč).
+
+```{r plot-abs, fig.height=3, fig.cap = "Role ESIF ve výdajích státního rozpočtu"}
+plot_abs <- plot_esif(cb_totals, breaks_y_limit = 2000, by_trida = FALSE,
+          title = "Absolutně (mld. Kč)",
+          legend_labels = names(palette_studie)[c(5:6)]) +
+  theme(legend.position = "top") +
+  theme(plot.title = element_text(face = "plain", size = 9))
+
+plot_perc <- plot_esif(cb_totals_p, perc = TRUE, by_trida = FALSE,
+          title = "Relativně") +
+  theme(plot.title = element_text(face = "plain", size = 9))
+
+plot_abs + plot_perc +
+  plot_annotation(title = "Role ESIF ve výdajích státního rozpočtu",
+                  theme = theme(plot.title = element_text(face = "bold", 
+                                                          size = 11)))
+```
+
+```{r}
+rlp <- listize(cb_totals_p)
+```
+
+Podíl ESI fondů na celkových výdajích SR se dlouhodobě drží mezi `r pc(rlp$y2016, .1)` (rok 2016) a `r pc(rlp$y2019, .1)` (rok 2019).
+V roce 2020 mírně klesl na `r pc(rlp$y2020, .1)`.
+Jak je ale patrné, pokles podílu ESI fondů je především následkem výrazného nárůstu výdajů financovaných z národních zdrojů.
+Výkyvem byl rok 2015, kdy vlivem dokončování předchozího období a souběhu se začátkem nového dosáhl tento podíl `r pc(rlp$y2015, .1)`.
+
+# Běžné a kapitálové {.tabset #bezkap}
+
+Pro porozumění role ESI fondů ve výdajích státního rozpočtu je užitečné tzv.
+druhové třídění rozpoětu, které ve své nejhrubší agregaci člení výdaje na běžné a kapitálové.
+
+```{r}
+rlt <- listize(cb_trida, source, trida)
+rlt2 <- listize(cb_trida, trida)
+rltp <- listize(cb_trida_p, trida)
+
+bk <- cb_trida |> 
+  count(vykaz_date, trida, wt = spending, name = "spending") |> 
+  listize(trida)
+```
+
+```{r}
+ggtitle <- "Národní a ESIF výdaje: běžné a kapitálové"
+```
+
+
+```{r plot-bezkap-abs, fig.cap=ggtitle, fig.height=3, fig.width=5}
+plot_esif(data = cb_trida, facet_var = trida, 
+          title = ggtitle,
+          subtitle = "mld. Kč") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2))
+```
+
+Jak ukazují grafy \@ref(fig:plot-bezkap-abs) a \@ref(fig:plot-bezkap-perc), ESI fondy tvoří větší poměr kapitálových (`r pc(rltp$y2015$kapitalove)` v roce 2020) než běžných (`r pc(rltp$y2020$bezne)` v roce 2020) výdajů, přičemž ale kapitálové výdaje tvoří výrazně menší část rozpočtových výdajů (`r bn(bk$y2020$kapitalove)` mld., `r pc(bk$y2020$kapitalove/(bk$y2020$bezne + bk$y2020$kapitalove))` rozpočtových výdajů v roce 2020).
+
+```{r}
+ggtitle <- "Podíl ESI fondů na běžných a kapitálových výdajích"
+```
+
+
+```{r plot-bezkap-perc, fig.height=3, fig.cap=ggtitle, fig.width=5}
 plot_esif(data = cb_trida_p, perc = TRUE, 
-            facet_var = trida, title = "Podíl ESI fondů na běžných a kapitálových výdajích")
+            facet_var = trida, 
+          title = ggtitle)
 ```
-
 
 # Odvětvové členění {.tabset .tabset-pills}
 
+Další pohled na rozpočtové výdaje užitečný pro porozumění roli ESI fondů poskytuje tzv. odvětvové třídění. Odvětvové členění zhruba kopíruje oblasti veřejných politik, jde ale napříč resorty (kapitolami).
+Odvětvové členění dělí výdaje do několika set paragrafů, které jsou seskupeny do skupin, oddílů a pododdílů. 
+V této logice ukazujeme roli ESI fondů v dělení na skupiny a pokračujeme přes oddíly k pododdílům.
+
 ## Skupiny
 
-```{r}
-plot_esif(data = cb_trida_skupina, perc = FALSE, 
-            facet_var = skupina, title = "Výdaje vlastní a z ESI fondů podle skupin",
-       subtitle = "členěno na běžné a kapitálové, mld. Kč")
+U skupin odvětvového členění pro přehlednost zobrazujeme zároveň rozpad na běžné a kapitálové výdaje. 
+Jak je patrné z grafu \@ref(fig:plot-trida-skupina), i na této vysoké úrovni agregace existuje variabilita jak v podílu kapitálových výdajů, tak v podílu ESI fondů na výdajích.
+*Sociální věci a politika zaměstnanosti* obsahují minimum kapitálových výdajů a i v dominujících běžných výdajích hrají ESI fondy jen malou roli. (Tato kategorie zahrnuje mj. starobní důchody.)
+Naopak ve skupině *Průmyslová a ostatní odvětví hospodářství* - kam patří především podpora podnikání - hrají kapitálové výdaje větší roli a jsou z výrazné části kryty ESI fondy.
+Ve skupině *Služby pro obyvatelstvo* je podíl kapitálových výdajů nižší, jsou ale silněji kryty ESI fondy.
+U obou těchto skupin je v časové řadě patrná dynamika programových období, s dočerpáváním v roce 2015 a pomalým náběhem období 2014-2020 po roce 2015.
+
+Ve skupině *Průmyslová a ostatní odvětví* i u běžných výdajů skupiny *Sociální politika...* lze pozorovat využití ESI fondů v období pandemie Covid-19 pro podporu podniků, resp. jednotlivců zasažených opatřeními souvisejícími s pandemií. V obou skupinách výdaje ESIF výrazně vzrostly v roce 2020. Narozdíl od předchozích období tento nárůst je doprovázen i nárůstem výdajů z národních zdrojů. 
+
+```{r plot-trida-skupina, fig.cap = "xx"}
+plot_esif(data = cb_trida_skupina, perc = FALSE, facet_var = skupina, 
+          title = "Výdaje vlastní a z ESI fondů podle skupin",
+          subtitle = "členěno na běžné a kapitálové, mld. Kč")
 ```
 
-```{r plot-skup-podil}
+Podrobnější pohled na roli ESI fondů poskytuje graf \@ref(fig:plot-skup-podil), který zobrazuje podíl ESI fondů na běžných a kapitálových výdajích v jednotlivých skupinách.
+Ve všech skupinách hrají ESI fondy větší roli v kapitálových výdajích než v běžných.
+
+```{r}
+ggtitle <- "Podíl ESI fondů na výdajích podle skupin"
+```
+
+```{r plot-skup-podil, fig.cap = ggtitle}
 plot_esif(data = cb_trida_skupina_p, perc = TRUE, keep_legend = TRUE,
-            facet_var = skupina, title = "Podíl ESI fondů na výdajích podle skupin",
-       subtitle = "členěno na běžné a kapitálové, mld. Kč") +
+          facet_var = skupina, label_width = 60,
+          title = ggtitle,
+          subtitle = "členěno na běžné a kapitálové, mld. Kč") +
   theme(legend.position = "bottom")
 ```
 
 ## Oddíly {.tabset .tabset-pills}
 
-```{r plot-oddil-abs, fig.height=6}
-plot_esif(data = cb_trida_oddil, perc = FALSE, 
-            facet_var = oddil,
-            title = "Výdaje vlastní a z ESI fondů podle oddílů",
-       subtitle = "členěno na běžné a kapitálové, mld. Kč. Soc. zabezpečení vynecháno pro čitelnost")
+V této části pracujeme s o stupeň jemnějším členěním, s oddíly odvětvového třídění. Protože se tato úroveň detailu ukazuje jako nejvhodnější pro přehledové znázornění role ESI fondů napříč oblastmi veřejných politik, nejdříve analyzujeme průměrné podíly ESI fondů v letech 2017-2020 (jelikož rok 2015 odráží dočerpávání období 2007-13 a v roce 2016 se ještě plně nerozběhly některé operační programy pro období 2014-20.)
+
+### Přehled
+
+```{r}
+cutoff_date <- "2016-12-31"
+
+oddil_share_kap <- cb_trida_oddil |> 
+  ungroup() |> 
+  filter(vykaz_date > cutoff_date) |> 
+  count(trida, oddil, wt = spending) |>
+  group_by(oddil) |> 
+  mutate(share_kap = n/sum(n)) |> 
+  filter(trida == "Kapitálové výdaje") |> 
+  select(-n)
+
+oddil_share_esif <- cb_trida_oddil |> 
+  ungroup() |> 
+  filter(vykaz_date > cutoff_date) |> 
+  count(source, oddil, wt = spending) |>
+  group_by(oddil) |> 
+  mutate(share_esif = n/sum(n)) |> 
+  filter(source == "EU") |> 
+  select(-n)
+
+oddil_size <- cb_trida_oddil |> 
+  ungroup() |> 
+  filter(vykaz_date > cutoff_date) |> 
+  count(oddil, wt = sum(spending, na.rm = TRUE)/n_distinct(vykaz_date))
+
+prehled <- oddil_size |> 
+  left_join(oddil_share_kap) |> 
+  left_join(oddil_share_esif) |> 
+  replace_na(list(share_esif = 0, share_kap = 0))
 ```
 
 ```{r}
-plot_esif(data = cb_trida_oddil |> filter(trida == "Kapitálové výdaje"), 
-            facet_var = oddil, legend_labels = names(palette_studie)[5:6])
+oddil_share_esif_bytrida <- cb_trida_oddil |> 
+  ungroup() |> 
+  filter(vykaz_date > cutoff_date) |> 
+  count(source, oddil, trida, wt = spending) |>
+  group_by(oddil, trida) |> 
+  mutate(share_esif_bytrida = n/sum(n)) |> 
+  filter(source == "EU") |> 
+  select(-n, -source)
+
+oddily_prehled <- oddil_share_esif |> 
+  ungroup() |> 
+  mutate(trida = "Celkem",
+         share_esif_bytrida = share_esif) |> 
+  bind_rows(oddil_share_esif_bytrida) |> 
+  left_join(oddil_size) |>
+  # spread(trida, share_esif_bytrida) |> 
+  mutate(oddil = paste0(oddil, " (", bn(n), ")") |> 
+           str_trunc(68) |> 
+           str_wrap(35) |> 
+           as.factor() |> 
+           fct_reorder(share_esif, .fun = sum, na.rm = TRUE),
+         trida = as.factor(trida) |> fct_relevel("Celkem"))
+```
+
+Jak ukazuje graf \@ref(fig:plot-oddily-prehled), ve třech oddílech tvořily ESI fondy průměrně více než 50 % výdajů: *Bydlení, komunální služby a územní rozvoj*, *Vodní hospodářství a ochrana životního prostředí*. Všechny tyto oblasti jsou dominantně kapitálové a právě v kapitálových výdajích je role ESIF výrazná. V zemědělství a podpoře průmyslu a podnikání pak tvoří ESIF 25 % a více výdajů, mezi kapitálovými výdaji v těchto oddílech vždy před 50 %. ESIF též financovaly přes třetinu kapitálových výdajů v dopravě a vzdělávání, téměř polovinu ve zdravotnictví, a přes polovinu v ostatním výzkumu a vývoji (tj. výzkum mimo VŠ). (100 % u kapitálových výdajů politiky zaměstnanosti se týká výdajů v řádu milionů korun). 
+
+V běžných výdajích je role ESIF obecně menší, ale výrazně patrná je role ESIF v oddílech *Bydlení, komunální služby a územní rozvoj* (v tom jediném překračuje 30 %), ochraně životního prostředí, zemědělství, ale i sociálních službách (všude přes 15 %).
+
+```{r}
+ggtitle <- "Podíl ESIF na výdajích podle oddílů"
+```
+
+```{r plot-oddily-prehled, fig.cap=ggtitle, fig.height=6}
+oddily_prehled |> 
+  filter(n > 5e8) |> 
+  ggplot(aes(y = oddil)) +
+  geom_col(aes(x = share_esif_bytrida, fill = trida)) +
+  scale_fill_manual(values = c("grey30", 
+                               palette_studie[["ESIF: Běžné výdaje"]],
+                               palette_studie[["ESIF: Kapitálové výdaje"]]),
+                    guide = "none") +
+  scale_colour_manual(values = c("grey30", 
+                               palette_studie[["ESIF: Běžné výdaje"]],
+                               palette_studie[["ESIF: Kapitálové výdaje"]]),
+                    guide = "none") +
+  facet_wrap(~trida) +
+  labs(title = ggtitle,
+       subtitle = "Průměr let 2017-2020\nV závorce objem všech výdajů v oddílu v mld. Kč") +
+  theme_studie("both", multiplot = TRUE, panel.spacing = unit(12, "pt")) +
+  ptrr::scale_x_percent_cz(limits = c(0,1.15), breaks = c(0, .25, .5, .75, 1)) +
+  geom_text(
+     lineheight = 0.9, size = 3,
+    aes(x = share_esif_bytrida, 
+        colour = trida,
+        label = ptrr::label_percent_cz(1)(share_esif_bytrida)), 
+    hjust = 0, nudge_x = .02)
+```
+```{r}
+ggtitle <- "Podíl ESIF a kapitálových výdajů v oddílech SR"
+```
+
+O něco komplexnější náhled na roli ESI fondů ukazuje graf \@ref(fig:plot-prehled-scatter), který oproti předchozímu grafu zobrazuje i finanční objem výdajových oddílů a podíl kapitálových výdajů na daném oddílu. V přehledovém grafu vpravo je patrných několik oddílu s vysokým podílem kapitálových výdajů a zároveň silnou rolí ESIF.
+
+```{r plot-prehled-scatter-zoom, fig.height=6, fig.cap = ggtitle, eval=FALSE}
+ggplot(prehled |> filter(n < 200e9), 
+       aes(share_esif, share_kap, size = n/1e9)) +
+  geom_point() +
+  ptrr::scale_x_percent_cz() +
+  ptrr::scale_y_percent_cz() +
+  # theme_studie(gridlines = "scatter", axis_titles = TRUE) +
+  # coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(title = ggtitle,
+       subtitle = "Průměr let 2017-2020. Sociální dávky a důchody vynechány pro přehlednost\nVlevo detail oddílů s menšími podíly ESIF, vpravo přehled",
+       x = "ESIF jako % na oddílu",
+       size = "výdaje (mld. Kč)",
+       y = "Kapitálové výdaje jako % oddílu") +
+  scale_size_continuous(breaks = c(1, 50, 100, 150), range = c(.5, 2)) +
+  ggrepel::geom_text_repel(aes(label = str_wrap(str_sub(oddil, 1, 50), 20)),
+                           size = 2.5, guide = "none", box.padding = .55,
+                           lineheight = .9,
+                           min.segment.length = 1, colour = "grey40") +
+  ggforce::facet_zoom(xlim = c(0, .25), ylim = c(0, .25), zoom.size = 1) +
+  theme(text = element_text(size = 10),
+        axis.ticks = element_blank(), panel.grid.minor = element_blank(),
+        legend.key = element_rect(fill = NA), 
+        plot.title = element_text(face = "bold"),
+        plot.title.position = "plot",
+        legend.position = "bottom",
+        plot.margin = unit(c(5, 0, 5, 0), "pt")) +
+  annotate("label", .12, .23, label = "Detail", label.size = 0) +
+  annotate("label", .37, .78, label = "Přehled", label.size = 0)
+```
+
+```{r plot-prehled-scatter, fig.cap = ggtitle, eval=TRUE, fig.width = 8.3/2.54}
+ggplot(prehled |> filter(n < 200e9), 
+       aes(share_esif, share_kap, size = n/1e9)) +
+  geom_point() +
+  ptrr::scale_x_percent_cz(limits = c(0, 1)) +
+  ptrr::scale_y_percent_cz(limits = c(0, 1)) +
+  theme_studie(gridlines = "scatter", axis_titles = TRUE) +
+  coord_equal(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(title = ggtitle,
+       subtitle = "Průměr let 2017-2020.\nSociální dávky a důchody vynechány pro přehlednost",
+       x = "ESIF jako % na oddílu",
+       size = "výdaje (mld. Kč)",
+       y = "Kapitálové výdaje jako % oddílu") +
+  scale_size_continuous(breaks = c(1, 50, 100, 150), range = c(.5, 2)) +
+  ggrepel::geom_text_repel(aes(label = str_wrap(str_sub(oddil, 1, 50), 20)),
+                           size = 2.5, box.padding = .25,
+                           lineheight = .9, max.overlaps = 15,
+                           min.segment.length = 1, colour = "grey40") +
+  theme_studie("scatter", legend.position = "bottom")
+```
+
+### Vývoj v čase
+
+Graf \@ref(fig:plot-oddil-abs) ukazuje celkový přehled, tj. vývoj složený výdajů v čase pro všechny oddíly, ale pro čitelnost v dalším textu pracujeme zvlášť se skupinami oddílů podle objemu a s běžnými a kapitálovými výdaji.
+
+```{r}
+ggtitle <- "Výdaje vlastní a z ESI fondů podle oddílů"
+```
+
+```{r plot-oddil-abs, fig.height=6, fig.cap=ggtitle}
+plot_esif(data = cb_trida_oddil |> 
+            filter(!oddil %in% oddil_do500mil),
+          perc = FALSE, label_width = 20,
+          facet_var = oddil,
+          title = ggtitle,
+          subtitle = "členěno na běžné a kapitálové, mld. Kč.\noddíly s výdaji do 500 mil. Kč vynechány") +
+  guides(fill = guide_legend(nrow = 2)) +
+  theme(legend.position = "bottom")
 ```
 
 ```{r}
+ggtitle <- "Kapitálové výdaje vlastní a z ESI fondů podle oddílů"
+```
+
+Jak jsme poznamenali výše, mezi oddíly s největším objemem **kapitálových výdajů** patří *Doprava* a *Bydlení, komunální služby a územní rozvoj*. V těchto i dalších větších oddílech hrají ESI fondy významnou roli. Z hlediska vývoje v čase stojí za pozornost oddíl *Bydlení...*, kde je nárůst celkového objemu tažený ESI fondy v podstatě návratem na stav v předchozím programovém období. Podobný je vývoj v oblasti vodního hospodářství, kde nárůst přichází dominantně z ESIF. Naopak v dopravě je nárůst kapitálových výdajů tažen především národními zdroji, čímž se podíl ESIF v čase snižuje. Ve vzdělávání a školských službách hrají ESI fondy od roku 2018 silnější roli, a to i oproti roku 2015, přičemž ale rostou i kapitálové výdaje z národních zdrojů. 
+
+
+
+```{r plot-oddil-kap, fig.cap = ggtitle}
+plot_esif(data = cb_trida_oddil |> 
+            filter(trida == "Kapitálové výdaje",
+                   !oddil %in% oddil_kapdo500mil), 
+          facet_var = oddil, label_width = 30, 
+          legend_labels = names(palette_studie)[5:6],
+          title = ggtitle, 
+          subtitle = "mld. Kč.\noddíly s výdaji do 500 mil. Kč vynechány") +
+  theme(legend.position = c(.8, .1))
+```
+
+U **běžných výdajů** analyzujeme zvlášť objemově větší a objemově menší oddíly.
+
+Graf \@ref(fig:plot-bezne-pod100) níže ukazuje výdaje v jednotlivých oddílech s objemem běžných výdajů do 100 mld. Kč. Za pozornost zde stojí oddíly *Politika zaměstnanosti* a *Průmysl...*, kde jsou v roce 2020 patrné výdaje na opatření spojené s pandemií Covid-19. V obou případech rostly národní i ESIF výdaje. Těmto oblastem se dále věnujeme v [tematických analýzách níže](#tematicke).
+
+```{r}
+ggtitle <- "Běžné výdaje vlastní a z ESI fondů podle oddílů"
+```
+
+```{r plot-bezne-pod100, fig.cap = ggtitle}
 oddily_pod_50mld <- cb_trida_oddil |> 
-              filter(trida == "Běžné výdaje", vykaz_date > "2020-01-01") |> 
+              filter(trida == "Běžné výdaje", 
+                     vykaz_date > "2020-01-01") |> 
   count(trida, wt = spending/1e9) |> 
   filter(n < 100) |> pull(oddil)
 
 plot_esif(data = cb_trida_oddil |> 
-              filter(trida == "Běžné výdaje",
-                     oddil %in% oddily_pod_50mld,
-                     ), 
-            facet_var = oddil, legend_labels = names(palette_studie)[5:6])
+            filter(trida == "Běžné výdaje",
+                   oddil %in% oddily_pod_50mld,
+                   !oddil %in% oddil_bezdo500mil,
+            ), 
+          facet_var = oddil, label_width = 25, 
+          title = ggtitle,
+          subtitle = "oddíly do 100 mld. Kč.\noddíly s výdaji do 500 mil. Kč vynechány",
+          legend_labels = names(palette_studie)[5:6]) +
+  theme(legend.position = c(.8, .1))
 ```
 
-```{r}
+Z grafu \@ref(fig:plot-bezne-nad100) je pak patrné, že v oddílech s objemem nad 100 mld. Kč běžných výdajů nehrají ESI fondy téměř žádnou roli - především proto, že se jedná o velké dávkové (např. důchody) nebo blokové transfery (např. financování regionálního školství). Výjimkou je v malé míře vzdělávání, kde podíl ESI fondů i na běžných výdajích v posledních letech mírně narostl, ale zůstává nízký.
+
+```{r plot-bezne-nad100, fig.cap = ggtitle, fig.height=3}
 oddily_nad_50mld <- cb_trida_oddil |> 
               filter(trida == "Běžné výdaje", vykaz_date > "2020-01-01") |> 
   count(trida, wt = spending/1e9) |> 
   filter(n >= 100) |> pull(oddil)
 
 plot_esif(data = cb_trida_oddil |> 
-              filter(trida == "Běžné výdaje",
-                     oddil %in% oddily_nad_50mld,
-                     ), 
-            facet_var = oddil, legend_labels = names(palette_studie)[5:6])
+            filter(trida == "Běžné výdaje",
+                   oddil %in% oddily_nad_50mld
+            ), 
+          facet_var = oddil, label_width = 40,
+          title = "Běžné výdaje vlastní a z ESI fondů podle oddílů",
+          subtitle = "oddíly nad 100 mld. Kč.",
+          legend_labels = names(palette_studie)[5:6], nrow = 1)
 ```
 
-### Podíl ESIF
+Graf \@ref(fig:plot-oddil-podil) pak ukazuje podíly ESI fondů na běžných a kapitálových výdajích. Výrazné trendy jsou patrné u oddílu *Doprava* a *Ostatní výzkum a vývoj* (který zahrnuje výzkum a vývoj mimo MŠ), u nichž podíl ESIF na kapitálových výdajích v posledních letech spíše klesá. U dopravy ale podíl ESIF zůstává na cca 30 % a u ostatního výzkumu a vývoje na cca 50 %. Naopak v oddíle *Bydlení, komunální služby a územní rozvoj* v od začátku období výrazně narostl podíl ESIF na kapitálových a slaběji i na běžných výdajích (přičemž kapitálové v oddílu převažují.) Za povšimnutí stojí i postupný pokles podílu ESI fondů na politice zaměstnanosti. Setrvale vysoký je podíl ESIF na kapitálových výdajích v ochraně životního prostředí, vodním hodpodářství, zemědělství a podpoře průmyslu, obchodu a služeb.
 
-```{r plot-oddil-podil, fig.height=6}
-plot_esif(cb_trida_oddil_p, facet_var = oddil, perc = TRUE,
-            keep_legend = TRUE,
-  title = "Podíl ESI fondů na výdajích podle oddílů",
-  subtitle = "členěno na běžné a kapitálové") +
+```{r}
+ggtitle <- "Podíl ESI fondů na výdajích podle rozpočtových oddílů"
+```
+
+```{r plot-oddil-podil, fig.height=6, fig.cap=ggtitle}
+plot_esif(cb_trida_oddil_p |> 
+            filter(!oddil %in% oddil_do500mil), 
+          facet_var = oddil, label_width = 30,
+          perc = TRUE,
+          keep_legend = TRUE,
+          title = ggtitle,
+          subtitle = "členěno na běžné a kapitálové\noddíly s výdaji do 500 mil. vynechány") +
   theme(legend.position = "bottom")
 ```
 
-## Tematické analýzy
+# Tematické analýzy {#tematicke}
 
-### Bydlení
+V této části se dále zaměřujeme na specifické oblasti veřejných výdajů (identifikované pomocí odvětvového členění rozpočtové skladby), ve kterých předchozí analýza ukázala vysoký podíl ESI fondů nebo jeho dynamický vývoj.
+
+## Bydlení, komunální služby a územní rozvoj
 
 ```{r}
-cb_trida_pododdil_p |> 
+ggtitle <- "Bydlení, komunální služby a územní rozvoj: výdaje podle ESIF a třídy"
+```
+
+Při pohledu na úroveň pododdílu (graf \@ref(fig:plot-bydleni-pododdil)) se ukazuje, že dostupná data - tj. vykazování výdajů podle pododdílů - zde nejsou dostatečně konzistentní na to, aby nám daný rozpad pomohl lépe porozumět vývoji výdajů v této oblasti. Je totiž pravděpodobné, že typově podobné výdaje jsou v různých letech vykazovány v různých pododdílech a nelze tedy usuzovat na skutečné změny.
+
+```{r plot-bydleni-pododdil, fig.cap=ggtitle}
+cb_trida_pododdil |> 
   filter(str_detect(oddil, "Bydle")) |> 
-  plot_esif(perc = TRUE, facet_var = pododdil, keep_legend = TRUE) +
+  plot_esif(perc = FALSE, facet_var = pododdil, label_width = 30, nrow = 1,
+            title = ggtitle,
+            subtitle = "mld. Kč") +
+  guides(fill = guide_legend(nrow = 2)) +
   theme(legend.position = "bottom")
 ```
+Podobně úroveň paragrafu (graf \@ref(fig:plot-bydleni-paragraf) naznačuje, že velká část výdajů byla v minulosti vykazována v nesprávném nebo přinejmenším obsahově překvapivém paragrafu "Mezinárodní spolupráce".
 
 ```{r}
-cb_trida_pododdil |> 
-  filter(str_detect(oddil, "Bydle")) |> 
-  plot_esif(perc = FALSE, facet_var = pododdil)
+ggtitle <- "Bydlení, komunální služby a územní rozvoj: výdaje podle ESIF a paragrafu"
 ```
 
-### ŽP
-
-```{r}
-cb_trida_pododdil_p |> 
-  filter(str_detect(oddil, "životn")) |> 
-  plot_esif(perc = TRUE, facet_var = pododdil)
-```
-```{r}
-cb_trida_pododdil |> 
-  filter(str_detect(oddil, "životn")) |> 
-  plot_esif(facet_var = pododdil)
-```
-
-```{r}
-cb_trida_pododdil |> 
-  filter(str_detect(oddil, "Vodn")) |> 
-  plot_esif(facet_var = pododdil)
-```
-
-```{r}
+```{r plot-bydleni-paragraf, fig.cap=ggtitle, fig.height=5}
 cb_sum_long |> 
-  filter(str_detect(pododdil, "Komunální služby")) |> 
-  plot_esif(facet_var = paragraf)
+  filter(str_detect(oddil, "Bydle")) |> 
+  plot_esif(perc = FALSE, facet_var = paragraf_nazev, 
+            label_width = 35,
+            title = ggtitle,
+            subtitle = "mld. Kč") +
+  guides(fill = guide_legend(nrow = 2)) +
+  theme(legend.position = c(0.8, .1))
+```
+
+## Životní prostředí a související
+
+V oblasti životního prostředí rozpad na jemnější úroveň (\@ref(fig:plot-zp-all))
+
+TO DO
+
+- kotlíky už částečně z národních
+
+```{r}
+ggtitle <- "Životní prostředí: složení výdajů (pododdíly)"
+```
+
+```{r plot-zp-all, fig.cap=ggtitle}
+cb_trida_pododdil |> 
+  filter(str_detect(oddil, "životn")) |> 
+  plot_esif(facet_var = pododdil, title = ggtitle, 
+            subtitle = "mld. Kč")
 ```
 
 ```{r}
@@ -231,109 +551,98 @@ cb_sum_long |>
 ```{r}
 cb_sum_long |> 
   filter(str_detect(pododdil, "Ochrana ovzduší")) |> 
-  plot_esif(facet_var = paragraf_nazev)
+  plot_esif(facet_var = paragraf_nazev, label_width = 35, nrow = 2) +
+  theme(legend.position = c(.9, .2))
+
 ```
 
 ```{r}
 cb_sum_long |> 
-  filter(str_detect(pododdil, "Ostatní odvětvové"),
+  filter(str_detect(pododdil, "krajin"),
          ) |> 
-  plot_esif(facet_var = paragraf_nazev)
+  plot_esif(facet_var = paragraf_nazev, label_width = 30, nrow = 2) +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2))
+```
+
+### Vodní hospodářství
+
+TO DO
+
+```{r}
+cb_trida_pododdil |> 
+  filter(str_detect(oddil, "Vodn")) |> 
+  plot_esif(facet_var = pododdil, label_width = 40)
+```
+
+## Doprava
+
+TO DO
+
+- hlavní bod: mají v tom binec, nic nejde říct
+
+```{r}
+cb_sum_long |> 
+  filter(str_detect(oddil, "Doprava")) |> 
+  plot_esif(facet_var = pododdil, ylabel_precision = 1, label_width = 40) +
+  theme(legend.position = c(.8, .1))
+```
+
+## Průmysl, stavebnictví, obchod a služby
+
+Tento oddíl byl dalším, kde byl jednak patrný setrvale vysoký podil ESI fondů, jednak se projevil i vliv pandemie.
+
+TO DO
+
+- covid
+- je v tom taky binec
+
+```{r}
+cb_sum_long |> 
+  filter(str_detect(oddil, "Průmysl, stavebnictví")) |> 
+  plot_esif(facet_var = pododdil, ylabel_precision = 1)
 ```
 
 ```{r}
 cb_sum_long |> 
-  filter(str_detect(pododdil, "Ostatní odvětvové"),
-         ) |> 
-  plot_esif(facet_var = paragraf_nazev)
+  filter(str_detect(oddil, "Průmysl, stavebnictví")) |> 
+  plot_esif(facet_var = paragraf_nazev, ylabel_precision = 1)
 ```
 
-## Rizikové pododdíly
-
-### Běžné výdaje {.tabset .tabset-pills}
-
-```{r sum-pododd-riziko}
-cb_trida_pododdil_perc_avg <- cb_sum_long %>% 
-  group_by(trida, skupina, oddil, pododdil, source) %>% 
-  summarise(spending = sum(spending), .groups = "drop") %>% 
-  group_by(trida, pododdil) %>% 
-  mutate(perc = spending/sum(spending)) %>% 
-  filter(source == "EU") %>% 
-  mutate(trida = str_remove(trida, " výdaje"))
-
-cb_sum_pododdil_perc_slope <- cb_trida_pododdil_p %>% 
-  filter(vykaz_date > "2016-01-01") %>% 
-  group_by(trida, skupina, oddil, pododdil) %>% 
-  mutate(allna = all(is.na(perc))) %>% 
-  filter(!allna) %>% 
-  nest() %>% 
-  mutate(model = map(data, ~lm(perc ~ vykaz_date, data = .x) %>% broom::tidy())) %>% 
-  unnest(model) %>% 
-  filter(term == "vykaz_date") %>% 
-  select(trida, pododdil, slope = estimate) %>% 
-  left_join(cb_trida_pododdil_perc_avg)
-
-pododd_ranks_bezne <- cb_sum_pododdil_perc_slope %>% 
-  filter(trida == "Běžné výdaje") %>% 
-  ungroup() %>% 
-  mutate(rank_perc = 1/rank(perc),
-         rank_slope = 1/rank(slope),
-         rank_sum = rank_perc + rank_slope) %>% 
-  select(skupina, oddil, pododdil, trida, starts_with("rank")) %>% 
-  slice_min(rank_perc, n = 12) 
-
+```{r}
+cb_sum_long |> 
+  filter(str_detect(pododdil, "Ostatní odvětvové")) |> 
+  plot_esif(facet_var = paragraf_nazev, nrow = 1, label_width = 60) +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2))
 ```
 
-```{r pododd-riziko}
-pododd_riziko <- cb_trida_pododdil %>% 
-  filter(vykaz_date > "2016-01-01") %>% 
-  left_join(pododd_ranks_bezne) %>% 
-  drop_na(rank_sum) %>% 
-  mutate(pododdil = as.factor(pododdil) %>% 
-           fct_reorder(rank_slope)) %>% 
-  group_by(oddil) %>% 
-  mutate(spend_oddil = sum(spending)) %>% 
-  ungroup() %>% 
-  mutate(pododdil = fct_reorder(pododdil, spend_oddil, .desc = TRUE, .fun = mean) %>% 
-           fct_relabel(~str_sub(.x, 1, 40)))
+## Politika zaměstnanosti
+
+TO DO
+
+- covid
+
+```{r}
+cb_sum_long |> 
+  filter(str_detect(oddil, "Politika zaměstnanosti")) |> 
+  plot_esif(facet_var = pododdil, ylabel_precision = 1, nrow = 1) +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2))
 ```
-
-
-```{r make-plot-pododd-riziko}
-riz_odd_gg <- ggplot(pododd_riziko, aes(vykaz_date, spending/1e9, alpha = source)) +
-  scale_y_continuous(expand = ptrr::flush_axis, 
-                     labels = ptrr::label_percent_cz()) +
-  scale_x_date(labels = yr_lbls, breaks = yr_brks) +
-  scale_alpha_manual(values = c(1, .5), name = "Zdroj") +
-  scale_fill_manual(values = c(clrs[["b"]], clrs[["k"]]), name = NULL) +
-  theme_studie(multiplot = T) +
-  facet_wrap(~pododdil, nrow = 4, labeller = label_wrap_gen())
+```{r}
+cb_sum_long |> 
+  filter(str_detect(pododdil, "Aktivní politika zaměstnanosti")) |>
+  plot_esif(facet_var = paragraf_nazev, ylabel_precision = 1, nrow = 2) +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 2))
 ```
-
-#### Absolutně
-
-```{r plot-pododd-riziko-abs, fig.height=7}
-riz_odd_gg +
-  geom_col(position = "stack", fill = clrs[["b"]]) +
-  labs(title = "Vybrané rizikové pododdíly výdajů státního rozpočtu",
-       subtitle = "běžné výdaje, mld. Kč\nřazeno podle objemu rozpočtového oddílu") +
-  scale_y_continuous(expand = ptrr::flush_axis, 
-                     labels = ptrr::label_number_cz(1))
-```
-
-#### Podíly
-
-```{r plot-pododd-riziko-podil, fig.height=7}
-riz_odd_gg +
-  geom_col(position = "fill", fill = clrs[["b"]]) +
-  labs(title = "Vybrané rizikové pododdíly výdajů státního rozpočtu",
-       subtitle = "běžné výdaje, podíly\nřazeno podle objemu rozpočtového oddílu")
-  
-```
-
-
 
 ## Příklad detailní analýzy
+
+TO DO
+
+- v analýze nepoužíváme druhové třídění, ale jde to kombinovat
 
 ```{r plot-detail}
 pdod <- "Správa v sociálním zabezpečení a politice zaměstnanosti"
@@ -345,19 +654,16 @@ cb_esif_marked %>%
          # pododdil == "Správa ve vzdělávání"
          # pododdil == "Správa v ochraně životního prostředí"
   ) %>% 
-  count(vykaz_date, esif, wt = budget_spending/1e9) %>% 
-  ggplot(aes(vykaz_date, n, alpha = as.factor(esif) %>% fct_rev())) +
-  scale_alpha_manual(values = c(1, .5), name = "Zdroj",
-                     labels = c("EU", "vlastní")) +
-  geom_col(fill = clrs[["b"]]) + 
-  theme_studie() +
+  count(vykaz_date, esif, wt = budget_spending/1e9, name = "spending") %>% 
+  mutate(source = if_else(esif, "EU", "vlastní"), trida = "Běžné výdaje") |> 
+  plot_esif(by_trida = FALSE) +
   labs(title = "Podíl EU fondů na specifické výseči výdajů",
        subtitle = str_glue("Podseskupení: {pdsk}\nPododdíl: {pdod}"))
 ```
 
 # Přílohy
 
-## Příloha 1: Výpočty pro podmnožinu výdajů podle studie z roku 2017 {-}
+## Příloha 1: Výpočty pro podmnožinu výdajů podle studie z roku 2017 {#studie2017 .unnumbered}
 
 ### Celkové výdaje
 
@@ -417,6 +723,11 @@ plot_esif(data = cb_trida_hl_p, perc = TRUE,
 
 ## Příloha 2: Technické aspekty ve stručnosti {#data}
 
+TO DO: 
+
+- vyčistit
+- doplnit odkazy na web, github atd.
+
 ### Zdroje dat
 
 Využíváme data ze Státní poklady, konkrétně otevřené datové sady o plnění rozpočtů tzv. ústředně řízených organizacích, které dohromady odpovídají hranicím státního rozpočtu.
@@ -427,12 +738,12 @@ Využíváme data ze Státní poklady, konkrétně otevřené datové sady o pln
 
 Státní pokladna ve veřejně dostupných datech sleduje čtyři typy organizací
 
-- ústředně řízené:
-  - organizační složky státu
-  - příspěvkové organizace
-  - státní fondy
-- místně řízené, 
-  - tj. obce, kraje a jejich příspěvkové organizace a sdružení, vše společně
+-   ústředně řízené:
+    -   organizační složky státu
+    -   příspěvkové organizace
+    -   státní fondy
+-   místně řízené,
+    -   tj. obce, kraje a jejich příspěvkové organizace a sdružení, vše společně
 
 Kromě příjmů a výdajů pak stát eviduje ještě účelové transfery (dotace) od státu k obcím.
 
