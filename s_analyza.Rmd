@@ -751,9 +751,9 @@ Kromě příjmů a výdajů pak stát eviduje ještě účelové transfery (dota
 
 Peníze do veřejného sektoru tečou třemi cestami:
 
-- do státního rozpočtu
-- do obecních a krajských rozpočtů
-- do státních fondů
+-   do státního rozpočtu
+-   do obecních a krajských rozpočtů
+-   do státních fondů
 
 Následně tečou dál formou transferů, tj. účelových a neúčelových přesunů, dotací atd., např. od státu nebo státním fondům obcím nebo státním příspěvkovým organizacím.
 
@@ -761,9 +761,9 @@ Peníze jednou přitečené do státního rozpočtu jsou tam vidět jako příje
 
 U ESI fondů platí, že peníze přitečou vždy do státního rozpočtu (tzv. Národní fond) a následně je stát buď 
 
-- utratí (sám je příjemce) - pak vidíme na co přesně, tj. např. platy, nákupy + na jaké odvětví (paragraf)
-- pošle dál do veřejného sektoru, např. obci nebo vlastní příspěvkovce - pak je vidíme ve výdajích SR jako transfer a obec/státní či obecní příspěvkovka jej eviduje v detailu výdajů svého rozpočtu (k tomu ale viz níže)
-- pošle do soukromého sektoru jako transfer (dotaci) - pak je vidíme ve výdajích SR jako transfer v daném odvětví (paragrafu).
+-   utratí (sám je příjemce) - pak vidíme na co přesně, tj. např. platy, nákupy + na jaké odvětví (paragraf)
+-   pošle dál do veřejného sektoru, např. obci nebo vlastní příspěvkovce - pak je vidíme ve výdajích SR jako transfer a obec/státní či obecní příspěvkovka jej eviduje v detailu výdajů svého rozpočtu (k tomu ale viz níže)
+-   pošle do soukromého sektoru jako transfer (dotaci) - pak je vidíme ve výdajích SR jako transfer v daném odvětví (paragrafu).
 
 Technické řešení tohoto problému - kdy výdaje jsou evidovány při předání mezi částmi veřejného sektoru i při konečném vydání - řeší konsolidace, pro kterou data státní pokladny také poskytují podklad.
 
@@ -771,10 +771,10 @@ Technické řešení tohoto problému - kdy výdaje jsou evidovány při předá
 
 Data státní pokladny fungují tak, že na každou utracenou korunu nalepí několik nálepek podle různých členění a výsledné datové sady tak poskytují velmi jemný rozpad výdají podle několika členění naráz. Každé členění má několik úrovní detailu, od cca 10 kategorií po několik set.
 
-- odvětvové členění, tzv. paragrafy, tj. na jakou oblast (viděno sektorově)
-- zodpovědnostní členění: kapitoly, tj. z rozpočtu kterého ministerstva, popř. konkrétní veřejné organizace, výdaje šly
-- druhové členění: v nejvyšší hladině členění na běžné a kapitálové výdaje, dále na platy, transfery, nákupy atd.
-- zdrojové třídění: kde se peníze vzaly? V základní úrovni ČR x mimo, dále až na konkrétní programy vč. kofinancování
+-   odvětvové členění, tzv. paragrafy, tj. na jakou oblast (viděno sektorově)
+-   zodpovědnostní členění: kapitoly, tj. z rozpočtu kterého ministerstva, popř. konkrétní veřejné organizace, výdaje šly
+-   druhové členění: v nejvyšší hladině členění na běžné a kapitálové výdaje, dále na platy, transfery, nákupy atd.
+-   zdrojové třídění: kde se peníze vzaly? V základní úrovni ČR x mimo, dále až na konkrétní programy vč. kofinancování
 
 Této vícerozpěrnosti dat využíváme jednak pro identifikaci peněz z ESIF (zdrojové třídění), jednak pro detailnější analýzy (např. kapitálové výdaje na transfery soukromému sektoru v oblasi energetiky).
 
@@ -786,24 +786,24 @@ Ze státní pokladny lze dovodit operační program, ztrácí se ale vazba na pr
 
 ### Dostupnost a omezení dat
 
-| typ  | roky   | identifikace ESIF  |
-|---|---|---|
-| státní rozpočet  |  2015-2021 | Ano
-| státní příspěvkové organizace  | 2010-2020  | ? |
-| státní fondy  | 2015-2021  | Ne |
-| samosprávy a jimi zřizované organizace | 2010-2021 | Částečně |
+| typ                                    | roky      | identifikace ESIF |
+|----------------------------------------|-----------|-------------------|
+| státní rozpočet                        | 2015-2021 | Ano               |
+| státní příspěvkové organizace          | 2010-2020 | ?                 |
+| státní fondy                           | 2015-2021 | Ne                |
+| samosprávy a jimi zřizované organizace | 2010-2021 | Částečně          |
 
 #### Poznámky ke kvalitě dat
 
-- odvětvové třídění investic do pododdílů v oddílu Doprava je po roce 2015 velmi vachrlaté a pododdíly v podstatě nejdou použít - většina výdajů na železnice a silnice je v pododdíle Ostatní záležitosti... a všechny tyto oddíly objemově velmi skáčou mezi lety.
+-   odvětvové třídění investic do pododdílů v oddílu Doprava je po roce 2015 velmi vachrlaté a pododdíly v podstatě nejdou použít - většina výdajů na železnice a silnice je v pododdíle Ostatní záležitosti... a všechny tyto oddíly objemově velmi skáčou mezi lety.
 
 ### Srovnatelnost se studií z roku 2017
 
 Hlavní rozdíly jsou tři:
 
-1. studie z roku 2017 zahrnuje státní fondy
-2. studie z roku 2017 zahrnuje samosprávy
-3. studie z roku 2017 pracuje s vybraným okruhem výdajů - vyloučeny jsou např. ty části druhového nebo odvětvového třídění, kde ESI fondy nehrají roli (např. sociální dávky), popř. které nebyly centrem zájmu studie (zemědělství)
+1.  studie z roku 2017 zahrnuje státní fondy
+2.  studie z roku 2017 zahrnuje samosprávy
+3.  studie z roku 2017 pracuje s vybraným okruhem výdajů - vyloučeny jsou např. ty části druhového nebo odvětvového třídění, kde ESI fondy nehrají roli (např. sociální dávky), popř. které nebyly centrem zájmu studie (zemědělství)
 
 Ad 1: u SF nejsou z veřejných zdrojů data o zdrojích výdajů, pro rok 2017 vznikly velkým množstvím ruční kompilace interně na MF
 Ad 2: pro obce data o zdroji výdajů zřejmě nejsou přímo dostupná od roku 2015
