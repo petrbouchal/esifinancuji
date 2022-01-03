@@ -3,7 +3,7 @@ output_dir: docs
 base_url: https://esifinancuji.petrbouchal.xyz
 lang: cs
 include: ["demo.R"]
-exclude: ["LICENSE.md", "*.csv", "*.rds", "renv", "renv.lock", "data-input", "data-output", "data-processed", "sp_data", "config.yml", "R", "data-export", "scripts", "refs"]
+exclude: ["LICENSE.md", "*.csv", "*.rds", "renv", "renv.lock", "data-input", "data-output", "data-processed", "sp_data", "config.yml", "R", "data-export", "scripts", "refs", "rmd-in"]
 navbar:
   title: "ESIF data"
   left:
