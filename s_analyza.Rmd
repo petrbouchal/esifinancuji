@@ -155,8 +155,7 @@ Výkyvem byl rok 2015, kdy vlivem dokončování předchozího období a souběh
 
 # Běžné a kapitálové {.tabset #bezkap}
 
-Pro porozumění role ESI fondů ve výdajích státního rozpočtu je užitečné tzv.
-druhové třídění rozpoětu, které ve své nejhrubší agregaci člení výdaje na běžné a kapitálové.
+Pro porozumění role ESI fondů ve výdajích státního rozpočtu je užitečné tzv. druhové třídění rozpoětu, které ve své nejhrubší agregaci člení výdaje na běžné a kapitálové.
 
 ```{r}
 rlt <- listize(cb_trida, source, trida)
@@ -196,7 +195,8 @@ plot_esif(data = cb_trida_p, perc = TRUE,
 
 # Odvětvové členění {.tabset .tabset-pills}
 
-Další pohled na rozpočtové výdaje užitečný pro porozumění roli ESI fondů poskytuje tzv. odvětvové třídění. Odvětvové členění zhruba kopíruje oblasti veřejných politik, jde ale napříč resorty (kapitolami).
+Další pohled na rozpočtové výdaje užitečný pro porozumění roli ESI fondů poskytuje tzv. odvětvové třídění. 
+Odvětvové členění zhruba kopíruje oblasti veřejných politik, jde ale napříč resorty (kapitolami).
 Odvětvové členění dělí výdaje do několika set paragrafů, které jsou seskupeny do skupin, oddílů a pododdílů. 
 V této logice ukazujeme roli ESI fondů v dělení na skupiny a pokračujeme přes oddíly k pododdílům.
 
@@ -209,7 +209,9 @@ Naopak ve skupině *Průmyslová a ostatní odvětví hospodářství* - kam pat
 Ve skupině *Služby pro obyvatelstvo* je podíl kapitálových výdajů nižší, jsou ale silněji kryty ESI fondy.
 U obou těchto skupin je v časové řadě patrná dynamika programových období, s dočerpáváním v roce 2015 a pomalým náběhem období 2014-2020 po roce 2015.
 
-Ve skupině *Průmyslová a ostatní odvětví* i u běžných výdajů skupiny *Sociální politika...* lze pozorovat využití ESI fondů v období pandemie Covid-19 pro podporu podniků, resp. jednotlivců zasažených opatřeními souvisejícími s pandemií. V obou skupinách výdaje ESIF výrazně vzrostly v roce 2020. Narozdíl od předchozích období tento nárůst je doprovázen i nárůstem výdajů z národních zdrojů. 
+Ve skupině *Průmyslová a ostatní odvětví* i u běžných výdajů skupiny *Sociální politika...* lze pozorovat využití ESI fondů v období pandemie Covid-19 pro podporu podniků, resp. jednotlivců zasažených opatřeními souvisejícími s pandemií. 
+V obou skupinách výdaje ESIF výrazně vzrostly v roce 2020. 
+Narozdíl od předchozích období tento nárůst je doprovázen i nárůstem výdajů z národních zdrojů. 
 
 ```{r plot-trida-skupina, fig.cap = "xx"}
 plot_esif(data = cb_trida_skupina, perc = FALSE, facet_var = skupina, 
@@ -755,11 +757,17 @@ Peníze do veřejného sektoru tečou třemi cestami:
 -   do obecních a krajských rozpočtů
 -   do státních fondů
 
-Následně tečou dál formou transferů, tj. účelových a neúčelových přesunů, dotací atd., např. od státu nebo státním fondům obcím nebo státním příspěvkovým organizacím.
+Následně tečou dál formou transferů, tj.
+účelových a neúčelových přesunů, dotací atd., např.
+od státu nebo státním fondům obcím nebo státním příspěvkovým organizacím.
 
-Peníze jednou přitečené do státního rozpočtu jsou tam vidět jako příjem a následně jako výdaj. Pokud peníze utrácí stát sám na svoje vlastní aktivity, výdaje vidíme rozčlěnený do detailu podle paragrafů a položek. Pokud stát poslal peníze dál, např. obcím, vidíme ho jako transfer a další detail vidíme až v datech od toho, kdo je na konci utratil, tj. např. obec. Proto např. ve státním rozpočtu nejde dobře sledovat výdaje na platy ve školství, protože ty jsou ve státním rozpočtu evidovány jako transfer obcím a nejsou v detailu sledovány. 
+Peníze jednou přitečené do státního rozpočtu jsou tam vidět jako příjem a následně jako výdaj.
+Pokud peníze utrácí stát sám na svoje vlastní aktivity, výdaje vidíme rozčlěnený do detailu podle paragrafů a položek.
+Pokud stát poslal peníze dál, např.
+obcím, vidíme ho jako transfer a další detail vidíme až v datech od toho, kdo je na konci utratil, tj. např. obec.
+Proto např. ve státním rozpočtu nejde dobře sledovat výdaje na platy ve školství, protože ty jsou ve státním rozpočtu evidovány jako transfer obcím a nejsou v detailu sledovány.
 
-U ESI fondů platí, že peníze přitečou vždy do státního rozpočtu (tzv. Národní fond) a následně je stát buď 
+U ESI fondů platí, že peníze přitečou vždy do státního rozpočtu (tzv. Národní fond) a následně je stát buď
 
 -   utratí (sám je příjemce) - pak vidíme na co přesně, tj. např. platy, nákupy + na jaké odvětví (paragraf)
 -   pošle dál do veřejného sektoru, např. obci nebo vlastní příspěvkovce - pak je vidíme ve výdajích SR jako transfer a obec/státní či obecní příspěvkovka jej eviduje v detailu výdajů svého rozpočtu (k tomu ale viz níže)
@@ -769,7 +777,8 @@ Technické řešení tohoto problému - kdy výdaje jsou evidovány při předá
 
 #### Členění: jaký detail můžeme znát
 
-Data státní pokladny fungují tak, že na každou utracenou korunu nalepí několik nálepek podle různých členění a výsledné datové sady tak poskytují velmi jemný rozpad výdají podle několika členění naráz. Každé členění má několik úrovní detailu, od cca 10 kategorií po několik set.
+Data státní pokladny fungují tak, že na každou utracenou korunu nalepí několik nálepek podle různých členění a výsledné datové sady tak poskytují velmi jemný rozpad výdají podle několika členění naráz.
+Každé členění má několik úrovní detailu, od cca 10 kategorií po několik set.
 
 -   odvětvové členění, tzv. paragrafy, tj. na jakou oblast (viděno sektorově)
 -   zodpovědnostní členění: kapitoly, tj. z rozpočtu kterého ministerstva, popř. konkrétní veřejné organizace, výdaje šly
@@ -805,8 +814,7 @@ Hlavní rozdíly jsou tři:
 2.  studie z roku 2017 zahrnuje samosprávy
 3.  studie z roku 2017 pracuje s vybraným okruhem výdajů - vyloučeny jsou např. ty části druhového nebo odvětvového třídění, kde ESI fondy nehrají roli (např. sociální dávky), popř. které nebyly centrem zájmu studie (zemědělství)
 
-Ad 1: u SF nejsou z veřejných zdrojů data o zdrojích výdajů, pro rok 2017 vznikly velkým množstvím ruční kompilace interně na MF
-Ad 2: pro obce data o zdroji výdajů zřejmě nejsou přímo dostupná od roku 2015
+Ad 1: u SF nejsou z veřejných zdrojů data o zdrojích výdajů, pro rok 2017 vznikly velkým množstvím ruční kompilace interně na MF Ad 2: pro obce data o zdroji výdajů zřejmě nejsou přímo dostupná od roku 2015.
 
 Následky:
 
