@@ -31,8 +31,8 @@ label_lesslong <- function(string) {
 make_labeller <- function(length, nrow = 2) {
   function(string) {
     string |>
-      str_trunc(width = (length - 4) * nrow, ellipsis = "…") |>
-      str_wrap(length)
+      str_trunc(width = (length) * nrow, ellipsis = "…") |>
+      str_wrap(length + 2)
   }
 }
 
@@ -81,7 +81,7 @@ plot_esif <- function(data, perc = FALSE, by_trida = TRUE,
       geom_point(size = 2.5, colour = "white") +
       geom_point(size = 1.6, aes(colour = var)) +
       scale_y_continuous(expand = ptrr::flush_axis,
-                         breaks = scales::breaks_pretty(n = 6),
+                         breaks = scales::breaks_pretty(n = 4),
                          limits = c(0, breaks_y_limit),
                          labels = ptrr::label_percent_cz(ylabel_precision)) +
       guides(colour = if(keep_legend) guide_legend(title = NULL) else "none") +
