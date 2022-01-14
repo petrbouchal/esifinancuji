@@ -66,6 +66,7 @@ default:
   export_cdbk: "codebook.yaml"
 
   repo_remote: "https://github.com/petrbouchal/esifinancuji"
+  docs_url: "https://esifinancuji.petrbouchal.xyz"
 
   # data from 2017 study
   first_report_xlsx: "data-input/adic2017/vydaje_dataset.xlsx"
