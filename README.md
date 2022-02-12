@@ -18,10 +18,15 @@ společné evropské politiky podpory a pomoci, ESI a obdobných fondů na
 
 **[Draft studie o roli ESIF ve veřejných financích](s_pokladna.html)**
 
-**Konečná verze studie prošla editací ve wordu a bude dostupná na webu
+**Konečná verze studie prošla editací ve wordu a je dostupná na webu
 [Úřadu
-vlády](https://www.vlada.cz/cz/evropske-zalezitosti/analyzy-eu/analyzy-uvod-125732/)**,
-zdrojový kód textově téměř konečné verze je v souboru
+vlády](https://www.vlada.cz/cz/evropske-zalezitosti/analyzy-eu/analyzy-uvod-125732/)**:
+
+-   [Veřejné výdaje a ESI fondy v letech 2015-2020: hlavní poznatky
+    (prosinec
+    2021](https://www.vlada.cz/cz/evropske-zalezitosti/analyzy-eu/analyzy-uvod-125732/)
+
+Zdrojový kód textově téměř konečné verze je v souboru
 \[s_analyza.docs/s_analyza.html), výstup v
 [s_analyza.docx](s_analyza.docx).
 

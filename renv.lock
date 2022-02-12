@@ -32,10 +32,8 @@
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.2-18",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "08588806cba69f04797dab50627428ed"
+      "Version": "1.4-0",
+      "Source": "Repository"
     },
     "R6": {
       "Package": "R6",
@@ -74,10 +72,8 @@
     },
     "arrow": {
       "Package": "arrow",
-      "Version": "5.0.0.20211012",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "a55dd97581619176059e7f95c5823a12"
+      "Version": "7.0.0",
+      "Source": "Repository"
     },
     "askpass": {
       "Package": "askpass",
@@ -1138,10 +1134,8 @@
     },
     "systemfonts": {
       "Package": "systemfonts",
-      "Version": "1.0.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "6e899d7c097698d50ec87b1d8e65f246"
+      "Version": "1.0.4",
+      "Source": "Repository"
     },
     "tarchetypes": {
       "Package": "tarchetypes",
@@ -1171,10 +1165,8 @@
     },
     "textshaping": {
       "Package": "textshaping",
-      "Version": "0.3.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "08517f55a30f309465c722ebd83f7e10"
+      "Version": "0.3.6",
+      "Source": "Repository"
     },
     "tibble": {
       "Package": "tibble",
