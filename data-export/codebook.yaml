@@ -12,7 +12,7 @@ meta_snippets:
 table:
   name: cb_semisum_long
   _columns: 17
-  _rows: 56504.0
+  _rows: 66273.0
   _type: tbl_df
   Info: Tabulka se součty výdajů podle času, zdroje (ESIF nebo ne) a druhového i odvětvového
     třídění<br />Jde o konsolidované výdaje, tj. součet odpovídá celkovým výdajům

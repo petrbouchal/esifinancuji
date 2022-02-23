@@ -40,8 +40,12 @@ Relevantní předchozí publikace v této oblasti:
 
 -   [MMR (2017) o roli ESI fondů ve veřejných
     výdajích](https://dotaceeu.cz/cs/evropske-fondy-v-cr/narodni-organ-pro-koordinaci/evaluace/knihovna-evaluaci/verejne-vydaje-a-fondy-eu-2007%e2%80%932015)
-    (
-    [PDF](https://dotaceeu.cz/Dotace/media/SF/NOK/Evaluace/Evalua%c4%8dn%c3%ad%20knihovna/2017/Adicionalita/Verejne-vydaje-a-fondy-EU-final-public_1.pdf))
+
+## Časový rozsah
+
+Publikovaná studie pracuje s daty do roku 2020, kód v tomto repozitáři a
+exportovaná data ale zahrnují i data za 2021, publikovaná v únoru 2022
+(update 2022-02-23).
 
 ## Dokumentace souborů
 

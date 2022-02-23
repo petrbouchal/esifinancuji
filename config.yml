@@ -1,8 +1,8 @@
 default:
 
   # settings for MISRIS (central budget starting from 2015)
-  sp_years_central_new: !expr 2015:2020 # which years to download
   sp_months_central_new: 12 # which month's data to download
+  sp_years_central_new: !expr 2015:2021 # which years to download
   sp_central_arrowdir_new: "data-processed/sp-central-new-arr"
 
   sp_nastroj_ids_1420_ops: ["102", "103", "104", "105", "106", "107", "108", "109"]

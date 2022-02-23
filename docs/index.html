@@ -283,14 +283,33 @@ $(document).ready(function () {
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 <!-- badges: end -->
-<p>Tento repozitář obsahuje kód na zpracování dat o výdajích financovaných z ESI fondů v ČR primárně v letech 2014-2020. Cílem je:</p>
+<p>Tento repozitář obsahuje kód na zpracování dat o výdajích
+financovaných z ESI fondů v ČR primárně v letech 2014-2020. Cílem
+je:</p>
 <ul>
-<li>připravit dataset pro vyhodnocení role ESI fondů ve veřejných výdajích</li>
+<li>připravit dataset pro vyhodnocení role ESI fondů ve veřejných
+výdajích</li>
 <li>analýza role ESI fondů ve veřejných výdajích</li>
 </ul>
-<p><strong>Vytvořeno pro Úřad vlády ČR jako součást projektu <em>Systémová podpora společné evropské politiky podpory a pomoci, ESI a obdobných fondů na Úřadu vlády ČR</em> (CZ.08.1.125/0.0/0.0/15_001/0000176)</strong></p>
-<p><strong><a href="s_pokladna.html">Draft studie o roli ESIF ve veřejných financích</a></strong></p>
-<p><strong>Konečná verze studie prošla editací ve wordu a bude dostupná na webu <a href="https://www.vlada.cz/cz/evropske-zalezitosti/analyzy-eu/analyzy-uvod-125732/">Úřadu vlády</a></strong>, zdrojový kód textově téměř konečné verze je v souboru [s_analyza.docs/s_analyza.html), výstup v <a href="s_analyza.docx">s_analyza.docx</a>.</p>
+<p><strong>Vytvořeno pro Úřad vlády ČR jako součást projektu
+<em>Systémová podpora společné evropské politiky podpory a pomoci, ESI a
+obdobných fondů na Úřadu vlády ČR</em>
+(CZ.08.1.125/0.0/0.0/15_001/0000176)</strong></p>
+<p><strong><a href="s_pokladna.html">Draft studie o roli ESIF ve
+veřejných financích</a></strong></p>
+<p><strong>Konečná verze studie prošla editací ve wordu a je dostupná na
+webu <a
+href="https://www.vlada.cz/cz/evropske-zalezitosti/analyzy-eu/analyzy-uvod-125732/">Úřadu
+vlády</a></strong>:</p>
+<ul>
+<li><a
+href="https://www.vlada.cz/cz/evropske-zalezitosti/analyzy-eu/analyzy-uvod-125732/">Veřejné
+výdaje a ESI fondy v letech 2015-2020: hlavní poznatky (prosinec
+2021</a></li>
+</ul>
+<p>Zdrojový kód textově téměř konečné verze je v souboru
+[s_analyza.docs/s_analyza.html), výstup v <a
+href="s_analyza.docx">s_analyza.docx</a>.</p>
 <p>Detailnější dokumentace k pipelinu:</p>
 <ul>
 <li><a href="s_doc.html">obsahová dokumentace</a></li>
@@ -299,23 +318,36 @@ $(document).ready(function () {
 </ul>
 <p>Relevantní předchozí publikace v této oblasti:</p>
 <ul>
-<li><a href="https://dotaceeu.cz/cs/evropske-fondy-v-cr/narodni-organ-pro-koordinaci/evaluace/knihovna-evaluaci/verejne-vydaje-a-fondy-eu-2007%e2%80%932015">MMR (2017) o roli ESI fondů ve veřejných výdajích</a> ( <a href="https://dotaceeu.cz/Dotace/media/SF/NOK/Evaluace/Evalua%c4%8dn%c3%ad%20knihovna/2017/Adicionalita/Verejne-vydaje-a-fondy-EU-final-public_1.pdf">PDF</a>)</li>
+<li><a
+href="https://dotaceeu.cz/cs/evropske-fondy-v-cr/narodni-organ-pro-koordinaci/evaluace/knihovna-evaluaci/verejne-vydaje-a-fondy-eu-2007%e2%80%932015">MMR
+(2017) o roli ESI fondů ve veřejných výdajích</a></li>
 </ul>
+<div id="časový-rozsah" class="section level2">
+<h2>Časový rozsah</h2>
+<p>Publikovaná studie pracuje s daty do roku 2020, kód v tomto
+repozitáři a exportovaná data ale zahrnují i data za 2021, publikovaná v
+únoru 2022 (update 2022-02-23).</p>
+</div>
 <div id="dokumentace-souborů" class="section level2">
 <h2>Dokumentace souborů</h2>
 <ul>
 <li><code>esifunguji.Rproj</code>: konfigurace RStudio projektu</li>
-<li><code>_targets.R</code>: hlavní soubor definující datový pipeline</li>
-<li><code>_site.yml</code>: konfigurace webu generovaného uvnitř pipeline do složky <code>docs</code></li>
-<li><code>_interactive.R</code>: utilita pro rychlé načtení objektů pro interaktivní práci</li>
-<li><code>build.R</code>: utilita - spouští pipeline, v RStudio projectu navázáno na Build command</li>
+<li><code>_targets.R</code>: hlavní soubor definující datový
+pipeline</li>
+<li><code>_site.yml</code>: konfigurace webu generovaného uvnitř
+pipeline do složky <code>docs</code></li>
+<li><code>_interactive.R</code>: utilita pro rychlé načtení objektů pro
+interaktivní práci</li>
+<li><code>build.R</code>: utilita - spouští pipeline, v RStudio projectu
+navázáno na Build command</li>
 <li><code>*.Rmd</code>: zdroje webové dokumentace</li>
 <li><code>docs</code>: vygenerovaná webová dokumentace</li>
 <li><code>data-export</code>: exporty výstupních dat</li>
 <li><code>data-input</code>: vstupní data</li>
 <li><code>data-output</code>: výstupní data ve formátu pro R</li>
 <li><code>data-processed</code>: mezidata</li>
-<li><code>renv</code>: skladiště systému renv pro reprodukovatelnost prostředí (needitovat ručně)</li>
+<li><code>renv</code>: skladiště systému renv pro reprodukovatelnost
+prostředí (needitovat ručně)</li>
 <li><code>R</code>: kód funkcí, které dohromady vytváří pipeline</li>
 <li><code>scripts</code>: jiný kód mimo pipeline - odkladiště</li>
 <li><code>sp_data</code>: cache dat Státní pokladny</li>
