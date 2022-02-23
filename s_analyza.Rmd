@@ -469,6 +469,11 @@ plot_esif(data = cb_trida_oddil |>
 
 Z grafu \@ref(fig:plot-bezne-nad100) je pak patrné, že v oddílech s objemem nad 100 mld. Kč běžných výdajů nehrají ESI fondy téměř žádnou roli - především proto, že se jedná o velké dávkové (např. důchody) nebo blokové transfery (např. financování regionálního školství). Výjimkou je v malé míře vzdělávání, kde podíl ESI fondů i na běžných výdajích v posledních letech mírně narostl, ale zůstává nízký.
 
+```{r}
+ggtitle <- "Běžné výdaje vlastní a z ESI fondů podle oddílů"
+```
+
+
 ```{r plot-bezne-nad100, fig.cap = ggtitle, fig.height=3}
 oddily_nad_50mld <- cb_trida_oddil |> 
               filter(trida == "Běžné výdaje", vykaz_date > "2020-01-01") |> 
@@ -480,7 +485,7 @@ plot_esif(data = cb_trida_oddil |>
                    oddil %in% oddily_nad_50mld
             ), 
           facet_var = oddil, label_width = 20,
-          title = "Běžné výdaje vlastní a z ESI fondů podle oddílů",
+          title = ggtitle,
           subtitle = "oddíly nad 100 mld. Kč.",
           legend_labels = names(palette_studie)[5:6], nrow = 1)
 ```
