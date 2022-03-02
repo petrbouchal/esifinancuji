@@ -283,31 +283,45 @@ $(document).ready(function () {
 <div id="celková-analytická-logika-systému" class="section level2">
 <h2>Celková analytická logika systému</h2>
 <ul>
-<li>z dat státní pokladny o veřejných výdajích sestavujeme kompletní dataset výdajů členěných podle odvětvového a druhového třídění</li>
-<li>ze zdrojového třídění dovozujeme podíl ESI fondů v jednotlivých kategoriích výdajů či jejich kombinacích</li>
-<li>omezujeme se na státní rozpočet, protože u státních fondů ani samospráv není zdrojové třídění veřejně dostupné</li>
-<li>celkové objemy ESI fondů validujeme proti veřejným datům o proplácení projektů, popř. poloveřejným jemnějším datům ze sestav MMR</li>
+<li>z dat státní pokladny o veřejných výdajích sestavujeme kompletní
+dataset výdajů členěných podle odvětvového a druhového třídění</li>
+<li>ze zdrojového třídění dovozujeme podíl ESI fondů v jednotlivých
+kategoriích výdajů či jejich kombinacích</li>
+<li>omezujeme se na státní rozpočet, protože u státních fondů ani
+samospráv není zdrojové třídění veřejně dostupné</li>
+<li>celkové objemy ESI fondů validujeme proti veřejným datům o
+proplácení projektů, popř. poloveřejným jemnějším datům ze sestav
+MMR</li>
 </ul>
-<p>Hlavními výstupy jsou: - datové exporty pro detailní analýzu, viz <a href="s_output.html">dokument k výstupům</a> - <a href="s_pokladna.html">studie</a> role ESI fondů ve výdajích státního rozpočtu</p>
+<p>Hlavními výstupy jsou: - datové exporty pro detailní analýzu, viz <a
+href="s_output.html">dokument k výstupům</a> - <a
+href="s_pokladna.html">studie</a> role ESI fondů ve výdajích státního
+rozpočtu</p>
 </div>
 <div id="data-a-rozhodnutí" class="section level2">
 <h2>Data a rozhodnutí</h2>
-<p>V naší definici ESI fondů nejsou zahrnuty norské/EEA fondy, proto jsou součástí kategorie označené (mírně nepřesně) jako “vlastní výdaje”.</p>
-<p>V ESI fondech je zahrnuto kofinancování ze státního rozpočtu, nikoli ale konfinancování z jiných zdrojů.</p>
-<p>K problematice srovnatelnosti se studií z roku 2014 viz <a href="s_pokladna.html#data">relevantní část ve studii</a></p>
+<p>V naší definici ESI fondů nejsou zahrnuty norské/EEA fondy, proto
+jsou součástí kategorie označené (mírně nepřesně) jako “vlastní
+výdaje”.</p>
+<p>V ESI fondech je zahrnuto kofinancování ze státního rozpočtu, nikoli
+ale konfinancování z jiných zdrojů.</p>
+<p>K problematice srovnatelnosti se studií z roku 2014 viz <a
+href="s_pokladna.html#data">relevantní část ve studii</a></p>
 <div id="technické-detaily" class="section level3">
 <h3>Technické detaily</h3>
 <p>viz <a href="dev.html">technickou dokumentaci</a></p>
 </div>
-<div id="hodnoty-konfiguračních-proměnných-v-souboru-config.yml" class="section level3">
-<h3>Hodnoty konfiguračních proměnných v souboru <code>config.yml</code></h3>
+<div id="hodnoty-konfiguračních-proměnných-v-souboru-config.yml"
+class="section level3">
+<h3>Hodnoty konfiguračních proměnných v souboru
+<code>config.yml</code></h3>
 <details closed>
 <pre class="r"><code>
 default:
 
   # settings for MISRIS (central budget starting from 2015)
-  sp_years_central_new: !expr 2015:2020 # which years to download
   sp_months_central_new: 12 # which month&#39;s data to download
+  sp_years_central_new: !expr 2015:2021 # which years to download
   sp_central_arrowdir_new: &quot;data-processed/sp-central-new-arr&quot;
 
   sp_nastroj_ids_1420_ops: [&quot;102&quot;, &quot;103&quot;, &quot;104&quot;, &quot;105&quot;, &quot;106&quot;, &quot;107&quot;, &quot;108&quot;, &quot;109&quot;]

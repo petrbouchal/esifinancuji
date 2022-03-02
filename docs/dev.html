@@ -303,28 +303,47 @@ $(document).ready(function () {
 <li>codebook</li>
 <li>studie v Rmarkdown</li>
 </ul></li>
-<li>Mezi tím je spousta kroků v <code>tidyverse</code>, které všechna data propojují.</li>
+<li>Mezi tím je spousta kroků v <code>tidyverse</code>, které všechna
+data propojují.</li>
 </ul>
 </div>
 <div id="jak-se-to-děje" class="section level3">
 <h3>Jak se to děje</h3>
-<p>Celý pipeline je organizován nástrojem <code>{targets}</code>, funguje podobně jako <code>make</code>. Ve skriptu <code>_targets.R</code> jsou popsány všechny výstupy (“targets”) a jejich vztahy. <code>{targets}</code> sleduje, které targets neodpovídají aktuálnímu stavu kódu (funkce ve skriptech v <code>R/</code>) a jeho vstupů a po spuštění pipeline (<code>tar_make()</code>) spouští pouze ten kód, který je potřeba pro uvedení výstupů do aktuální podoby. Mezi výstupy patří průběžné datasety, výstupní datové soubory i výstupní datovádokumentace.</p>
-<p>Všechny cesty ke vstupním a výstupním souborům a dalším parametry se nastavují v <code>config.yml</code>.</p>
-<p>O reprodukovatelnost prostředí (tj. udržování správné verze balíků R) se stará systém <code>{renv}</code>.</p>
-<p>Dokumentaci a validaci dat zajišťují postupy s využitím balíku <code>{pointblank}</code></p>
-<p>Dokumentace se generuje ze vstupních Rmarkdown souborů do adresáře <code>/docs</code>, který se po push na github automaticky publikuje.</p>
+<p>Celý pipeline je organizován nástrojem <code>{targets}</code>,
+funguje podobně jako <code>make</code>. Ve skriptu
+<code>_targets.R</code> jsou popsány všechny výstupy (“targets”) a
+jejich vztahy. <code>{targets}</code> sleduje, které targets
+neodpovídají aktuálnímu stavu kódu (funkce ve skriptech v
+<code>R/</code>) a jeho vstupů a po spuštění pipeline
+(<code>tar_make()</code>) spouští pouze ten kód, který je potřeba pro
+uvedení výstupů do aktuální podoby. Mezi výstupy patří průběžné
+datasety, výstupní datové soubory i výstupní datovádokumentace.</p>
+<p>Všechny cesty ke vstupním a výstupním souborům a dalším parametry se
+nastavují v <code>config.yml</code>.</p>
+<p>O reprodukovatelnost prostředí (tj. udržování správné verze balíků R)
+se stará systém <code>{renv}</code>.</p>
+<p>Dokumentaci a validaci dat zajišťují postupy s využitím balíku
+<code>{pointblank}</code></p>
+<p>Dokumentace se generuje ze vstupních Rmarkdown souborů do adresáře
+<code>/docs</code>, který se po push na github automaticky
+publikuje.</p>
 </div>
 </div>
 <div id="jak-to-znovu-pustit" class="section level2">
 <h2>Jak to znovu pustit</h2>
 <ol style="list-style-type: decimal">
-<li>pustit <code>renv::restore()</code> - tím se do projektu načtou správné verze Rkových balíků</li>
-<li>vložit aktualizované vstupní sestavy do <code>data-input/sestavy [datum]</code></li>
+<li>pustit <code>renv::restore()</code> - tím se do projektu načtou
+správné verze Rkových balíků</li>
+<li>vložit aktualizované vstupní sestavy do
+<code>data-input/sestavy [datum]</code></li>
 <li>Zanést cestu do patřičného parametru v <code>config.yml</code></li>
 <li>Zopakovat s daty PRV v <code>data-input/prv</code></li>
 <li>Analogicky lze aktualizovat i excelové soubory</li>
-<li>V <code>config.yml</code> aktualizovat cestu k veřejnému seznamu operací na webu dotaceeu.cz</li>
-<li>Pustit <code>targets::tar_make()</code>, popř. spustit skript <code>build.R</code> nebo použít tlačítko <code>Build</code> na záložce <code>Build</code>.</li>
+<li>V <code>config.yml</code> aktualizovat cestu k veřejnému seznamu
+operací na webu dotaceeu.cz</li>
+<li>Pustit <code>targets::tar_make()</code>, popř. spustit skript
+<code>build.R</code> nebo použít tlačítko <code>Build</code> na záložce
+<code>Build</code>.</li>
 </ol>
 </div>
 <div id="dokumentace-pro-reprodukovatelnost" class="section level2">
@@ -402,6 +421,7 @@ default:
   export_cdbk: &quot;codebook.yaml&quot;
 
   repo_remote: &quot;https://github.com/petrbouchal/esifinancuji&quot;
+  docs_url: &quot;https://esifinancuji.petrbouchal.xyz&quot;
 
   # data from 2017 study
   first_report_xlsx: &quot;data-input/adic2017/vydaje_dataset.xlsx&quot;
@@ -417,12 +437,12 @@ default:
 <details closed>
 <pre class="r"><code>
 R version 4.1.2 (2021-11-01)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur 10.16
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Monterey 12.3
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -442,7 +462,7 @@ other attached packages:
 [17] readr_2.0.2               writexl_1.4.0            
 [19] lubridate_1.7.10          czso_0.3.5               
 [21] ragg_1.1.0                tidyr_1.1.3              
-[23] arrow_5.0.0.20211012      purrrow_0.0.0.9000       
+[23] arrow_7.0.0               purrrow_0.0.0.9000       
 [25] config_0.3.1              httr_1.4.2               
 [27] curl_4.3                  janitor_2.0.1            
 [29] readxl_1.3.1              here_1.0.1               
@@ -456,23 +476,24 @@ loaded via a namespace (and not attached):
  [5] fs_1.5.0          farver_2.1.0      listenv_0.8.0     ggrepel_0.9.1    
  [9] bit64_4.0.5       fansi_0.5.0       xml2_1.3.2        codetools_0.2-18 
 [13] extrafont_0.17    cachem_1.0.4      knitr_1.36        jsonlite_1.7.2   
-[17] Rttf2pt1_1.3.8    png_0.1-7         clipr_0.7.1       compiler_4.1.2   
-[21] assertthat_0.2.1  fastmap_1.1.0     cli_3.0.1         later_1.1.0.1    
-[25] hrbrthemes_0.8.0  htmltools_0.5.2   tools_4.1.2       igraph_1.2.6     
-[29] gtable_0.3.0      glue_1.4.2        Rcpp_1.0.6        cellranger_1.1.0 
-[33] jquerylib_0.1.4   vctrs_0.3.8       extrafontdb_1.0   blastula_0.3.2   
-[37] xfun_0.24         globals_0.14.0    ps_1.6.0          mime_0.10        
-[41] lifecycle_1.0.0   renv_0.14.0       ptrr_0.2.0.9000   scales_1.1.1     
-[45] hms_1.0.0         promises_1.2.0.1  parallel_4.1.2    yaml_2.2.1       
-[49] gdtools_0.2.3     sass_0.4.0        stringi_1.5.3     highr_0.8        
-[53] desc_1.4.0        rlang_0.4.11      pkgconfig_2.0.3   systemfonts_1.0.1
-[57] evaluate_0.14     labeling_0.4.2    htmlwidgets_1.5.3 bit_4.0.4        
-[61] processx_3.5.2    tidyselect_1.1.1  parallelly_1.23.0 bookdown_0.24    
-[65] R6_2.5.0          generics_0.1.0    DBI_1.1.0         pillar_1.6.2     
-[69] withr_2.4.2       tibble_3.1.3      crayon_1.4.2      utf8_1.2.2       
-[73] tzdb_0.1.2        rmarkdown_2.11    usethis_2.1.3     grid_4.1.2       
-[77] data.table_1.14.0 callr_3.7.0.9000  digest_0.6.27     xtable_1.8-4     
-[81] httpuv_1.5.5      textshaping_0.3.0 munsell_0.5.0    
+[17] broom_0.7.3       Rttf2pt1_1.3.8    png_0.1-7         clipr_0.7.1      
+[21] compiler_4.1.2    backports_1.2.1   assertthat_0.2.1  fastmap_1.1.0    
+[25] cli_3.0.1         later_1.1.0.1     hrbrthemes_0.8.0  htmltools_0.5.2  
+[29] tools_4.1.2       igraph_1.2.6      gtable_0.3.0      glue_1.4.2       
+[33] Rcpp_1.0.8        cellranger_1.1.0  jquerylib_0.1.4   vctrs_0.3.8      
+[37] extrafontdb_1.0   blastula_0.3.2    xfun_0.24         globals_0.14.0   
+[41] ps_1.6.0          mime_0.10         lifecycle_1.0.0   renv_0.14.0      
+[45] ptrr_0.2.0.9000   scales_1.1.1      hms_1.0.0         promises_1.2.0.1 
+[49] parallel_4.1.2    yaml_2.2.1        gdtools_0.2.3     sass_0.4.0       
+[53] stringi_1.5.3     highr_0.8         desc_1.4.0        checkmate_2.0.0  
+[57] commonmark_1.7    rlang_0.4.11      pkgconfig_2.0.3   systemfonts_1.0.4
+[61] evaluate_0.14     labeling_0.4.2    htmlwidgets_1.5.3 bit_4.0.4        
+[65] processx_3.5.2    tidyselect_1.1.1  parallelly_1.23.0 bookdown_0.24    
+[69] R6_2.5.0          generics_0.1.0    DBI_1.1.0         pillar_1.6.2     
+[73] withr_2.4.2       tibble_3.1.3      crayon_1.4.2      utf8_1.2.2       
+[77] tzdb_0.1.2        rmarkdown_2.11    usethis_2.1.5     grid_4.1.2       
+[81] data.table_1.14.0 callr_3.7.0.9000  digest_0.6.27     xtable_1.8-4     
+[85] httpuv_1.5.5      textshaping_0.3.6 munsell_0.5.0    
 </code></pre>
 </details>
 <p><br></p>
@@ -484,7 +505,7 @@ loaded via a namespace (and not attached):
 <pre class="r"><code>
 {
   &quot;R&quot;: {
-    &quot;Version&quot;: &quot;4.1.0&quot;,
+    &quot;Version&quot;: &quot;4.1.2&quot;,
     &quot;Repositories&quot;: [
       {
         &quot;Name&quot;: &quot;CRAN&quot;,
@@ -516,10 +537,8 @@ loaded via a namespace (and not attached):
     },
     &quot;Matrix&quot;: {
       &quot;Package&quot;: &quot;Matrix&quot;,
-      &quot;Version&quot;: &quot;1.2-18&quot;,
-      &quot;Source&quot;: &quot;Repository&quot;,
-      &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;08588806cba69f04797dab50627428ed&quot;
+      &quot;Version&quot;: &quot;1.4-0&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;
     },
     &quot;R6&quot;: {
       &quot;Package&quot;: &quot;R6&quot;,
@@ -558,10 +577,8 @@ loaded via a namespace (and not attached):
     },
     &quot;arrow&quot;: {
       &quot;Package&quot;: &quot;arrow&quot;,
-      &quot;Version&quot;: &quot;5.0.0.2&quot;,
-      &quot;Source&quot;: &quot;Repository&quot;,
-      &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;5e634f811bbca399a976807ed93ec80e&quot;
+      &quot;Version&quot;: &quot;7.0.0&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;
     },
     &quot;askpass&quot;: {
       &quot;Package&quot;: &quot;askpass&quot;,
@@ -626,6 +643,13 @@ loaded via a namespace (and not attached):
       &quot;Repository&quot;: &quot;CRAN&quot;,
       &quot;Hash&quot;: &quot;9addc7e2c5954eca5719928131fed98c&quot;
     },
+    &quot;bookdown&quot;: {
+      &quot;Package&quot;: &quot;bookdown&quot;,
+      &quot;Version&quot;: &quot;0.24&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;,
+      &quot;Repository&quot;: &quot;CRAN&quot;,
+      &quot;Hash&quot;: &quot;3837766a1e1b527af25fa3e2d12a2800&quot;
+    },
     &quot;brew&quot;: {
       &quot;Package&quot;: &quot;brew&quot;,
       &quot;Version&quot;: &quot;1.0-6&quot;,
@@ -656,10 +680,15 @@ loaded via a namespace (and not attached):
     },
     &quot;bslib&quot;: {
       &quot;Package&quot;: &quot;bslib&quot;,
-      &quot;Version&quot;: &quot;0.2.4&quot;,
-      &quot;Source&quot;: &quot;Repository&quot;,
-      &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;4830a372b241d78ed6f53731ee3023ac&quot;
+      &quot;Version&quot;: &quot;0.3.1.9000&quot;,
+      &quot;Source&quot;: &quot;GitHub&quot;,
+      &quot;RemoteType&quot;: &quot;github&quot;,
+      &quot;RemoteHost&quot;: &quot;api.github.com&quot;,
+      &quot;RemoteRepo&quot;: &quot;bslib&quot;,
+      &quot;RemoteUsername&quot;: &quot;rstudio&quot;,
+      &quot;RemoteRef&quot;: &quot;HEAD&quot;,
+      &quot;RemoteSha&quot;: &quot;888fbe064491692deb56fd90dc23455052e31073&quot;,
+      &quot;Hash&quot;: &quot;4fb58ab3aa9aa1927807fa79817cee70&quot;
     },
     &quot;cachem&quot;: {
       &quot;Package&quot;: &quot;cachem&quot;,
@@ -738,10 +767,10 @@ loaded via a namespace (and not attached):
     },
     &quot;cpp11&quot;: {
       &quot;Package&quot;: &quot;cpp11&quot;,
-      &quot;Version&quot;: &quot;0.2.6&quot;,
+      &quot;Version&quot;: &quot;0.4.0&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;f08909ebdad90b19d8d3930da4220564&quot;
+      &quot;Hash&quot;: &quot;40ba3fd26c8f61d8d14d334bc7761df9&quot;
     },
     &quot;credentials&quot;: {
       &quot;Package&quot;: &quot;credentials&quot;,
@@ -759,10 +788,10 @@ loaded via a namespace (and not attached):
     },
     &quot;czso&quot;: {
       &quot;Package&quot;: &quot;czso&quot;,
-      &quot;Version&quot;: &quot;0.3.4&quot;,
+      &quot;Version&quot;: &quot;0.3.5&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;53fbcbc0d12b46c7ba668a351510852c&quot;
+      &quot;Hash&quot;: &quot;6fb94b3867e48c70c2ff124e4ed2ead2&quot;
     },
     &quot;data.table&quot;: {
       &quot;Package&quot;: &quot;data.table&quot;,
@@ -780,10 +809,10 @@ loaded via a namespace (and not attached):
     },
     &quot;desc&quot;: {
       &quot;Package&quot;: &quot;desc&quot;,
-      &quot;Version&quot;: &quot;1.3.0&quot;,
+      &quot;Version&quot;: &quot;1.4.0&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;b6963166f7f10b970af1006c462ce6cd&quot;
+      &quot;Hash&quot;: &quot;28763d08fadd0b733e3cee9dab4e12fe&quot;
     },
     &quot;details&quot;: {
       &quot;Package&quot;: &quot;details&quot;,
@@ -871,15 +900,10 @@ loaded via a namespace (and not attached):
     },
     &quot;fontawesome&quot;: {
       &quot;Package&quot;: &quot;fontawesome&quot;,
-      &quot;Version&quot;: &quot;0.0.0.9000&quot;,
-      &quot;Source&quot;: &quot;GitHub&quot;,
-      &quot;RemoteType&quot;: &quot;github&quot;,
-      &quot;RemoteHost&quot;: &quot;api.github.com&quot;,
-      &quot;RemoteUsername&quot;: &quot;rstudio&quot;,
-      &quot;RemoteRepo&quot;: &quot;fontawesome&quot;,
-      &quot;RemoteRef&quot;: &quot;master&quot;,
-      &quot;RemoteSha&quot;: &quot;3a68542b93e59d497b70b6eb2636ca4eb0aca00f&quot;,
-      &quot;Hash&quot;: &quot;dffe2c1fdb8babe1dc7dfbd938d8bbf0&quot;
+      &quot;Version&quot;: &quot;0.2.2&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;,
+      &quot;Repository&quot;: &quot;CRAN&quot;,
+      &quot;Hash&quot;: &quot;55624ed409e46c5f358b2c060be87f67&quot;
     },
     &quot;forcats&quot;: {
       &quot;Package&quot;: &quot;forcats&quot;,
@@ -925,10 +949,10 @@ loaded via a namespace (and not attached):
     },
     &quot;gert&quot;: {
       &quot;Package&quot;: &quot;gert&quot;,
-      &quot;Version&quot;: &quot;1.2.0&quot;,
+      &quot;Version&quot;: &quot;1.5.0&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;dcbfac00cf60125f43791a135ef68285&quot;
+      &quot;Hash&quot;: &quot;8fddce7cbd59467106266a6e93e253b4&quot;
     },
     &quot;getPass&quot;: {
       &quot;Package&quot;: &quot;getPass&quot;,
@@ -944,6 +968,13 @@ loaded via a namespace (and not attached):
       &quot;Repository&quot;: &quot;CRAN&quot;,
       &quot;Hash&quot;: &quot;3eb6477d01eb5bbdc03f7d5f70f2733e&quot;
     },
+    &quot;ggrepel&quot;: {
+      &quot;Package&quot;: &quot;ggrepel&quot;,
+      &quot;Version&quot;: &quot;0.9.1&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;,
+      &quot;Repository&quot;: &quot;CRAN&quot;,
+      &quot;Hash&quot;: &quot;08ab869f37e6a7741a64ab9069bcb67d&quot;
+    },
     &quot;ggtext&quot;: {
       &quot;Package&quot;: &quot;ggtext&quot;,
       &quot;Version&quot;: &quot;0.1.1&quot;,
@@ -958,10 +989,10 @@ loaded via a namespace (and not attached):
     },
     &quot;gh&quot;: {
       &quot;Package&quot;: &quot;gh&quot;,
-      &quot;Version&quot;: &quot;1.2.0&quot;,
+      &quot;Version&quot;: &quot;1.3.0&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;05129b4387282404780d2f8593636388&quot;
+      &quot;Hash&quot;: &quot;38c2580abbda249bd6afeec00d14f531&quot;
     },
     &quot;git2r&quot;: {
       &quot;Package&quot;: &quot;git2r&quot;,
@@ -1049,10 +1080,10 @@ loaded via a namespace (and not attached):
     },
     &quot;htmltools&quot;: {
       &quot;Package&quot;: &quot;htmltools&quot;,
-      &quot;Version&quot;: &quot;0.5.1.1&quot;,
+      &quot;Version&quot;: &quot;0.5.2&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;af2c2531e55df5cf230c4b5444fc973c&quot;
+      &quot;Hash&quot;: &quot;526c484233f42522278ab06fb185cb26&quot;
     },
     &quot;htmlwidgets&quot;: {
       &quot;Package&quot;: &quot;htmlwidgets&quot;,
@@ -1112,10 +1143,10 @@ loaded via a namespace (and not attached):
     },
     &quot;jquerylib&quot;: {
       &quot;Package&quot;: &quot;jquerylib&quot;,
-      &quot;Version&quot;: &quot;0.1.3&quot;,
+      &quot;Version&quot;: &quot;0.1.4&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;5ff50b36f7f0832f8421745af333e73c&quot;
+      &quot;Hash&quot;: &quot;5aab57a3bd297eee1c1d862735972182&quot;
     },
     &quot;jsonlite&quot;: {
       &quot;Package&quot;: &quot;jsonlite&quot;,
@@ -1199,13 +1230,6 @@ loaded via a namespace (and not attached):
       &quot;Repository&quot;: &quot;CRAN&quot;,
       &quot;Hash&quot;: &quot;a0bc51650201a56d00a4798523cc91b3&quot;
     },
-    &quot;metathis&quot;: {
-      &quot;Package&quot;: &quot;metathis&quot;,
-      &quot;Version&quot;: &quot;1.0.3&quot;,
-      &quot;Source&quot;: &quot;Repository&quot;,
-      &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;5056a889bccd51d78697799bc25ece39&quot;
-    },
     &quot;mgcv&quot;: {
       &quot;Package&quot;: &quot;mgcv&quot;,
       &quot;Version&quot;: &quot;1.8-33&quot;,
@@ -1269,6 +1293,13 @@ loaded via a namespace (and not attached):
       &quot;Repository&quot;: &quot;CRAN&quot;,
       &quot;Hash&quot;: &quot;9ab1426429ad716b42088a0fd8e909ee&quot;
     },
+    &quot;patchwork&quot;: {
+      &quot;Package&quot;: &quot;patchwork&quot;,
+      &quot;Version&quot;: &quot;1.1.1&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;,
+      &quot;Repository&quot;: &quot;CRAN&quot;,
+      &quot;Hash&quot;: &quot;c446b30cb33ec125ff02588b60660ccb&quot;
+    },
     &quot;pillar&quot;: {
       &quot;Package&quot;: &quot;pillar&quot;,
       &quot;Version&quot;: &quot;1.6.2&quot;,
@@ -1313,15 +1344,10 @@ loaded via a namespace (and not attached):
     },
     &quot;pointblank&quot;: {
       &quot;Package&quot;: &quot;pointblank&quot;,
-      &quot;Version&quot;: &quot;0.8.0.9000&quot;,
-      &quot;Source&quot;: &quot;GitHub&quot;,
-      &quot;RemoteType&quot;: &quot;github&quot;,
-      &quot;RemoteHost&quot;: &quot;api.github.com&quot;,
-      &quot;RemoteUsername&quot;: &quot;rich-iannone&quot;,
-      &quot;RemoteRepo&quot;: &quot;pointblank&quot;,
-      &quot;RemoteRef&quot;: &quot;main&quot;,
-      &quot;RemoteSha&quot;: &quot;f4757063fca88bfdc0f3971ec401d2b6e2297dd7&quot;,
-      &quot;Hash&quot;: &quot;9de8808ddda1e7b9b1e2a2217a11511a&quot;
+      &quot;Version&quot;: &quot;0.9.0&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;,
+      &quot;Repository&quot;: &quot;CRAN&quot;,
+      &quot;Hash&quot;: &quot;7486e4dea341651aaa8888bd9cbf4e1e&quot;
     },
     &quot;praise&quot;: {
       &quot;Package&quot;: &quot;praise&quot;,
@@ -1419,10 +1445,10 @@ loaded via a namespace (and not attached):
     },
     &quot;readr&quot;: {
       &quot;Package&quot;: &quot;readr&quot;,
-      &quot;Version&quot;: &quot;1.4.0&quot;,
+      &quot;Version&quot;: &quot;2.0.2&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;2639976851f71f330264a9c9c3d43a61&quot;
+      &quot;Hash&quot;: &quot;7cb2c3ecfbc2c6786221d2c0c1f6ed68&quot;
     },
     &quot;readxl&quot;: {
       &quot;Package&quot;: &quot;readxl&quot;,
@@ -1517,10 +1543,10 @@ loaded via a namespace (and not attached):
     },
     &quot;sass&quot;: {
       &quot;Package&quot;: &quot;sass&quot;,
-      &quot;Version&quot;: &quot;0.3.1&quot;,
+      &quot;Version&quot;: &quot;0.4.0&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;3ef1adfe46b7b144b970d74ce33ab0d6&quot;
+      &quot;Hash&quot;: &quot;50cf822feb64bb3977bda0b7091be623&quot;
     },
     &quot;scales&quot;: {
       &quot;Package&quot;: &quot;scales&quot;,
@@ -1545,10 +1571,10 @@ loaded via a namespace (and not attached):
     },
     &quot;shiny&quot;: {
       &quot;Package&quot;: &quot;shiny&quot;,
-      &quot;Version&quot;: &quot;1.6.0&quot;,
+      &quot;Version&quot;: &quot;1.7.1&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;6e3b6ae7fe02b5859e4bb277f218b8ae&quot;
+      &quot;Hash&quot;: &quot;00344c227c7bd0ab5d78052c5d736c44&quot;
     },
     &quot;shinyWidgets&quot;: {
       &quot;Package&quot;: &quot;shinyWidgets&quot;,
@@ -1611,26 +1637,17 @@ loaded via a namespace (and not attached):
       &quot;Repository&quot;: &quot;CRAN&quot;,
       &quot;Hash&quot;: &quot;b227d13e29222b4574486cfcbde077fa&quot;
     },
-    &quot;sysfonts&quot;: {
-      &quot;Package&quot;: &quot;sysfonts&quot;,
-      &quot;Version&quot;: &quot;0.8.3&quot;,
-      &quot;Source&quot;: &quot;Repository&quot;,
-      &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;6a750650ae5e5ba11b45cb5012bd6167&quot;
-    },
     &quot;systemfonts&quot;: {
       &quot;Package&quot;: &quot;systemfonts&quot;,
-      &quot;Version&quot;: &quot;1.0.1&quot;,
-      &quot;Source&quot;: &quot;Repository&quot;,
-      &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;6e899d7c097698d50ec87b1d8e65f246&quot;
+      &quot;Version&quot;: &quot;1.0.4&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;
     },
     &quot;tarchetypes&quot;: {
       &quot;Package&quot;: &quot;tarchetypes&quot;,
-      &quot;Version&quot;: &quot;0.2.0&quot;,
+      &quot;Version&quot;: &quot;0.4.1&quot;,
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;a5270db1c2b225697a08c5612b44facb&quot;
+      &quot;Hash&quot;: &quot;24c9eb58a70cef665befbcc9891572de&quot;
     },
     &quot;targets&quot;: {
       &quot;Package&quot;: &quot;targets&quot;,
@@ -1653,10 +1670,8 @@ loaded via a namespace (and not attached):
     },
     &quot;textshaping&quot;: {
       &quot;Package&quot;: &quot;textshaping&quot;,
-      &quot;Version&quot;: &quot;0.3.0&quot;,
-      &quot;Source&quot;: &quot;Repository&quot;,
-      &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;08517f55a30f309465c722ebd83f7e10&quot;
+      &quot;Version&quot;: &quot;0.3.6&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;
     },
     &quot;tibble&quot;: {
       &quot;Package&quot;: &quot;tibble&quot;,
@@ -1664,13 +1679,6 @@ loaded via a namespace (and not attached):
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
       &quot;Hash&quot;: &quot;038455513fde65e79c25e724e0c84ca2&quot;
-    },
-    &quot;tictoc&quot;: {
-      &quot;Package&quot;: &quot;tictoc&quot;,
-      &quot;Version&quot;: &quot;1.0.1&quot;,
-      &quot;Source&quot;: &quot;Repository&quot;,
-      &quot;Repository&quot;: &quot;CRAN&quot;,
-      &quot;Hash&quot;: &quot;5acb66b0266ad1f0ebf7ffe1aa36ff4c&quot;
     },
     &quot;tidyr&quot;: {
       &quot;Package&quot;: &quot;tidyr&quot;,
@@ -1699,6 +1707,13 @@ loaded via a namespace (and not attached):
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
       &quot;Hash&quot;: &quot;db9a6f2cf147751322d22c9f6647c7bd&quot;
+    },
+    &quot;tzdb&quot;: {
+      &quot;Package&quot;: &quot;tzdb&quot;,
+      &quot;Version&quot;: &quot;0.1.2&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;,
+      &quot;Repository&quot;: &quot;CRAN&quot;,
+      &quot;Hash&quot;: &quot;fb2b801053decce71295bb8cb04d438b&quot;
     },
     &quot;utf8&quot;: {
       &quot;Package&quot;: &quot;utf8&quot;,
@@ -1734,6 +1749,13 @@ loaded via a namespace (and not attached):
       &quot;Source&quot;: &quot;Repository&quot;,
       &quot;Repository&quot;: &quot;CRAN&quot;,
       &quot;Hash&quot;: &quot;12545f2acf49d1d346d075580122d89c&quot;
+    },
+    &quot;vroom&quot;: {
+      &quot;Package&quot;: &quot;vroom&quot;,
+      &quot;Version&quot;: &quot;1.5.5&quot;,
+      &quot;Source&quot;: &quot;Repository&quot;,
+      &quot;Repository&quot;: &quot;CRAN&quot;,
+      &quot;Hash&quot;: &quot;9c3b3a3f947c7936cea7485349247e5b&quot;
     },
     &quot;waiter&quot;: {
       &quot;Package&quot;: &quot;waiter&quot;,
@@ -1829,10 +1851,10 @@ loaded via a namespace (and not attached):
 <div id="targets-zobrazení-pipeline" class="section level3">
 <h3>targets: zobrazení pipeline</h3>
 <pre class="r"><code>targets::tar_visnetwork()</code></pre>
-<pre><code>## [31m
+<pre><code>## 
 ## Attaching package: ‘dplyr’
 ## 
-## [39m[31mThe following objects are masked from ‘package:stats’:
+## The following objects are masked from ‘package:stats’:
 ## 
 ##     filter, lag
 ## 
@@ -1840,26 +1862,27 @@ loaded via a namespace (and not attached):
 ## 
 ##     intersect, setdiff, setequal, union
 ## 
-## [39m[31m
+## 
 ## Attaching package: ‘bslib’
 ## 
-## [39m[31mThe following object is masked from ‘package:utils’:
+## The following object is masked from ‘package:utils’:
 ## 
 ##     page
 ## 
-## [39m[31mWarning messages:
+## Warning messages:
 ## 1: found matches() from tidyselect in a call to tar_load() or tar_read() in a knitr / R Markdown code chunk. These dependencies cannot be detected statically, so they will be ignored. 
 ## 2: found matches() from tidyselect in a call to tar_load() or tar_read() in a knitr / R Markdown code chunk. These dependencies cannot be detected statically, so they will be ignored. 
 ## 3: found matches() from tidyselect in a call to tar_load() or tar_read() in a knitr / R Markdown code chunk. These dependencies cannot be detected statically, so they will be ignored. 
-## 4: found matches() from tidyselect in a call to tar_load() or tar_read() in a knitr / R Markdown code chunk. These dependencies cannot be detected statically, so they will be ignored. 
-## [39m</code></pre>
+## 4: found matches() from tidyselect in a call to tar_load() or tar_read() in a knitr / R Markdown code chunk. These dependencies cannot be detected statically, so they will be ignored.</code></pre>
 <div id="htmlwidget-29f33bc0837365441b27" style="width:576px;height:288px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-29f33bc0837365441b27">{"x":{"nodes":{"name":["cb_codebook","cb_codebook_yaml","cb_esif_marked","cb_semisum_long","cb_semisum_long_parquet","cb_sum_hlousek_long","cb_sum_hlousek_wide","cb_sum_long","cb_sum_long_csv","cb_sum_long_parquet","cb_sum_long_xlsx","cb_sum_wide","cb_totals","cb_totals_hl","cb_totals_hl_p","cb_totals_p","cb_trida","cb_trida_hl","cb_trida_hl_p","cb_trida_oddil","cb_trida_oddil_p","cb_trida_p","cb_trida_pododdil","cb_trida_pododdil_p","cb_trida_skupina","cb_trida_skupina_p","cis_kraj","codelists","compiled_op_sum","config_yml","d_file","d_file_l","d_file_o","d_file_sf","d_id","d_id_l","d_id_o","d_id_sf","d_months","d_months_l","d_months_o","d_url","d_url_l","d_url_o","d_url_sf","d_years","d_years_l","d_years_l_ptrn","d_years_o","d_years_o_ptrn","d_years_ptrn","dt17_long","dt17_wide","ef_pub","ef_pubxls","ef_pubxls_url","efs_prv","efs_prv_annual","efs_zop","efs_zop_annual","first_report_xlsx","nastroje_zdroje","pop_obce","readme_md","s_analyza_docx","s_analyza_rmd","s_dev_html","s_dev_rmd","s_doc_html","s_doc_rmd","s_index_html","s_output_html","s_output_rmd","s_pokladna_html","s_pokladna_rmd","s_pokladnachecks_html","s_pokladnachecks_rmd","s_readme_html","s_readme_rmd","siteconf","sitefiles","sp_central_new_arrdir","sp_central_new_ops","sp_central_old_arrdir","sp_cl","sp_cl_paths","sp_cl_urls","sp_clp","sp_local_arrdir","sp_local_grants_arrdir","sp_sf_arrdir","table_file","table_file_l","table_file_lg","table_file_o","table_file_sf","zuj_obec","marrow","t_html","load_efs_zop","check_online","c_hier_excel_path","t_sestavy","sp_base_url","sp_codelists","c_sest_xlsx_obl","t_sp_data_local_grants","c_sp_months_sf","t_vydaje_export","summarise_geo_by_kraj","sp_datasets_i","usr","yr_brks","c_sest_xlsx_zop","c_sp_nastroj_ids_0713_prv","bn","sp_load_codelist","make_cb_totals_perc","sp_datasets","export_table","t_public_list","sp_tables_i",".__global__","c_sp_nastroj_ids_1420_ops","clrs","theme_studie","get_stats_pop_obce","c_sp_nastroj_ids_1420_prv","t_vydaje_analysis","c_sp_sf_arrowdir","c_sp_months_central_old","c_sest_dir","t_sp_data_local","get_table","t_2017","c_repo_remote","t_geometa","make_labeller","palette_studie","yr_lbls","sp_tables","c_sest_xlsx_fin","c_mc_xlsx_h","c_sp_years_local","switch_minus","codelist_to_parquet","make_zop_timing_plot","op_labels","c_sest_xlsx_prj","c_sp_local_grants_arrowdir","mn","c_export_dir","codelist_names","c_export_cdbk","make_esif_sum_wide","c_export_sum_pq","c_export_sum_xlsx",".__NAMESPACE__.","c_czso_pop_table_id",".packageName","yr_lbls_m","nm","c_prv_data_path","extract_cl","openlinks","make_cb_totals","nastroj_op","c_export_detail_pq","t_vydaje_core","t_sp_data_central_new","label_lesslong","marrow2_dir","budget_arrow_months",".__S3MethodsTable__.","c_sp_nastroj_ids_0713_ops","c_mc_xlsx_q","c_sp_months_local","c_sp_years_central_old","c_sp_central_arrowdir_new","pc","t_sp_codelists","get_sp_budgetresp","c_mc_xlsx_prv","release_questions","summarise_zop","yr_lbls_old","tar_render_sitedoc","c_hier_excel_sheet","obdobi_to_short","get_nm","yr_brks_old","get_sp_monitoring","cnf","t_config","load_prv","c_sp_local_arrowdir","t_sp_statefunds","c_sp_months_central_new","t_sp_data_central_old","semisummarise_esif_marked","filter_hlousek","listize","collect_filtered_arrow_ds","t_op_compile","make_export_codebook","c_ef_pubxls_url","c_first_report_xlsx","c_ef_obce_arrowdir","get_zuj_obec","c_sp_years_central_new","summarise_prv","c_export_sum_csv","c_sp_central_arrowdir_old","summarise_esif_marked","marrow_dir","marrow_files","marrow_ds","sp_get_codelist_url","sp_get_codelist_viewer","sp_get_dataset_url","sp_get_dataset_doc","sp_load_codelist_named","sp_get_table_file","plot_esif","sp_load_table","add_op_labels","make_nastroje_zdroje","sp_get_monitoring","sp_get_codelist_file","sp_get_dataset","get_dataset_doc","summarise_by_op","read_pubxls","build_efs_timing","sp_get_codelist","get_dataset","sp_get_table","sp_add_codelist","get_codelist","load_budget_local_grants","load_and_prep_budget","budget_new_ops","make_cb_esif_marked","add_codelist","load_budget_yearsum_local","load_budget_yearsum_central_old","load_budget_yearsum_sf","load_budget_yearsum_central_new"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","pattern","pattern","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","pattern","pattern","stem","stem","pattern","stem","pattern","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","pattern","pattern","stem","stem","stem","pattern","pattern","pattern","pattern","pattern","stem","function","object","function","function","object","object","object","object","object","object","object","object","function","object","object","object","object","object","function","function","function","object","function","object","object","object","object","object","function","function","object","object","object","object","object","object","function","object","object","object","function","object","object","object","object","object","object","function","function","function","object","object","object","function","object","object","object","function","object","object","object","object","object","object","function","object","function","function","function","object","object","object","object","function","function","function","object","object","object","object","object","object","function","object","function","object","function","function","object","function","object","function","function","object","function","object","object","function","object","object","object","object","function","function","function","function","object","function","object","object","object","function","object","function","object","object","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function"],"status":["uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","started","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.238,0.02,5.082,0.37,0.263,9.008,0.046,7.586,0.226,0.035,0.211,0.088,0.028,0.032,0.039,0.022,0.031,0.016,0.048,0.043,0.035,0.018,0.05,0.046,0.037,0.018,1.752,1.185,0.191,0.002,0,0.035,0.068,1.864,0,1.236,0.003,2.622,0.001,0.002,0.001,0.344,0.569,0.281,0.634,0.005,0.001,0,0.004,0,0,1.67,2.559,9.352,19.573,1.546,0.956,0.194,4.544,121.347,1.712,0.014,8.649,0.316,39.269,1.312,13.43,1.276,3.448,0.002,0.006,5.268,1.221,54.673,1.071,8.205,1.669,2.53,1.08,0.001,1.396,908.707,2.273,299.206,0.386,4.635,0.732,0.088,732.994,6.723,11.054,0,0.025,1.311,0.015,0.048,4.594,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[738737,2909,2796588,736962,635409,52688,70622,63364,1494381,73443,292029,85926,478,478,263,262,678,674,368,8097,2990,367,31985,7538,2363,1139,837,145,3085,2530,0,180730223,2592095,107135,57,55,55,56,48,48,48,0,0,0,0,102,102,0,102,0,0,138971,176403,13596201,70269952,0,670136,213911,2840699,1747156,1032584,254,40217,2280,2934857,38496,115235,2762,12145,1633,19629,37907,2287,27485,16463,40848,3147,10022,2809,1928,160,256,1892534,224,4380,150397417,0,8287,416,416,256,0,1171385894,27343687,10321052,383273,38162,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,6,11,5,6,null,null,null,null,null,null,null,6,11,5,6,null,null,11,null,5,6,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,12,12,12,12,null,null,null,6,11,11,5,6,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["cb_codebook","cb_codebook_yaml","cb_esif_marked","cb_semisum_long","cb_semisum_long_parquet","cb_sum_hlousek_long","cb_sum_hlousek_wide","cb_sum_long","cb_sum_long_csv","cb_sum_long_parquet","cb_sum_long_xlsx","cb_sum_wide","cb_totals","cb_totals_hl","cb_totals_hl_p","cb_totals_p","cb_trida","cb_trida_hl","cb_trida_hl_p","cb_trida_oddil","cb_trida_oddil_p","cb_trida_p","cb_trida_pododdil","cb_trida_pododdil_p","cb_trida_skupina","cb_trida_skupina_p","cis_kraj","codelists","compiled_op_sum","config_yml","d_file","d_file_l","d_file_o","d_file_sf","d_id","d_id_l","d_id_o","d_id_sf","d_months","d_months_l","d_months_o","d_url","d_url_l","d_url_o","d_url_sf","d_years","d_years_l","d_years_l_ptrn","d_years_o","d_years_o_ptrn","d_years_ptrn","dt17_long","dt17_wide","ef_pub","ef_pubxls","ef_pubxls_url","efs_prv","efs_prv_annual","efs_zop","efs_zop_annual","first_report_xlsx","nastroje_zdroje","pop_obce","readme_md","s_analyza_docx","s_analyza_rmd","s_dev_html","s_dev_rmd","s_doc_html","s_doc_rmd","s_index_html","s_output_html","s_output_rmd","s_pokladna_html","s_pokladna_rmd","s_pokladnachecks_html","s_pokladnachecks_rmd","s_readme_html","s_readme_rmd","siteconf","sitefiles","sp_central_new_arrdir","sp_central_new_ops","sp_central_old_arrdir","sp_cl","sp_cl_paths","sp_cl_urls","sp_clp","sp_local_arrdir","sp_local_grants_arrdir","sp_sf_arrdir","table_file","table_file_l","table_file_lg","table_file_o","table_file_sf","zuj_obec","marrow","t_html","load_efs_zop","check_online","c_hier_excel_path","t_sestavy","sp_base_url","sp_codelists","c_sest_xlsx_obl","t_sp_data_local_grants","c_sp_months_sf","t_vydaje_export","summarise_geo_by_kraj","sp_datasets_i","usr","yr_brks","c_sest_xlsx_zop","c_sp_nastroj_ids_0713_prv","bn","sp_load_codelist","make_cb_totals_perc","sp_datasets","export_table","t_public_list","sp_tables_i",".__global__","c_sp_nastroj_ids_1420_ops","clrs","theme_studie","get_stats_pop_obce","c_sp_nastroj_ids_1420_prv","t_vydaje_analysis","c_sp_sf_arrowdir","c_sp_months_central_old","c_sest_dir","t_sp_data_local","get_table","t_2017","c_repo_remote","t_geometa","make_labeller","palette_studie","yr_lbls","sp_tables","c_sest_xlsx_fin","c_mc_xlsx_h","c_sp_years_local","switch_minus","codelist_to_parquet","make_zop_timing_plot","op_labels","c_sest_xlsx_prj","c_sp_local_grants_arrowdir","mn","c_export_dir","codelist_names","c_export_cdbk","make_esif_sum_wide","c_export_sum_pq","c_export_sum_xlsx",".__NAMESPACE__.","c_czso_pop_table_id",".packageName","yr_lbls_m","nm","c_prv_data_path","extract_cl","openlinks","make_cb_totals","nastroj_op","c_export_detail_pq","t_vydaje_core","t_sp_data_central_new","label_lesslong","marrow2_dir","budget_arrow_months",".__S3MethodsTable__.","c_sp_nastroj_ids_0713_ops","c_mc_xlsx_q","c_sp_months_local","c_sp_years_central_old","c_sp_central_arrowdir_new","pc","t_sp_codelists","get_sp_budgetresp","c_mc_xlsx_prv","release_questions","summarise_zop","yr_lbls_old","tar_render_sitedoc","c_hier_excel_sheet","obdobi_to_short","get_nm","yr_brks_old","get_sp_monitoring","cnf","t_config","load_prv","c_sp_local_arrowdir","t_sp_statefunds","c_sp_months_central_new","t_sp_data_central_old","semisummarise_esif_marked","filter_hlousek","listize","collect_filtered_arrow_ds","t_op_compile","make_export_codebook","c_ef_pubxls_url","c_first_report_xlsx","c_ef_obce_arrowdir","get_zuj_obec","c_sp_years_central_new","summarise_prv","c_export_sum_csv","c_sp_central_arrowdir_old","summarise_esif_marked","marrow_dir","marrow_files","marrow_ds","sp_get_codelist_url","sp_get_codelist_viewer","sp_get_dataset_url","sp_get_dataset_doc","sp_load_codelist_named","sp_get_table_file","plot_esif","sp_load_table","add_op_labels","make_nastroje_zdroje","sp_get_monitoring","sp_get_codelist_file","sp_get_dataset","get_dataset_doc","summarise_by_op","read_pubxls","build_efs_timing","sp_get_codelist","get_dataset","sp_get_table","sp_add_codelist","get_codelist","load_budget_local_grants","load_and_prep_budget","budget_new_ops","make_cb_esif_marked","add_codelist","load_budget_yearsum_local","load_budget_yearsum_central_old","load_budget_yearsum_sf","load_budget_yearsum_central_new"],"label":["cb_codebook","cb_codebook_yaml","cb_esif_marked","cb_semisum_long","cb_semisum_long_parquet","cb_sum_hlousek_long","cb_sum_hlousek_wide","cb_sum_long","cb_sum_long_csv","cb_sum_long_parquet","cb_sum_long_xlsx","cb_sum_wide","cb_totals","cb_totals_hl","cb_totals_hl_p","cb_totals_p","cb_trida","cb_trida_hl","cb_trida_hl_p","cb_trida_oddil","cb_trida_oddil_p","cb_trida_p","cb_trida_pododdil","cb_trida_pododdil_p","cb_trida_skupina","cb_trida_skupina_p","cis_kraj","codelists","compiled_op_sum","config_yml","d_file","d_file_l","d_file_o","d_file_sf","d_id","d_id_l","d_id_o","d_id_sf","d_months","d_months_l","d_months_o","d_url","d_url_l","d_url_o","d_url_sf","d_years","d_years_l","d_years_l_ptrn","d_years_o","d_years_o_ptrn","d_years_ptrn","dt17_long","dt17_wide","ef_pub","ef_pubxls","ef_pubxls_url","efs_prv","efs_prv_annual","efs_zop","efs_zop_annual","first_report_xlsx","nastroje_zdroje","pop_obce","readme_md","s_analyza_docx","s_analyza_rmd","s_dev_html","s_dev_rmd","s_doc_html","s_doc_rmd","s_index_html","s_output_html","s_output_rmd","s_pokladna_html","s_pokladna_rmd","s_pokladnachecks_html","s_pokladnachecks_rmd","s_readme_html","s_readme_rmd","siteconf","sitefiles","sp_central_new_arrdir","sp_central_new_ops","sp_central_old_arrdir","sp_cl","sp_cl_paths","sp_cl_urls","sp_clp","sp_local_arrdir","sp_local_grants_arrdir","sp_sf_arrdir","table_file","table_file_l","table_file_lg","table_file_o","table_file_sf","zuj_obec","marrow","t_html","load_efs_zop","check_online","c_hier_excel_path","t_sestavy","sp_base_url","sp_codelists","c_sest_xlsx_obl","t_sp_data_local_grants","c_sp_months_sf","t_vydaje_export","summarise_geo_by_kraj","sp_datasets_i","usr","yr_brks","c_sest_xlsx_zop","c_sp_nastroj_ids_0713_prv","bn","sp_load_codelist","make_cb_totals_perc","sp_datasets","export_table","t_public_list","sp_tables_i",".__global__","c_sp_nastroj_ids_1420_ops","clrs","theme_studie","get_stats_pop_obce","c_sp_nastroj_ids_1420_prv","t_vydaje_analysis","c_sp_sf_arrowdir","c_sp_months_central_old","c_sest_dir","t_sp_data_local","get_table","t_2017","c_repo_remote","t_geometa","make_labeller","palette_studie","yr_lbls","sp_tables","c_sest_xlsx_fin","c_mc_xlsx_h","c_sp_years_local","switch_minus","codelist_to_parquet","make_zop_timing_plot","op_labels","c_sest_xlsx_prj","c_sp_local_grants_arrowdir","mn","c_export_dir","codelist_names","c_export_cdbk","make_esif_sum_wide","c_export_sum_pq","c_export_sum_xlsx",".__NAMESPACE__.","c_czso_pop_table_id",".packageName","yr_lbls_m","nm","c_prv_data_path","extract_cl","openlinks","make_cb_totals","nastroj_op","c_export_detail_pq","t_vydaje_core","t_sp_data_central_new","label_lesslong","marrow2_dir","budget_arrow_months",".__S3MethodsTable__.","c_sp_nastroj_ids_0713_ops","c_mc_xlsx_q","c_sp_months_local","c_sp_years_central_old","c_sp_central_arrowdir_new","pc","t_sp_codelists","get_sp_budgetresp","c_mc_xlsx_prv","release_questions","summarise_zop","yr_lbls_old","tar_render_sitedoc","c_hier_excel_sheet","obdobi_to_short","get_nm","yr_brks_old","get_sp_monitoring","cnf","t_config","load_prv","c_sp_local_arrowdir","t_sp_statefunds","c_sp_months_central_new","t_sp_data_central_old","semisummarise_esif_marked","filter_hlousek","listize","collect_filtered_arrow_ds","t_op_compile","make_export_codebook","c_ef_pubxls_url","c_first_report_xlsx","c_ef_obce_arrowdir","get_zuj_obec","c_sp_years_central_new","summarise_prv","c_export_sum_csv","c_sp_central_arrowdir_old","summarise_esif_marked","marrow_dir","marrow_files","marrow_ds","sp_get_codelist_url","sp_get_codelist_viewer","sp_get_dataset_url","sp_get_dataset_doc","sp_load_codelist_named","sp_get_table_file","plot_esif","sp_load_table","add_op_labels","make_nastroje_zdroje","sp_get_monitoring","sp_get_codelist_file","sp_get_dataset","get_dataset_doc","summarise_by_op","read_pubxls","build_efs_timing","sp_get_codelist","get_dataset","sp_get_table","sp_add_codelist","get_codelist","load_budget_local_grants","load_and_prep_budget","budget_new_ops","make_cb_esif_marked","add_codelist","load_budget_yearsum_local","load_budget_yearsum_central_old","load_budget_yearsum_sf","load_budget_yearsum_central_new"],"level":[11,12,9,10,11,10,11,10,11,11,11,11,11,11,12,12,11,11,12,11,12,12,11,12,11,12,1,2,4,1,5,5,5,5,1,1,1,1,2,2,2,4,4,4,4,2,2,3,2,3,3,4,3,4,2,1,2,3,2,3,2,6,2,3,10,1,2,1,2,1,3,13,1,10,1,10,1,2,1,1,1,8,9,8,5,4,3,6,8,7,8,6,6,6,6,6,2,1,0,1,1,0,0,1,1,0,0,1,0,0,1,1,1,1,1,0,1,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,1,0,1,0,1,1,1,1,1,1,0,1,0,0,0,1,1,0,1,1,1,0,0,0,0,1,0,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,1,1,0,1,0,1,1,0,0,0,1,0,1,0,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,5,5,6,6,6,6,6,7,7,7,7],"color":["#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#DC863B","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","square","square","square","dot","dot","dot","dot","dot","dot","dot","square","square","square","square","dot","dot","square","dot","square","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","square","square","square","dot","dot","dot","square","square","square","square","square","dot","triangle","triangleDown","triangle","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangle","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangle","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangle","triangle","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangle","triangleDown","triangle","triangle","triangleDown","triangle","triangleDown","triangle","triangle","triangleDown","triangle","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangle","triangle","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangle","triangleDown","triangleDown","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle"]},"edges":{"from":["marrow","marrow","marrow","check_online","check_online","check_online","sp_base_url","sp_codelists","sp_codelists","sp_get_codelist_url","sp_add_codelist","sp_add_codelist","sp_add_codelist","sp_add_codelist","sp_add_codelist","sp_load_table","sp_load_table","add_op_labels","add_op_labels","add_op_labels","add_op_labels","sp_datasets_i","sp_datasets_i","usr","usr","usr","sp_get_dataset_doc","yr_brks","c_sp_nastroj_ids_0713_prv","sp_load_codelist","sp_load_codelist","sp_tables_i","sp_tables_i","c_sp_nastroj_ids_1420_ops","theme_studie","c_sp_nastroj_ids_1420_prv","load_and_prep_budget","load_and_prep_budget","load_and_prep_budget","load_and_prep_budget","make_labeller","palette_studie","yr_lbls","sp_get_dataset_url","switch_minus","op_labels","sp_get_codelist","sp_get_codelist","sp_get_codelist_file","sp_get_table_file","extract_cl","extract_cl","c_sp_nastroj_ids_0713_ops","sp_get_dataset","sp_get_dataset","get_sp_monitoring","budget_new_ops","nastroj_op","sp_central_new_arrdir","sp_cl","c_export_dir","c_export_sum_csv","cb_sum_long","export_table","c_export_cdbk","c_export_dir","cb_codebook","cb_semisum_long","cb_sum_long","make_cb_totals","cb_esif_marked","summarise_esif_marked","budget_arrow_months","c_sp_months_sf","c_sp_sf_arrowdir","load_budget_yearsum_sf","sp_cl","table_file_sf","d_years","c_sp_months_central_new","config_yml","s_doc_rmd","siteconf","sitefiles","budget_arrow_months","c_sp_central_arrowdir_old","c_sp_months_central_old","load_budget_yearsum_central_old","sp_cl","table_file_o","d_file","sp_get_table_file","budget_arrow_months","c_sp_local_grants_arrowdir","c_sp_months_local","load_budget_local_grants","sp_cl","table_file_lg","d_years_l","efs_zop","s_pokladnachecks_rmd","siteconf","sitefiles","sp_central_new_arrdir","sp_central_new_ops","sp_central_old_arrdir","sp_cl","sp_local_arrdir","sp_local_grants_arrdir","cb_sum_long","make_cb_totals","cb_sum_hlousek_long","make_esif_sum_wide","cb_sum_long","make_cb_totals","efs_prv","summarise_prv","budget_arrow_months","c_sp_central_arrowdir_new","c_sp_months_central_new","load_budget_yearsum_central_new","sp_cl","table_file","cb_esif_marked","s_pokladna_rmd","siteconf","sitefiles","sp_cl","s_readme_html","s_readme_rmd","d_id_l","d_months_l","d_url_l","d_years_l","sp_get_dataset","budget_arrow_months","c_sp_local_arrowdir","c_sp_months_local","load_budget_yearsum_local","sp_cl","table_file_l","make_nastroje_zdroje","sp_cl","d_id_o","d_months_o","d_url_o","d_years_o","sp_get_dataset","config_yml","s_readme_rmd","siteconf","sitefiles","get_zuj_obec","efs_zop","summarise_zop","sp_cl_paths","sp_load_codelist_named","d_id_l","d_months_l","d_years_l_ptrn","sp_get_dataset_url","d_id","d_months","d_years_ptrn","sp_get_dataset_url","d_id_o","d_months_o","d_years_o_ptrn","sp_get_dataset_url","ef_pubxls_url","efs_prv_annual","efs_zop_annual","summarise_by_op","cb_sum_long","make_cb_totals","cb_sum_long","make_esif_sum_wide","c_prv_data_path","cis_kraj","load_prv","cb_trida_hl","make_cb_totals_perc","d_id","d_months","d_url","d_years","sp_get_dataset","cb_sum_hlousek_long","make_cb_totals","make_cb_esif_marked","nastroje_zdroje","sp_central_new_arrdir","sp_cl","s_readme_html","s_readme_rmd","siteconf","sitefiles","c_export_detail_pq","c_export_dir","cb_semisum_long","export_table","cb_esif_marked","s_analyza_rmd","siteconf","sitefiles","sp_cl_urls","sp_get_codelist_file","ef_pubxls","read_pubxls","c_sp_months_local","d_years_o","c_sp_months_central_old","c_export_dir","c_export_sum_xlsx","cb_sum_long","export_table","cb_esif_marked","filter_hlousek","summarise_esif_marked","c_sest_dir","c_sest_xlsx_zop","load_efs_zop","cb_codebook","cb_codebook_yaml","cb_semisum_long","cb_semisum_long_parquet","cb_sum_long","cb_sum_long_csv","cb_sum_long_parquet","cb_sum_long_xlsx","config_yml","ef_pub","s_output_rmd","siteconf","sitefiles","cb_trida","make_cb_totals_perc","d_file_sf","sp_get_table_file","d_id_sf","d_months","d_years_ptrn","sp_get_dataset_url","first_report_xlsx","cb_totals_hl","make_cb_totals_perc","cb_trida_oddil","make_cb_totals_perc","cb_trida_pododdil","make_cb_totals_perc","cb_totals","make_cb_totals_perc","c_czso_pop_table_id","get_stats_pop_obce","codelists","sp_get_codelist_url","cb_sum_long","make_cb_totals","d_file_l","sp_get_table_file","cb_trida_skupina","make_cb_totals_perc","codelist_names","d_file_o","sp_get_table_file","dt17_wide","s_dev_rmd","siteconf","sitefiles","d_id_sf","d_months","d_url_sf","d_years","sp_get_dataset","cb_semisum_long","make_export_codebook","c_export_dir","c_export_sum_pq","cb_sum_long","export_table","cb_sum_hlousek_long","make_cb_totals","d_file_l","sp_get_table_file","c_first_report_xlsx","c_sp_years_local","c_sp_years_central_old","codelist_to_parquet","codelists","sp_cl","cb_esif_marked","semisummarise_esif_marked","c_sp_years_central_new"],"to":["marrow_dir","marrow_files","marrow_ds","sp_get_codelist_url","sp_get_dataset_doc","sp_get_dataset_url","sp_get_codelist_url","sp_get_codelist_url","sp_get_codelist_viewer","sp_get_codelist_file","load_budget_local_grants","load_and_prep_budget","budget_new_ops","make_cb_esif_marked","add_codelist","load_budget_local_grants","sp_get_table","summarise_by_op","read_pubxls","build_efs_timing","budget_new_ops","sp_get_dataset_doc","sp_get_dataset_url","sp_get_dataset_doc","sp_get_codelist_file","sp_get_dataset","get_dataset_doc","plot_esif","make_nastroje_zdroje","sp_load_codelist_named","sp_get_codelist","sp_get_table_file","sp_get_table","make_nastroje_zdroje","plot_esif","make_nastroje_zdroje","load_budget_yearsum_local","load_budget_yearsum_central_old","load_budget_yearsum_sf","load_budget_yearsum_central_new","plot_esif","plot_esif","plot_esif","sp_get_dataset","sp_load_table","add_op_labels","sp_add_codelist","get_codelist","sp_get_codelist","sp_get_table","make_nastroje_zdroje","make_cb_esif_marked","make_nastroje_zdroje","get_dataset","sp_get_table","sp_get_monitoring","sp_central_new_ops","sp_central_new_ops","sp_central_new_ops","sp_central_new_ops","cb_sum_long_csv","cb_sum_long_csv","cb_sum_long_csv","cb_sum_long_csv","cb_codebook_yaml","cb_codebook_yaml","cb_codebook_yaml","cb_codebook_yaml","cb_trida_pododdil","cb_trida_pododdil","cb_sum_long","cb_sum_long","sp_sf_arrdir","sp_sf_arrdir","sp_sf_arrdir","sp_sf_arrdir","sp_sf_arrdir","sp_sf_arrdir","d_years_ptrn","d_months","s_doc_html","s_doc_html","s_doc_html","s_doc_html","sp_central_old_arrdir","sp_central_old_arrdir","sp_central_old_arrdir","sp_central_old_arrdir","sp_central_old_arrdir","sp_central_old_arrdir","table_file","table_file","sp_local_grants_arrdir","sp_local_grants_arrdir","sp_local_grants_arrdir","sp_local_grants_arrdir","sp_local_grants_arrdir","sp_local_grants_arrdir","d_years_l_ptrn","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","cb_trida_skupina","cb_trida_skupina","cb_sum_hlousek_wide","cb_sum_hlousek_wide","cb_totals","cb_totals","efs_prv_annual","efs_prv_annual","sp_central_new_arrdir","sp_central_new_arrdir","sp_central_new_arrdir","sp_central_new_arrdir","sp_central_new_arrdir","sp_central_new_arrdir","s_pokladna_html","s_pokladna_html","s_pokladna_html","s_pokladna_html","s_pokladna_html","s_index_html","s_index_html","d_file_l","d_file_l","d_file_l","d_file_l","d_file_l","sp_local_arrdir","sp_local_arrdir","sp_local_arrdir","sp_local_arrdir","sp_local_arrdir","sp_local_arrdir","nastroje_zdroje","nastroje_zdroje","d_file_o","d_file_o","d_file_o","d_file_o","d_file_o","s_readme_html","s_readme_html","s_readme_html","s_readme_html","zuj_obec","efs_zop_annual","efs_zop_annual","sp_cl","sp_cl","d_url_l","d_url_l","d_url_l","d_url_l","d_url","d_url","d_url","d_url","d_url_o","d_url_o","d_url_o","d_url_o","ef_pubxls","compiled_op_sum","compiled_op_sum","compiled_op_sum","cb_trida","cb_trida","cb_sum_wide","cb_sum_wide","efs_prv","efs_prv","efs_prv","cb_trida_hl_p","cb_trida_hl_p","d_file","d_file","d_file","d_file","d_file","cb_totals_hl","cb_totals_hl","cb_esif_marked","cb_esif_marked","cb_esif_marked","cb_esif_marked","readme_md","readme_md","readme_md","readme_md","cb_semisum_long_parquet","cb_semisum_long_parquet","cb_semisum_long_parquet","cb_semisum_long_parquet","s_analyza_docx","s_analyza_docx","s_analyza_docx","s_analyza_docx","sp_cl_paths","sp_cl_paths","ef_pub","ef_pub","d_months_l","d_years_o_ptrn","d_months_o","cb_sum_long_xlsx","cb_sum_long_xlsx","cb_sum_long_xlsx","cb_sum_long_xlsx","cb_sum_hlousek_long","cb_sum_hlousek_long","cb_sum_hlousek_long","efs_zop","efs_zop","efs_zop","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","cb_trida_p","cb_trida_p","table_file_sf","table_file_sf","d_url_sf","d_url_sf","d_url_sf","d_url_sf","dt17_wide","cb_totals_hl_p","cb_totals_hl_p","cb_trida_oddil_p","cb_trida_oddil_p","cb_trida_pododdil_p","cb_trida_pododdil_p","cb_totals_p","cb_totals_p","pop_obce","pop_obce","sp_cl_urls","sp_cl_urls","cb_trida_oddil","cb_trida_oddil","table_file_l","table_file_l","cb_trida_skupina_p","cb_trida_skupina_p","codelists","table_file_o","table_file_o","dt17_long","s_dev_html","s_dev_html","s_dev_html","d_file_sf","d_file_sf","d_file_sf","d_file_sf","d_file_sf","cb_codebook","cb_codebook","cb_sum_long_parquet","cb_sum_long_parquet","cb_sum_long_parquet","cb_sum_long_parquet","cb_trida_hl","cb_trida_hl","table_file_lg","table_file_lg","first_report_xlsx","d_years_l","d_years_o","sp_clp","sp_clp","sp_clp","cb_semisum_long","cb_semisum_long","d_years"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Started","Stem","Pattern","Function","Object"],"color":["#354823","#DC863B","#899DA4","#899DA4","#899DA4","#899DA4"],"shape":["dot","dot","dot","square","triangle","triangleDown"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-29f33bc0837365441b27">{"x":{"nodes":{"name":["cb_codebook","cb_codebook_yaml","cb_esif_marked","cb_semisum_long","cb_semisum_long_parquet","cb_sum_hlousek_long","cb_sum_hlousek_wide","cb_sum_long","cb_sum_long_csv","cb_sum_long_parquet","cb_sum_long_xlsx","cb_sum_wide","cb_totals","cb_totals_hl","cb_totals_hl_p","cb_totals_p","cb_trida","cb_trida_hl","cb_trida_hl_p","cb_trida_oddil","cb_trida_oddil_p","cb_trida_p","cb_trida_pododdil","cb_trida_pododdil_p","cb_trida_skupina","cb_trida_skupina_p","cis_kraj","codelists","compiled_op_sum","config_yml","d_file","d_file_l","d_file_o","d_file_sf","d_id","d_id_l","d_id_o","d_id_sf","d_months","d_months_l","d_months_o","d_url","d_url_l","d_url_o","d_url_sf","d_years","d_years_l","d_years_l_ptrn","d_years_o","d_years_o_ptrn","d_years_ptrn","dt17_long","dt17_wide","ef_pub","ef_pubxls","ef_pubxls_url","efs_prv","efs_prv_annual","efs_zop","efs_zop_annual","first_report_xlsx","nastroje_zdroje","pop_obce","readme_md","s_analyza_docx","s_analyza_rmd","s_dev_html","s_dev_rmd","s_doc_html","s_doc_rmd","s_index_html","s_output_html","s_output_rmd","s_pokladna_html","s_pokladna_rmd","s_pokladnachecks_html","s_pokladnachecks_rmd","s_readme_html","s_readme_rmd","siteconf","sitefiles","sp_central_new_arrdir","sp_central_new_ops","sp_central_old_arrdir","sp_cl","sp_cl_paths","sp_cl_urls","sp_clp","sp_local_arrdir","sp_local_grants_arrdir","sp_sf_arrdir","table_file","table_file_l","table_file_lg","table_file_o","table_file_sf","zuj_obec","marrow","t_html","load_efs_zop","check_online","c_hier_excel_path","t_sestavy","sp_base_url","sp_codelists","c_sest_xlsx_obl","t_sp_data_local_grants","c_sp_months_sf","t_vydaje_export","summarise_geo_by_kraj","sp_datasets_i","usr","yr_brks","c_sest_xlsx_zop","c_sp_nastroj_ids_0713_prv","bn","sp_load_codelist","make_cb_totals_perc","sp_datasets","export_table","t_public_list","sp_tables_i",".__global__","c_sp_nastroj_ids_1420_ops","clrs","theme_studie","get_stats_pop_obce","c_sp_nastroj_ids_1420_prv","t_vydaje_analysis","c_sp_sf_arrowdir","c_sp_months_central_old","c_sest_dir","t_sp_data_local","get_table","t_2017","c_repo_remote","t_geometa","make_labeller","palette_studie","yr_lbls","sp_tables","c_sest_xlsx_fin","c_mc_xlsx_h","c_sp_years_local","switch_minus","codelist_to_parquet","make_zop_timing_plot","op_labels","c_sest_xlsx_prj","c_sp_local_grants_arrowdir","mn","c_export_dir","codelist_names","c_export_cdbk","c_docs_url","make_esif_sum_wide","c_export_sum_pq","c_export_sum_xlsx",".__NAMESPACE__.","c_czso_pop_table_id",".packageName","yr_lbls_m","nm","c_prv_data_path","extract_cl","openlinks","make_cb_totals","nastroj_op","c_export_detail_pq","t_vydaje_core","t_sp_data_central_new","label_lesslong","marrow2_dir","budget_arrow_months",".__S3MethodsTable__.","c_sp_nastroj_ids_0713_ops","c_mc_xlsx_q","c_sp_months_local","c_sp_years_central_old","c_sp_central_arrowdir_new","pc","t_sp_codelists","get_sp_budgetresp","c_mc_xlsx_prv","release_questions","summarise_zop","yr_lbls_old","tar_render_sitedoc","c_hier_excel_sheet","obdobi_to_short","get_nm","yr_brks_old","get_sp_monitoring","cnf","t_config","load_prv","c_sp_local_arrowdir","t_sp_statefunds","c_sp_months_central_new","t_sp_data_central_old","semisummarise_esif_marked","filter_hlousek","listize","collect_filtered_arrow_ds","t_op_compile","make_export_codebook","c_ef_pubxls_url","c_first_report_xlsx","c_ef_obce_arrowdir","get_zuj_obec","c_sp_years_central_new","summarise_prv","c_export_sum_csv","c_sp_central_arrowdir_old","summarise_esif_marked","marrow_dir","marrow_files","marrow_ds","sp_get_codelist_url","sp_get_codelist_viewer","sp_get_dataset_url","sp_get_dataset_doc","sp_load_codelist_named","sp_get_table_file","plot_esif","sp_load_table","add_op_labels","make_nastroje_zdroje","sp_get_monitoring","sp_get_codelist_file","sp_get_dataset","get_dataset_doc","summarise_by_op","read_pubxls","build_efs_timing","sp_get_codelist","get_dataset","sp_get_table","sp_add_codelist","get_codelist","load_budget_local_grants","load_and_prep_budget","budget_new_ops","make_cb_esif_marked","add_codelist","load_budget_yearsum_local","load_budget_yearsum_central_old","load_budget_yearsum_sf","load_budget_yearsum_central_new"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","pattern","pattern","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","pattern","pattern","stem","stem","pattern","stem","pattern","pattern","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","pattern","pattern","pattern","pattern","stem","stem","stem","pattern","pattern","pattern","pattern","pattern","stem","function","object","function","function","object","object","object","object","object","object","object","object","function","object","object","object","object","object","function","function","function","object","function","object","object","object","object","object","function","function","object","object","object","object","object","object","function","object","object","object","function","object","object","object","object","object","object","function","function","function","object","object","object","function","object","object","object","object","function","object","object","object","object","object","object","function","object","function","function","function","object","object","object","object","function","function","function","object","object","object","object","object","object","function","object","function","object","function","function","object","function","object","function","function","object","function","object","object","function","object","object","object","object","function","function","function","function","object","function","object","object","object","function","object","function","object","object","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function","function"],"status":["uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","uptodate","uptodate","started","uptodate","uptodate","uptodate","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.043,0.002,1.956,0.093,0.057,1.774,0.011,1.68,0.043,0.007,0.069,0.009,0.171,0.004,0.003,0.003,0.003,0.004,0.004,0.005,0.004,0.004,0.008,0.008,0.006,0.007,1.752,1.185,0.191,0.002,0,0.035,0.068,1.864,0,1.236,0.003,2.622,0.001,0.002,0.001,0.344,0.569,0.281,0.634,0.005,0.001,0,0.004,0,0,0.01,0.116,9.352,19.573,1.546,0.956,0.194,4.544,121.347,1.712,0.014,8.649,0.191,13.456,1.503,7.127,1.276,1.881,0.002,0.001,2.617,1.221,15.965,1.071,3.134,1.669,4.547,1.113,0.001,2.787,189.624,0.365,50.996,0.386,4.635,0.732,0.088,180.65,2.69,2.732,0,0.025,1.311,0.015,0.048,4.594,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[741482,2909,2813835,739709,636583,53349,71799,64215,1489215,73845,292923,87371,479,481,264,264,681,680,369,8220,2986,369,32395,7518,2396,1139,837,145,3085,2581,0,180730223,2592095,107135,57,55,55,56,48,48,48,0,0,0,0,102,102,0,102,0,0,138922,176403,13596201,70269952,0,670136,213911,2840699,1747156,1032584,254,40217,2769,2937874,45138,115425,2762,12206,1633,10575,37911,2287,27582,16463,40848,3147,10575,3287,1928,373288,256,1903006,224,4380,150397417,0,8287,416,416,256,0,1171385894,27343687,10321052,383273,38162,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,6,11,5,6,null,null,null,null,null,null,null,6,11,5,6,null,null,11,null,5,6,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,12,12,12,12,null,null,null,6,11,11,5,6,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"id":["cb_codebook","cb_codebook_yaml","cb_esif_marked","cb_semisum_long","cb_semisum_long_parquet","cb_sum_hlousek_long","cb_sum_hlousek_wide","cb_sum_long","cb_sum_long_csv","cb_sum_long_parquet","cb_sum_long_xlsx","cb_sum_wide","cb_totals","cb_totals_hl","cb_totals_hl_p","cb_totals_p","cb_trida","cb_trida_hl","cb_trida_hl_p","cb_trida_oddil","cb_trida_oddil_p","cb_trida_p","cb_trida_pododdil","cb_trida_pododdil_p","cb_trida_skupina","cb_trida_skupina_p","cis_kraj","codelists","compiled_op_sum","config_yml","d_file","d_file_l","d_file_o","d_file_sf","d_id","d_id_l","d_id_o","d_id_sf","d_months","d_months_l","d_months_o","d_url","d_url_l","d_url_o","d_url_sf","d_years","d_years_l","d_years_l_ptrn","d_years_o","d_years_o_ptrn","d_years_ptrn","dt17_long","dt17_wide","ef_pub","ef_pubxls","ef_pubxls_url","efs_prv","efs_prv_annual","efs_zop","efs_zop_annual","first_report_xlsx","nastroje_zdroje","pop_obce","readme_md","s_analyza_docx","s_analyza_rmd","s_dev_html","s_dev_rmd","s_doc_html","s_doc_rmd","s_index_html","s_output_html","s_output_rmd","s_pokladna_html","s_pokladna_rmd","s_pokladnachecks_html","s_pokladnachecks_rmd","s_readme_html","s_readme_rmd","siteconf","sitefiles","sp_central_new_arrdir","sp_central_new_ops","sp_central_old_arrdir","sp_cl","sp_cl_paths","sp_cl_urls","sp_clp","sp_local_arrdir","sp_local_grants_arrdir","sp_sf_arrdir","table_file","table_file_l","table_file_lg","table_file_o","table_file_sf","zuj_obec","marrow","t_html","load_efs_zop","check_online","c_hier_excel_path","t_sestavy","sp_base_url","sp_codelists","c_sest_xlsx_obl","t_sp_data_local_grants","c_sp_months_sf","t_vydaje_export","summarise_geo_by_kraj","sp_datasets_i","usr","yr_brks","c_sest_xlsx_zop","c_sp_nastroj_ids_0713_prv","bn","sp_load_codelist","make_cb_totals_perc","sp_datasets","export_table","t_public_list","sp_tables_i",".__global__","c_sp_nastroj_ids_1420_ops","clrs","theme_studie","get_stats_pop_obce","c_sp_nastroj_ids_1420_prv","t_vydaje_analysis","c_sp_sf_arrowdir","c_sp_months_central_old","c_sest_dir","t_sp_data_local","get_table","t_2017","c_repo_remote","t_geometa","make_labeller","palette_studie","yr_lbls","sp_tables","c_sest_xlsx_fin","c_mc_xlsx_h","c_sp_years_local","switch_minus","codelist_to_parquet","make_zop_timing_plot","op_labels","c_sest_xlsx_prj","c_sp_local_grants_arrowdir","mn","c_export_dir","codelist_names","c_export_cdbk","c_docs_url","make_esif_sum_wide","c_export_sum_pq","c_export_sum_xlsx",".__NAMESPACE__.","c_czso_pop_table_id",".packageName","yr_lbls_m","nm","c_prv_data_path","extract_cl","openlinks","make_cb_totals","nastroj_op","c_export_detail_pq","t_vydaje_core","t_sp_data_central_new","label_lesslong","marrow2_dir","budget_arrow_months",".__S3MethodsTable__.","c_sp_nastroj_ids_0713_ops","c_mc_xlsx_q","c_sp_months_local","c_sp_years_central_old","c_sp_central_arrowdir_new","pc","t_sp_codelists","get_sp_budgetresp","c_mc_xlsx_prv","release_questions","summarise_zop","yr_lbls_old","tar_render_sitedoc","c_hier_excel_sheet","obdobi_to_short","get_nm","yr_brks_old","get_sp_monitoring","cnf","t_config","load_prv","c_sp_local_arrowdir","t_sp_statefunds","c_sp_months_central_new","t_sp_data_central_old","semisummarise_esif_marked","filter_hlousek","listize","collect_filtered_arrow_ds","t_op_compile","make_export_codebook","c_ef_pubxls_url","c_first_report_xlsx","c_ef_obce_arrowdir","get_zuj_obec","c_sp_years_central_new","summarise_prv","c_export_sum_csv","c_sp_central_arrowdir_old","summarise_esif_marked","marrow_dir","marrow_files","marrow_ds","sp_get_codelist_url","sp_get_codelist_viewer","sp_get_dataset_url","sp_get_dataset_doc","sp_load_codelist_named","sp_get_table_file","plot_esif","sp_load_table","add_op_labels","make_nastroje_zdroje","sp_get_monitoring","sp_get_codelist_file","sp_get_dataset","get_dataset_doc","summarise_by_op","read_pubxls","build_efs_timing","sp_get_codelist","get_dataset","sp_get_table","sp_add_codelist","get_codelist","load_budget_local_grants","load_and_prep_budget","budget_new_ops","make_cb_esif_marked","add_codelist","load_budget_yearsum_local","load_budget_yearsum_central_old","load_budget_yearsum_sf","load_budget_yearsum_central_new"],"label":["cb_codebook","cb_codebook_yaml","cb_esif_marked","cb_semisum_long","cb_semisum_long_parquet","cb_sum_hlousek_long","cb_sum_hlousek_wide","cb_sum_long","cb_sum_long_csv","cb_sum_long_parquet","cb_sum_long_xlsx","cb_sum_wide","cb_totals","cb_totals_hl","cb_totals_hl_p","cb_totals_p","cb_trida","cb_trida_hl","cb_trida_hl_p","cb_trida_oddil","cb_trida_oddil_p","cb_trida_p","cb_trida_pododdil","cb_trida_pododdil_p","cb_trida_skupina","cb_trida_skupina_p","cis_kraj","codelists","compiled_op_sum","config_yml","d_file","d_file_l","d_file_o","d_file_sf","d_id","d_id_l","d_id_o","d_id_sf","d_months","d_months_l","d_months_o","d_url","d_url_l","d_url_o","d_url_sf","d_years","d_years_l","d_years_l_ptrn","d_years_o","d_years_o_ptrn","d_years_ptrn","dt17_long","dt17_wide","ef_pub","ef_pubxls","ef_pubxls_url","efs_prv","efs_prv_annual","efs_zop","efs_zop_annual","first_report_xlsx","nastroje_zdroje","pop_obce","readme_md","s_analyza_docx","s_analyza_rmd","s_dev_html","s_dev_rmd","s_doc_html","s_doc_rmd","s_index_html","s_output_html","s_output_rmd","s_pokladna_html","s_pokladna_rmd","s_pokladnachecks_html","s_pokladnachecks_rmd","s_readme_html","s_readme_rmd","siteconf","sitefiles","sp_central_new_arrdir","sp_central_new_ops","sp_central_old_arrdir","sp_cl","sp_cl_paths","sp_cl_urls","sp_clp","sp_local_arrdir","sp_local_grants_arrdir","sp_sf_arrdir","table_file","table_file_l","table_file_lg","table_file_o","table_file_sf","zuj_obec","marrow","t_html","load_efs_zop","check_online","c_hier_excel_path","t_sestavy","sp_base_url","sp_codelists","c_sest_xlsx_obl","t_sp_data_local_grants","c_sp_months_sf","t_vydaje_export","summarise_geo_by_kraj","sp_datasets_i","usr","yr_brks","c_sest_xlsx_zop","c_sp_nastroj_ids_0713_prv","bn","sp_load_codelist","make_cb_totals_perc","sp_datasets","export_table","t_public_list","sp_tables_i",".__global__","c_sp_nastroj_ids_1420_ops","clrs","theme_studie","get_stats_pop_obce","c_sp_nastroj_ids_1420_prv","t_vydaje_analysis","c_sp_sf_arrowdir","c_sp_months_central_old","c_sest_dir","t_sp_data_local","get_table","t_2017","c_repo_remote","t_geometa","make_labeller","palette_studie","yr_lbls","sp_tables","c_sest_xlsx_fin","c_mc_xlsx_h","c_sp_years_local","switch_minus","codelist_to_parquet","make_zop_timing_plot","op_labels","c_sest_xlsx_prj","c_sp_local_grants_arrowdir","mn","c_export_dir","codelist_names","c_export_cdbk","c_docs_url","make_esif_sum_wide","c_export_sum_pq","c_export_sum_xlsx",".__NAMESPACE__.","c_czso_pop_table_id",".packageName","yr_lbls_m","nm","c_prv_data_path","extract_cl","openlinks","make_cb_totals","nastroj_op","c_export_detail_pq","t_vydaje_core","t_sp_data_central_new","label_lesslong","marrow2_dir","budget_arrow_months",".__S3MethodsTable__.","c_sp_nastroj_ids_0713_ops","c_mc_xlsx_q","c_sp_months_local","c_sp_years_central_old","c_sp_central_arrowdir_new","pc","t_sp_codelists","get_sp_budgetresp","c_mc_xlsx_prv","release_questions","summarise_zop","yr_lbls_old","tar_render_sitedoc","c_hier_excel_sheet","obdobi_to_short","get_nm","yr_brks_old","get_sp_monitoring","cnf","t_config","load_prv","c_sp_local_arrowdir","t_sp_statefunds","c_sp_months_central_new","t_sp_data_central_old","semisummarise_esif_marked","filter_hlousek","listize","collect_filtered_arrow_ds","t_op_compile","make_export_codebook","c_ef_pubxls_url","c_first_report_xlsx","c_ef_obce_arrowdir","get_zuj_obec","c_sp_years_central_new","summarise_prv","c_export_sum_csv","c_sp_central_arrowdir_old","summarise_esif_marked","marrow_dir","marrow_files","marrow_ds","sp_get_codelist_url","sp_get_codelist_viewer","sp_get_dataset_url","sp_get_dataset_doc","sp_load_codelist_named","sp_get_table_file","plot_esif","sp_load_table","add_op_labels","make_nastroje_zdroje","sp_get_monitoring","sp_get_codelist_file","sp_get_dataset","get_dataset_doc","summarise_by_op","read_pubxls","build_efs_timing","sp_get_codelist","get_dataset","sp_get_table","sp_add_codelist","get_codelist","load_budget_local_grants","load_and_prep_budget","budget_new_ops","make_cb_esif_marked","add_codelist","load_budget_yearsum_local","load_budget_yearsum_central_old","load_budget_yearsum_sf","load_budget_yearsum_central_new"],"level":[11,12,9,10,11,10,11,10,11,11,11,11,11,11,12,12,11,11,12,11,12,12,11,12,11,12,1,2,4,1,5,5,5,5,1,1,1,1,2,2,2,4,4,4,4,2,2,3,2,3,3,4,3,4,2,1,2,3,2,3,2,6,2,3,10,1,2,1,2,1,3,13,1,10,1,10,1,2,1,1,1,8,9,8,5,4,3,6,8,7,8,6,6,6,6,6,2,1,0,1,1,0,0,1,1,0,0,1,0,0,1,1,1,1,1,0,1,1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,0,0,1,1,0,1,1,1,0,0,0,0,1,0,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,1,1,0,1,0,1,1,0,0,0,1,0,1,0,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,5,5,6,6,6,6,6,7,7,7,7],"color":["#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#354823","#354823","#DC863B","#354823","#354823","#354823","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","square","square","square","dot","dot","dot","dot","dot","dot","dot","square","square","square","square","dot","dot","square","dot","square","square","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","square","square","square","square","dot","dot","dot","square","square","square","square","square","dot","triangle","triangleDown","triangle","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangle","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangle","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangle","triangle","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangle","triangleDown","triangle","triangle","triangleDown","triangle","triangleDown","triangle","triangle","triangleDown","triangle","triangleDown","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangleDown","triangle","triangle","triangle","triangle","triangleDown","triangle","triangleDown","triangleDown","triangleDown","triangle","triangleDown","triangle","triangleDown","triangleDown","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle","triangle"]},"edges":{"from":["marrow","marrow","marrow","check_online","check_online","check_online","sp_base_url","sp_codelists","sp_codelists","sp_get_codelist_url","sp_add_codelist","sp_add_codelist","sp_add_codelist","sp_add_codelist","sp_add_codelist","sp_load_table","sp_load_table","add_op_labels","add_op_labels","add_op_labels","add_op_labels","sp_datasets_i","sp_datasets_i","usr","usr","usr","sp_get_dataset_doc","yr_brks","c_sp_nastroj_ids_0713_prv","sp_load_codelist","sp_load_codelist","sp_tables_i","sp_tables_i","c_sp_nastroj_ids_1420_ops","theme_studie","c_sp_nastroj_ids_1420_prv","load_and_prep_budget","load_and_prep_budget","load_and_prep_budget","load_and_prep_budget","make_labeller","palette_studie","yr_lbls","sp_get_dataset_url","switch_minus","op_labels","sp_get_codelist","sp_get_codelist","sp_get_codelist_file","sp_get_table_file","extract_cl","extract_cl","c_sp_nastroj_ids_0713_ops","sp_get_dataset","sp_get_dataset","get_sp_monitoring","budget_new_ops","nastroj_op","sp_central_new_arrdir","sp_cl","c_export_dir","c_export_sum_csv","cb_sum_long","export_table","c_export_cdbk","c_export_dir","cb_codebook","cb_semisum_long","cb_sum_long","make_cb_totals","cb_esif_marked","summarise_esif_marked","budget_arrow_months","c_sp_months_sf","c_sp_sf_arrowdir","load_budget_yearsum_sf","sp_cl","table_file_sf","d_years","c_sp_months_central_new","config_yml","s_doc_rmd","siteconf","sitefiles","budget_arrow_months","c_sp_central_arrowdir_old","c_sp_months_central_old","load_budget_yearsum_central_old","sp_cl","table_file_o","d_file","sp_get_table_file","budget_arrow_months","c_sp_local_grants_arrowdir","c_sp_months_local","load_budget_local_grants","sp_cl","table_file_lg","d_years_l","efs_zop","s_pokladnachecks_rmd","siteconf","sitefiles","sp_central_new_arrdir","sp_central_new_ops","sp_central_old_arrdir","sp_cl","sp_local_arrdir","sp_local_grants_arrdir","cb_sum_long","make_cb_totals","cb_sum_hlousek_long","make_esif_sum_wide","cb_sum_long","make_cb_totals","efs_prv","summarise_prv","budget_arrow_months","c_sp_central_arrowdir_new","c_sp_months_central_new","load_budget_yearsum_central_new","sp_cl","table_file","cb_esif_marked","s_pokladna_rmd","siteconf","sitefiles","sp_cl","s_readme_html","s_readme_rmd","d_id_l","d_months_l","d_url_l","d_years_l","sp_get_dataset","budget_arrow_months","c_sp_local_arrowdir","c_sp_months_local","load_budget_yearsum_local","sp_cl","table_file_l","make_nastroje_zdroje","sp_cl","d_id_o","d_months_o","d_url_o","d_years_o","sp_get_dataset","config_yml","s_readme_rmd","siteconf","sitefiles","get_zuj_obec","efs_zop","summarise_zop","sp_cl_paths","sp_load_codelist_named","d_id_l","d_months_l","d_years_l_ptrn","sp_get_dataset_url","d_id","d_months","d_years_ptrn","sp_get_dataset_url","d_id_o","d_months_o","d_years_o_ptrn","sp_get_dataset_url","ef_pubxls_url","efs_prv_annual","efs_zop_annual","summarise_by_op","cb_sum_long","make_cb_totals","cb_sum_long","make_esif_sum_wide","c_prv_data_path","cis_kraj","load_prv","cb_trida_hl","make_cb_totals_perc","d_id","d_months","d_url","d_years","sp_get_dataset","cb_sum_hlousek_long","make_cb_totals","make_cb_esif_marked","nastroje_zdroje","sp_central_new_arrdir","sp_cl","s_readme_html","s_readme_rmd","siteconf","sitefiles","c_export_detail_pq","c_export_dir","cb_semisum_long","export_table","cb_esif_marked","s_analyza_rmd","siteconf","sitefiles","sp_cl_urls","sp_get_codelist_file","ef_pubxls","read_pubxls","c_sp_months_local","d_years_o","c_sp_months_central_old","c_export_dir","c_export_sum_xlsx","cb_sum_long","export_table","cb_esif_marked","filter_hlousek","summarise_esif_marked","c_sest_dir","c_sest_xlsx_zop","load_efs_zop","cb_codebook","cb_codebook_yaml","cb_semisum_long","cb_semisum_long_parquet","cb_sum_long","cb_sum_long_csv","cb_sum_long_parquet","cb_sum_long_xlsx","config_yml","ef_pub","s_output_rmd","siteconf","sitefiles","cb_trida","make_cb_totals_perc","d_file_sf","sp_get_table_file","d_id_sf","d_months","d_years_ptrn","sp_get_dataset_url","first_report_xlsx","cb_totals_hl","make_cb_totals_perc","cb_trida_oddil","make_cb_totals_perc","cb_trida_pododdil","make_cb_totals_perc","cb_totals","make_cb_totals_perc","c_czso_pop_table_id","get_stats_pop_obce","codelists","sp_get_codelist_url","cb_sum_long","make_cb_totals","d_file_l","sp_get_table_file","cb_trida_skupina","make_cb_totals_perc","codelist_names","d_file_o","sp_get_table_file","dt17_wide","s_dev_rmd","siteconf","sitefiles","d_id_sf","d_months","d_url_sf","d_years","sp_get_dataset","cb_semisum_long","make_export_codebook","c_export_dir","c_export_sum_pq","cb_sum_long","export_table","cb_sum_hlousek_long","make_cb_totals","d_file_l","sp_get_table_file","c_first_report_xlsx","c_sp_years_local","c_sp_years_central_old","codelist_to_parquet","codelists","sp_cl","cb_esif_marked","semisummarise_esif_marked","c_sp_years_central_new"],"to":["marrow_dir","marrow_files","marrow_ds","sp_get_codelist_url","sp_get_dataset_doc","sp_get_dataset_url","sp_get_codelist_url","sp_get_codelist_url","sp_get_codelist_viewer","sp_get_codelist_file","load_budget_local_grants","load_and_prep_budget","budget_new_ops","make_cb_esif_marked","add_codelist","load_budget_local_grants","sp_get_table","summarise_by_op","read_pubxls","build_efs_timing","budget_new_ops","sp_get_dataset_doc","sp_get_dataset_url","sp_get_dataset_doc","sp_get_codelist_file","sp_get_dataset","get_dataset_doc","plot_esif","make_nastroje_zdroje","sp_load_codelist_named","sp_get_codelist","sp_get_table_file","sp_get_table","make_nastroje_zdroje","plot_esif","make_nastroje_zdroje","load_budget_yearsum_local","load_budget_yearsum_central_old","load_budget_yearsum_sf","load_budget_yearsum_central_new","plot_esif","plot_esif","plot_esif","sp_get_dataset","sp_load_table","add_op_labels","sp_add_codelist","get_codelist","sp_get_codelist","sp_get_table","make_nastroje_zdroje","make_cb_esif_marked","make_nastroje_zdroje","get_dataset","sp_get_table","sp_get_monitoring","sp_central_new_ops","sp_central_new_ops","sp_central_new_ops","sp_central_new_ops","cb_sum_long_csv","cb_sum_long_csv","cb_sum_long_csv","cb_sum_long_csv","cb_codebook_yaml","cb_codebook_yaml","cb_codebook_yaml","cb_codebook_yaml","cb_trida_pododdil","cb_trida_pododdil","cb_sum_long","cb_sum_long","sp_sf_arrdir","sp_sf_arrdir","sp_sf_arrdir","sp_sf_arrdir","sp_sf_arrdir","sp_sf_arrdir","d_years_ptrn","d_months","s_doc_html","s_doc_html","s_doc_html","s_doc_html","sp_central_old_arrdir","sp_central_old_arrdir","sp_central_old_arrdir","sp_central_old_arrdir","sp_central_old_arrdir","sp_central_old_arrdir","table_file","table_file","sp_local_grants_arrdir","sp_local_grants_arrdir","sp_local_grants_arrdir","sp_local_grants_arrdir","sp_local_grants_arrdir","sp_local_grants_arrdir","d_years_l_ptrn","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","s_pokladnachecks_html","cb_trida_skupina","cb_trida_skupina","cb_sum_hlousek_wide","cb_sum_hlousek_wide","cb_totals","cb_totals","efs_prv_annual","efs_prv_annual","sp_central_new_arrdir","sp_central_new_arrdir","sp_central_new_arrdir","sp_central_new_arrdir","sp_central_new_arrdir","sp_central_new_arrdir","s_pokladna_html","s_pokladna_html","s_pokladna_html","s_pokladna_html","s_pokladna_html","s_index_html","s_index_html","d_file_l","d_file_l","d_file_l","d_file_l","d_file_l","sp_local_arrdir","sp_local_arrdir","sp_local_arrdir","sp_local_arrdir","sp_local_arrdir","sp_local_arrdir","nastroje_zdroje","nastroje_zdroje","d_file_o","d_file_o","d_file_o","d_file_o","d_file_o","s_readme_html","s_readme_html","s_readme_html","s_readme_html","zuj_obec","efs_zop_annual","efs_zop_annual","sp_cl","sp_cl","d_url_l","d_url_l","d_url_l","d_url_l","d_url","d_url","d_url","d_url","d_url_o","d_url_o","d_url_o","d_url_o","ef_pubxls","compiled_op_sum","compiled_op_sum","compiled_op_sum","cb_trida","cb_trida","cb_sum_wide","cb_sum_wide","efs_prv","efs_prv","efs_prv","cb_trida_hl_p","cb_trida_hl_p","d_file","d_file","d_file","d_file","d_file","cb_totals_hl","cb_totals_hl","cb_esif_marked","cb_esif_marked","cb_esif_marked","cb_esif_marked","readme_md","readme_md","readme_md","readme_md","cb_semisum_long_parquet","cb_semisum_long_parquet","cb_semisum_long_parquet","cb_semisum_long_parquet","s_analyza_docx","s_analyza_docx","s_analyza_docx","s_analyza_docx","sp_cl_paths","sp_cl_paths","ef_pub","ef_pub","d_months_l","d_years_o_ptrn","d_months_o","cb_sum_long_xlsx","cb_sum_long_xlsx","cb_sum_long_xlsx","cb_sum_long_xlsx","cb_sum_hlousek_long","cb_sum_hlousek_long","cb_sum_hlousek_long","efs_zop","efs_zop","efs_zop","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","s_output_html","cb_trida_p","cb_trida_p","table_file_sf","table_file_sf","d_url_sf","d_url_sf","d_url_sf","d_url_sf","dt17_wide","cb_totals_hl_p","cb_totals_hl_p","cb_trida_oddil_p","cb_trida_oddil_p","cb_trida_pododdil_p","cb_trida_pododdil_p","cb_totals_p","cb_totals_p","pop_obce","pop_obce","sp_cl_urls","sp_cl_urls","cb_trida_oddil","cb_trida_oddil","table_file_l","table_file_l","cb_trida_skupina_p","cb_trida_skupina_p","codelists","table_file_o","table_file_o","dt17_long","s_dev_html","s_dev_html","s_dev_html","d_file_sf","d_file_sf","d_file_sf","d_file_sf","d_file_sf","cb_codebook","cb_codebook","cb_sum_long_parquet","cb_sum_long_parquet","cb_sum_long_parquet","cb_sum_long_parquet","cb_trida_hl","cb_trida_hl","table_file_lg","table_file_lg","first_report_xlsx","d_years_l","d_years_o","sp_clp","sp_clp","sp_clp","cb_semisum_long","cb_semisum_long","d_years"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Outdated","Started","Stem","Pattern","Function","Object"],"color":["#354823","#78B7C5","#DC863B","#899DA4","#899DA4","#899DA4","#899DA4"],"shape":["dot","dot","dot","dot","square","triangle","triangleDown"]},"nodesToDataframe":true}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="git" class="section level3">
 <h3>Git</h3>
-<p>Repozitář online: <a href="https://github.com/petrbouchal/esifinancuji" class="uri">https://github.com/petrbouchal/esifinancuji</a></p>
-<p>Commit: d7b3b0c180b239b8da55677498e0039c66123220</p>
+<p>Repozitář online: <a
+href="https://github.com/petrbouchal/esifinancuji"
+class="uri">https://github.com/petrbouchal/esifinancuji</a></p>
+<p>Commit: 47dc90e686e44595d96b10f036aed4a3ab0cba3a</p>
 </div>
 </div>
 
