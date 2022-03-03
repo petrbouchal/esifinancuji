@@ -76,6 +76,7 @@ plot_esif(cb_totals_hl, breaks_y_limit = 2000, by_trida = FALSE,
 plot_esif(cb_totals_hl_p, perc = TRUE, by_trida = FALSE,
           title = "Podíl ESI fondů na výdajích státního rozpočtu")
 ```
+
 ## Běžné a kapitálové {.tabset}
 
 ### Celý státní rozpočet {.tabset .tabset-pills}
@@ -109,9 +110,10 @@ plot_esif(cb_trida_hl, perc = FALSE, by_trida = TRUE, facet_var = trida,
 plot_esif(data = cb_trida_hl_p, perc = TRUE, 
             facet_var = trida, title = "Podíl ESI fondů na běžných a kapitálových výdajích")
 ```
-# Odvětvové členění {.tabset .tabset-pills}
 
-## Skupiny
+## Odvětvové členění {.tabset .tabset-pills}
+
+### Skupiny
 
 ```{r plot-skup}
 plot_esif(data = cb_trida_skupina, perc = FALSE, 
@@ -126,7 +128,7 @@ plot_esif(data = cb_trida_skupina_p, perc = TRUE, keep_legend = TRUE,
   theme(legend.position = "bottom")
 ```
 
-## Skupiny (odvětvové členění) {.tabset .tabset-pills}
+### Skupiny (odvětvové členění) {.tabset .tabset-pills}
 
 ```{r plot-oddil-abs, fig.height=6}
 plot_esif(data = cb_trida_oddil, perc = FALSE, 
