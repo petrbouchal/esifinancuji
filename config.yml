@@ -58,9 +58,12 @@ default:
   # export location
 
   export_dir: "data-export"
+
   export_sum_xlsx: "esif_sr.xlsx"
   export_sum_csv: "esif_sr.csv"
   export_sum_pq: "esif_sr.parquet"
+  export_detail_op_xlsx: "esif_sr_detail-op.xlsx"
+  export_detail_op_parquet: "esif_sr_detail-op.parquet"
   export_detail_pq: "esif_sr_detail.parquet"
 
   export_cdbk: "codebook.yaml"

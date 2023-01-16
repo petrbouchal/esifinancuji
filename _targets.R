@@ -281,6 +281,8 @@ t_vydaje_export <- list(
   tar_file(cb_sum_long_csv, export_table(cb_sum_long, file.path(c_export_dir, c_export_sum_csv), write_excel_csv2)),
   tar_file(cb_sum_long_parquet, export_table(cb_sum_long, file.path(c_export_dir, c_export_sum_pq), write_parquet)),
   tar_file(cb_semisum_long_parquet, export_table(cb_semisum_long, file.path(c_export_dir, c_export_detail_pq), write_parquet)),
+  tar_file(cb_detail_op_xlsx, export_table(cb_esif_marked_op, file.path(c_export_dir, c_export_detail_op_xlsx), write_xlsx)),
+  tar_file(cb_detail_op_parquet, export_table(cb_esif_marked_op, file.path(c_export_dir, c_export_detail_op_parquet), write_parquet)),
   tar_target(cb_codebook, make_export_codebook(cb_semisum_long)),
   tar_file(cb_codebook_yaml,
            {pointblank::yaml_write(informant = cb_codebook %>%
