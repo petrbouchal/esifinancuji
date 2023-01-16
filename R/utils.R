@@ -17,6 +17,8 @@ op_labels <- tibble::tribble(
   "06",                      "Integrovaný regionální operační program", "IROP",
   "07",                        "Operační program Praha - pól růstu ČR", "OP PPR",
   "08",                             "Operační program Technická pomoc", "OP TP",
+  "09",                             "Program rozvoje venkova",          "PRV",
+  "10",                             "Operační program Rybářství",       "OPR",
   "11",                        "INTERREG V-A Česká republika - Polsko", "OP ČR-PL"
 ) %>%
   mutate(op_nazev_zkr = str_replace(op_nazev, "[Oo]perační program|INTERREG V-A", "OP") %>%
@@ -42,7 +44,6 @@ add_op_labels <- function(data, abbrevs = op_labels,
 }
 
 nastroj_op <- tibble::tribble(~nastroj_id, ~op_id, ~obdobi,
-                      "101",       "XX", "2014-20",
                       "102",       "01", "2014-20",
                       "103",       "02", "2014-20",
                       "104",       "05", "2014-20",
@@ -52,8 +53,9 @@ nastroj_op <- tibble::tribble(~nastroj_id, ~op_id, ~obdobi,
                       "108",       "07", "2014-20",
                       "109",       "08", "2014-20",
                       "110",       "11", "2014-20",
-                      "130",       "YY", "2014-20",
-                      "187",       "YY", "2014-20")
+                      "130",       "09", "2014-20",
+                      "101",       "10", "2014-20",
+                      "187",       "09", "2014-20")
 
 extract_cl <- function(cl_target_list, cl_string) {
 

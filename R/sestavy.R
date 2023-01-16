@@ -145,7 +145,7 @@ summarise_by_op <- function(efs_zop_quarterly, efs_prv_quarterly) {
   efs_prv_quarterly$op_nazev <- "Program rozvoje venkova"
   efs_prv_quarterly$op_nazev_zkr <- "Program rozvoje venkova"
   efs_prv_quarterly$op_zkr <- "PRV"
-  efs_prv_quarterly$op_id <- "YY"
+  efs_prv_quarterly$op_id <- "09"
 
   bind_rows(efs_zop_quarterly, efs_prv_quarterly) %>%
     group_by(across(starts_with("op_")), dt_zop_rok) %>%
