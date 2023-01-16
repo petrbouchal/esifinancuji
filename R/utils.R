@@ -30,7 +30,7 @@ add_op_labels <- function(data, abbrevs = op_labels,
   } else if ("op_zkr" %in% names(data)) {
     if(drop_orig) data$op_zkr <- NULL else data <- rename(data, op_zkr_orig = op_zkr)
   } else if ("op_nazev" %in% names(data)) {
-    if(drop_orig) data$op_nazev <- NULL else data <- rename(data, op_nazev_org = op_nazev)
+    if(drop_orig) data$op_nazev <- NULL else data <- rename(data, op_nazev_orig = op_nazev)
   }
 
   data2 <- data %>%
