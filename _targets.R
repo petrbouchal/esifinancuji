@@ -246,6 +246,8 @@ t_vydaje_core <- list(
   tar_target(nastroje_zdroje, make_nastroje_zdroje(sp_cl)),
   tar_target(cb_esif_marked, make_cb_esif_marked(sp_central_new_arrdir,
                                                  sp_cl, nastroje_zdroje)),
+  tar_target(cb_esif_marked_op, make_cb_esif_marked_op(cb_esif_marked,
+                                                    sp_cl, nastroj_op)),
   tar_target(cb_sum_long, summarise_esif_marked(cb_esif_marked)),
   tar_target(cb_semisum_long, semisummarise_esif_marked(cb_esif_marked)),
   tar_target(cb_sum_wide, make_esif_sum_wide(cb_sum_long)),

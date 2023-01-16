@@ -71,6 +71,21 @@ make_cb_esif_marked <- function(dataset_path, codelists, nastroje_zdroje) {
     ungroup()
 }
 
+make_cb_esif_marked_op <- function(cb_esif_marked, sp_cl, nastroj_op) {
+
+  cl_nastroj <- extract_cl(sp_cl, "nastroj")
+  cl_nastrojanal <- extract_cl(sp_cl, "nastrojanal")
+  cl_zdroj <- extract_cl(sp_cl, "zdroj")
+
+  cb_esif_marked |>
+    left_join(cl_nastroj, by = "nastroj_id") |>
+    left_join(cl_nastrojanal, by = "nastrojanal_id") |>
+    left_join(nastroj_op |> select(-obdobi), by = "nastroj_id") |>
+    add_op_labels() |>
+    select(-matches("(start|end)_date$")) |>
+    ungroup()
+}
+
 semisummarise_esif_marked <- function(data) {
   data %>%
     filter(paragraf != "0000") %>%
